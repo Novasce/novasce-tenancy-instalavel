@@ -58,7 +58,8 @@ jobs:
       - name: montar a sonda
         run: |
           flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-          flatpak-builder --user --install-deps-from=flathub --force-clean --default-branch=teste \
+          dbus-uuidgen --ensure 2>/dev/null || true
+          flatpak-builder --user --install-deps-from=flathub --force-clean --disable-rofiles-fuse --default-branch=teste \
             --repo=repo --gpg-sign="$CHAVE" --gpg-homedir="$GNUPGHOME" \
             build-dir flatpak/com.novasce.TenancySonda.yml
           flatpak build-update-repo --generate-static-deltas --prune --default-branch=teste \
