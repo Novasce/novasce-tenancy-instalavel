@@ -14,7 +14,7 @@
 | `apps/sonda/` | A sonda: Tauri 2, React e TypeScript. Só para teste; nunca se passa pelo produto |
 | `pacotes/` | Os núcleos em TypeScript, um por contrato (ainda vazio) |
 | `casos-de-prova/` | Os casos que este app e o Tenancy para Mac passam igual (formato no README da pasta) |
-| `flatpak/` | O manifesto e os arquivos do canal de teste |
+| `flatpak/` | O manifesto da sonda, o gerador do canal de teste e o script que cria a chave do canal (a parte privada vai direto para os segredos do GitHub) |
 | `.github/workflows/` | Conferência (segredos, tipos, testes) e o canal de teste |
 
 ## Canal de teste

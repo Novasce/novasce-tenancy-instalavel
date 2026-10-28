@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Sonda do Tenancy (teste)
+Comment=Confere o pacote, as permissões e a tela do Tenancy nesta máquina
+Exec=tenancy-sonda
+Icon=com.novasce.TenancySonda
+Categories=Development;
+Terminal=false

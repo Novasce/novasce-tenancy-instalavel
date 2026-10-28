@@ -1,0 +1,57 @@
+# Sonda do Tenancy: pacote de teste com as mesmas permissões que o app terá.
+# Montado no CI dentro do SDK do GNOME, com rede na montagem (canal próprio, fora do Flathub).
+id: com.novasce.TenancySonda
+runtime: org.gnome.Platform
+runtime-version: '51'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+  - org.freedesktop.Sdk.Extension.node22
+command: tenancy-sonda
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  # flatpak-spawn --host: a CLI de IA, o git e os processos da pessoa rodam no sistema
+  - --talk-name=org.freedesktop.Flatpak
+  # chaveiro do sistema, onde o Novasce OS guarda o login
+  - --talk-name=org.freedesktop.secrets
+  # ícone na bandeja do KDE
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --filesystem=~/Brain
+  - --filesystem=~/Espaços
+  - --filesystem=xdg-state/novasce:ro
+  - --filesystem=xdg-config/novasce:ro
+  - --filesystem=~/.local/bin:ro
+modules:
+  - shared-modules/libayatana-appindicator/libayatana-appindicator-gtk3.json
+
+  - name: sonda
+    buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/node22/bin
+      build-args:
+        - --share=network
+      env:
+        CARGO_HOME: /run/build/sonda/cargo
+        npm_config_cache: /run/build/sonda/npm-cache
+    build-commands:
+      - npm ci --no-audit --no-fund
+      - cd apps/sonda && npx tauri build --no-bundle --ci
+      - install -Dm755 apps/sonda/src-tauri/target/release/tenancy-sonda /app/bin/tenancy-sonda
+      - install -Dm644 flatpak/com.novasce.TenancySonda.desktop /app/share/applications/com.novasce.TenancySonda.desktop
+      - install -Dm644 flatpak/com.novasce.TenancySonda.metainfo.xml /app/share/metainfo/com.novasce.TenancySonda.metainfo.xml
+      - install -Dm644 flatpak/com.novasce.TenancySonda.png /app/share/icons/hicolor/256x256/apps/com.novasce.TenancySonda.png
+    sources:
+      - type: dir
+        path: ..
+        skip:
+          - node_modules
+          - build-dir
+          - .flatpak-builder
+          - repo
+          - site
+          - apps/sonda/src-tauri/target
+          - apps/sonda/dist

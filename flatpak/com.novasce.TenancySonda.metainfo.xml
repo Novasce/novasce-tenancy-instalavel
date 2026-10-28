@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.novasce.TenancySonda</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <name>Sonda do Tenancy (teste)</name>
+  <summary>Confere o pacote, as permissões e a tela do Tenancy nesta máquina</summary>
+  <description>
+    <p>App de teste da Novasce. Mostra em que pacote e motor está rodando e mede se a tela fica no lugar quando o estado muda. Não é o Tenancy e não guarda nada.</p>
+  </description>
+  <developer id="com.novasce">
+    <name>Novasce</name>
+  </developer>
+  <url type="vcs-browser">https://github.com/Novasce/novasce-tenancy-instalavel</url>
+  <launchable type="desktop-id">com.novasce.TenancySonda.desktop</launchable>
+  <content_rating type="oars-1.1" />
+  <releases>
+    <release version="0.0.1" date="2026-10-28" />
+  </releases>
+</component>
