@@ -1,0 +1,6 @@
+{
+  "identifier": "default",
+  "description": "Permissões da janela da sonda: o básico do Tauri e abrir links.",
+  "windows": ["principal"],
+  "permissions": ["core:default", "opener:default"]
+}
