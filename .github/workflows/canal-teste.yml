@@ -1,0 +1,88 @@
+name: canal-teste
+
+# Monta a sonda em Flatpak e publica o canal de teste nas Pages deste repositório.
+# Só a sonda e só o ramo teste. Disparado à mão, com a versão.
+on:
+  workflow_dispatch:
+    inputs:
+      versao:
+        description: "Versão da sonda, por exemplo 0.0.1"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: canal-teste
+  cancel-in-progress: false
+
+jobs:
+  montar:
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-51
+      options: --privileged
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+
+      - name: versão
+        env:
+          VERSAO: ${{ inputs.versao }}
+        run: |
+          [[ "$VERSAO" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "Versão inválida: $VERSAO"; exit 1; }
+          sed -i "s/\"version\": \"[0-9.]*\"/\"version\": \"$VERSAO\"/" apps/sonda/src-tauri/tauri.conf.json
+          sed -i "s|<release version=\"[0-9.]*\" date=\"[0-9-]*\" />|<release version=\"$VERSAO\" date=\"$(date -u +%F)\" />|" flatpak/com.novasce.TenancySonda.metainfo.xml
+          grep -q "\"version\": \"$VERSAO\"" apps/sonda/src-tauri/tauri.conf.json
+          grep -q "release version=\"$VERSAO\"" flatpak/com.novasce.TenancySonda.metainfo.xml
+
+      - name: chave do canal
+        env:
+          FLATPAK_GPG_PRIVADA: ${{ secrets.FLATPAK_GPG_PRIVADA }}
+        run: |
+          [ -n "$FLATPAK_GPG_PRIVADA" ] || { echo "Falta o segredo FLATPAK_GPG_PRIVADA."; exit 1; }
+          [ -s flatpak/chave-publica.gpg ] || { echo "Falta flatpak/chave-publica.gpg."; exit 1; }
+          export GNUPGHOME="$RUNNER_TEMP/gnupg"
+          mkdir -p -m 700 "$GNUPGHOME"
+          printf '%s\n' "$FLATPAK_GPG_PRIVADA" | gpg --batch --import 2>/dev/null
+          CHAVE="$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr:/ {print $10; exit}')"
+          PUBLICA="$(gpg --show-keys --with-colons flatpak/chave-publica.gpg | awk -F: '/^fpr:/ {print $10; exit}')"
+          [ "$CHAVE" = "$PUBLICA" ] || { echo "A chave do segredo não é a da parte pública do repositório."; exit 1; }
+          echo "GNUPGHOME=$GNUPGHOME" >> "$GITHUB_ENV"
+          echo "CHAVE=$CHAVE" >> "$GITHUB_ENV"
+
+      - name: montar a sonda
+        run: |
+          flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+          flatpak-builder --user --install-deps-from=flathub --force-clean --default-branch=teste \
+            --repo=repo --gpg-sign="$CHAVE" --gpg-homedir="$GNUPGHOME" \
+            build-dir flatpak/com.novasce.TenancySonda.yml
+          flatpak build-update-repo --generate-static-deltas --prune --default-branch=teste \
+            --gpg-sign="$CHAVE" --gpg-homedir="$GNUPGHOME" --title="Novasce (teste)" repo
+
+      - name: site do canal
+        run: |
+          mkdir -p site
+          cp -a repo site/repo
+          flatpak/gerar-canal.sh site "https://novasce.github.io/novasce-tenancy-instalavel"
+
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: site
+
+  publicar:
+    needs: montar
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    steps:
+      - id: publicar
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
