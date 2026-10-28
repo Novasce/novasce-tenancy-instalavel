@@ -1,0 +1,9 @@
+{
+  "name": "novasce-tenancy-instalavel",
+  "private": true,
+  "workspaces": ["pacotes/*", "apps/*"],
+  "scripts": {
+    "test": "npm test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  }
+}
