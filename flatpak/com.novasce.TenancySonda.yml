@@ -22,7 +22,7 @@ finish-args:
   - --talk-name=org.kde.StatusNotifierWatcher
   - --filesystem=~/Brain
   - --filesystem=~/Espaços
-  - --filesystem=xdg-state/novasce:ro
+  - --filesystem=~/.local/state/novasce:ro
   - --filesystem=xdg-config/novasce:ro
   - --filesystem=~/.local/bin:ro
 modules:
