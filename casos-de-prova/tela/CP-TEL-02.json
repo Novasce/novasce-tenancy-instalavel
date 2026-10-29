@@ -1,0 +1,46 @@
+{
+  "id": "CP-TEL-02",
+  "contrato": "tela",
+  "regra": "Tarefa ao fundo não tira o livre: a linha diz quantas estão em segundo plano",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "leituras": [
+      {
+        "tela": "CP-TEL-02-a.txt",
+        "mudouHa": 600,
+        "vistaHa": 30,
+        "abertaHa": 900,
+        "cpu": 0.1
+      },
+      {
+        "tela": "CP-TEL-02-b.txt",
+        "mudouHa": 600,
+        "vistaHa": 30,
+        "abertaHa": 900,
+        "cpu": 0.1
+      }
+    ]
+  },
+  "esperado": {
+    "leituras": [
+      {
+        "caixa": true,
+        "promptLivre": true,
+        "rodape": "nenhum",
+        "emSegundoPlano": 1,
+        "estado": "livre",
+        "linha": "livre · 1 em segundo plano"
+      },
+      {
+        "caixa": true,
+        "promptLivre": true,
+        "rodape": "nenhum",
+        "emSegundoPlano": 2,
+        "estado": "livre",
+        "linha": "livre · 2 em segundo plano"
+      }
+    ]
+  },
+  "mac": "passa"
+}

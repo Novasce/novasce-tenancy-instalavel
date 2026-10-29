@@ -1,0 +1,8 @@
+> Como eu paro uma resposta no meio?
+
+⏺ Aperte Esc. Enquanto eu trabalho, o rodapé mostra "esc to interrupt".
+
+────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────
+  ⏵⏵ auto mode on (shift+tab to cycle)

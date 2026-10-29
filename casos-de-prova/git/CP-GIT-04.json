@@ -1,0 +1,32 @@
+{
+  "id": "CP-GIT-04",
+  "contrato": "git",
+  "regra": "Fechar com arquivo mudado e nenhum commit não apaga nada",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "fechamentos": [
+      {
+        "commitsForaDaMain": 0,
+        "soltos": 1,
+        "headNaBranch": true
+      },
+      {
+        "commitsForaDaMain": null,
+        "soltos": 0,
+        "headNaBranch": true
+      }
+    ]
+  },
+  "esperado": {
+    "destinos": [
+      {
+        "tipo": "ficar"
+      },
+      {
+        "tipo": "ficar"
+      }
+    ]
+  },
+  "mac": "passa"
+}

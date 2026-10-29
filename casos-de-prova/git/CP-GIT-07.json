@@ -1,0 +1,28 @@
+{
+  "id": "CP-GIT-07",
+  "contrato": "git",
+  "regra": "Abrir PR vai à página de comparação, sem credencial na URL; fora do GitHub não há página",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "principal": "main",
+    "branch": "sessao-2-2026-10-28",
+    "remotos": [
+      "git@github.com:Exemplo/produto-a.git",
+      "ssh://git@github.com/Exemplo/produto-a.git",
+      "https://lia:credencial-de-exemplo@github.com/Exemplo/produto-a.git\n",
+      "https://github.com/Exemplo/produto-a",
+      "git@gitlab.exemplo.invalid:Exemplo/produto-a.git"
+    ]
+  },
+  "esperado": {
+    "enderecos": [
+      "https://github.com/Exemplo/produto-a/compare/main...sessao-2-2026-10-28?expand=1",
+      "https://github.com/Exemplo/produto-a/compare/main...sessao-2-2026-10-28?expand=1",
+      "https://github.com/Exemplo/produto-a/compare/main...sessao-2-2026-10-28?expand=1",
+      "https://github.com/Exemplo/produto-a/compare/main...sessao-2-2026-10-28?expand=1",
+      null
+    ]
+  },
+  "mac": "passa"
+}

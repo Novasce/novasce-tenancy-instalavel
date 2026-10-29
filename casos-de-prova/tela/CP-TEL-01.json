@@ -1,0 +1,31 @@
+{
+  "id": "CP-TEL-01",
+  "contrato": "tela",
+  "regra": "A caixa vazia entre duas bordas é prompt livre, mesmo com rodapé de várias linhas embaixo",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "leituras": [
+      {
+        "tela": "CP-TEL-01.txt",
+        "mudouHa": 600,
+        "vistaHa": 30,
+        "abertaHa": 900,
+        "cpu": 0.1
+      }
+    ]
+  },
+  "esperado": {
+    "leituras": [
+      {
+        "caixa": true,
+        "promptLivre": true,
+        "rodape": "nenhum",
+        "emSegundoPlano": null,
+        "estado": "livre",
+        "linha": "livre"
+      }
+    ]
+  },
+  "mac": "passa"
+}

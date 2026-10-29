@@ -1,0 +1,46 @@
+{
+  "id": "CP-TEL-03",
+  "contrato": "tela",
+  "regra": "esc to interrupt só conta no rodapé; a mesma frase dentro da conversa não é trabalho",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "leituras": [
+      {
+        "tela": "CP-TEL-03-a.txt",
+        "mudouHa": 60,
+        "vistaHa": 300,
+        "abertaHa": 900,
+        "cpu": 0.1
+      },
+      {
+        "tela": "CP-TEL-03-b.txt",
+        "mudouHa": 600,
+        "vistaHa": 30,
+        "abertaHa": 900,
+        "cpu": 0.1
+      }
+    ]
+  },
+  "esperado": {
+    "leituras": [
+      {
+        "caixa": true,
+        "promptLivre": true,
+        "rodape": "trabalhando",
+        "emSegundoPlano": null,
+        "estado": "trabalhando",
+        "linha": "trabalhando"
+      },
+      {
+        "caixa": true,
+        "promptLivre": true,
+        "rodape": "nenhum",
+        "emSegundoPlano": null,
+        "estado": "livre",
+        "linha": "livre"
+      }
+    ]
+  },
+  "mac": "passa"
+}

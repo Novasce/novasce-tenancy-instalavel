@@ -1,0 +1,31 @@
+{
+  "id": "CP-TEL-06",
+  "contrato": "tela",
+  "regra": "Sem caixa, o prompt vazio nas cinco últimas linhas vale como livre pelo caminho reserva",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "leituras": [
+      {
+        "tela": "CP-TEL-06.txt",
+        "mudouHa": 600,
+        "vistaHa": 30,
+        "abertaHa": 900,
+        "cpu": 0.1
+      }
+    ]
+  },
+  "esperado": {
+    "leituras": [
+      {
+        "caixa": false,
+        "promptLivre": true,
+        "rodape": "nenhum",
+        "emSegundoPlano": null,
+        "estado": "livre",
+        "linha": "livre"
+      }
+    ]
+  },
+  "mac": "passa"
+}

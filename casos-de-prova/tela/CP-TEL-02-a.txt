@@ -1,0 +1,9 @@
+> Rode os testes do pacote registro ao fundo
+
+⏺ Os testes estão rodando ao fundo. Aviso quando terminar.
+
+────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────
+  ⏵⏵ auto mode on · 1 shell · ↓ to manage
+  [EXEMPLO] lia · Ateliê de exemplo

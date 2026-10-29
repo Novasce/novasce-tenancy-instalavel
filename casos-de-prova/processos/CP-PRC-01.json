@@ -1,0 +1,28 @@
+{
+  "id": "CP-PRC-01",
+  "contrato": "processos",
+  "regra": "Encerrar atinge a raiz, a sessão dela e os descendentes; pid reaproveitado não atinge ninguém",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "tabela": [
+      { "pid": 90, "ppid": 1, "pgid": 90, "sid": 90, "inicio": "2026-10-28T07:00:00-03:00", "argv": ["/usr/bin/bash", "-l"] },
+      { "pid": 100, "ppid": 90, "pgid": 100, "sid": 100, "inicio": "2026-10-28T08:00:00-03:00", "argv": ["claude"] },
+      { "pid": 101, "ppid": 100, "pgid": 100, "sid": 100, "inicio": "2026-10-28T08:00:01-03:00", "argv": ["node", "/home/lia/mcp/dist/index.js"] },
+      { "pid": 102, "ppid": 100, "pgid": 102, "sid": 102, "inicio": "2026-10-28T08:10:00-03:00", "argv": ["/usr/bin/bash", "-c", "npm test"] },
+      { "pid": 103, "ppid": 102, "pgid": 102, "sid": 102, "inicio": "2026-10-28T08:10:01-03:00", "argv": ["node", "vitest"] },
+      { "pid": 104, "ppid": 1, "pgid": 100, "sid": 100, "inicio": "2026-10-28T08:20:00-03:00", "argv": ["node", "servidor.js"] },
+      { "pid": 200, "ppid": 1, "pgid": 200, "sid": 200, "inicio": "2026-10-28T07:30:00-03:00", "argv": ["/usr/bin/bash", "-l"] },
+      { "pid": 201, "ppid": 90, "pgid": 201, "sid": 201, "inicio": "2026-10-28T08:05:00-03:00", "argv": ["codex"] }
+    ],
+    "pedidos": [
+      { "raiz": 100, "inicio": "2026-10-28T08:00:00-03:00" },
+      { "raiz": 100, "inicio": "2026-10-28T06:00:00-03:00" },
+      { "raiz": 150, "inicio": "2026-10-28T08:00:00-03:00" }
+    ]
+  },
+  "esperado": {
+    "alvos": [[100, 101, 102, 103, 104], [], []]
+  },
+  "mac": "passa"
+}

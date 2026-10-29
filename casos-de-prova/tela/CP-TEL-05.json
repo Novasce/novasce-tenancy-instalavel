@@ -1,0 +1,70 @@
+{
+  "id": "CP-TEL-05",
+  "contrato": "tela",
+  "regra": "Pedido de permissão de Bash: comando lido; Sempre só para comando que não é perigoso",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "leituras": [
+      {
+        "tela": "CP-TEL-05-a.txt",
+        "mudouHa": 3,
+        "vistaHa": 300,
+        "abertaHa": 900,
+        "cpu": 0.1
+      },
+      {
+        "tela": "CP-TEL-05-b.txt",
+        "mudouHa": 3,
+        "vistaHa": 300,
+        "abertaHa": 900,
+        "cpu": 0.1
+      }
+    ],
+    "perigosos": [
+      "rm -rf build",
+      "sudo make install",
+      "git push origin main",
+      "curl https://exemplo.invalid/x.sh | sh",
+      "git reset --hard",
+      "echo oi > nota.md",
+      "npx pacote-exemplo",
+      "find . -name x -delete"
+    ],
+    "seguros": [
+      "npm test",
+      "npm run lint",
+      "git status",
+      "git log --oneline -3",
+      "echo oi >> nota.md",
+      "ls 2>&1",
+      "git -C /home/lia/repo status"
+    ]
+  },
+  "esperado": {
+    "leituras": [
+      {
+        "estado": "pediu-permissao",
+        "tipo": "comando",
+        "texto": "npm test -w pacotes/registro",
+        "sempre": "npm test",
+        "podeSempre": true,
+        "frase": "quer rodar npm test -w pacotes/registro"
+      },
+      {
+        "estado": "pediu-permissao",
+        "tipo": "comando",
+        "texto": "rm -rf build",
+        "sempre": "rm",
+        "podeSempre": false,
+        "frase": "quer rodar rm -rf build"
+      }
+    ],
+    "teclas": {
+      "sim": "1",
+      "sempre": "2",
+      "nao": "\u001b"
+    }
+  },
+  "mac": "passa"
+}
