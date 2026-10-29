@@ -78,6 +78,8 @@ export interface MaoDeArquivos {
 }
 
 export interface MaoDasClis {
+  /** O shell de login da pessoa (`$SHELL`). */
+  shell(): string;
   /** `<cli> --version`, com prazo de 5 s. */
   versao(cli: string): Promise<RespostaDaAjuda>;
   /** `<cli> --help`, com prazo de 5 s. */

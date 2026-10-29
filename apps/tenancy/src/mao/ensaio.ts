@@ -248,7 +248,7 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
         };
         terminais.set(id, t);
         const tela = ensaio.telaInicial[cli];
-        if (tela) queueMicrotask(() => ensaio.mostrar(id, tela));
+        if (tela) setTimeout(() => ensaio.mostrar(id, tela), 0);
         return { id, pid, inicio };
       },
       async escrever(id, dados) {
@@ -314,6 +314,7 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
       arquivos: () => ensaio.arquivos,
     },
     cli: {
+      shell: () => "/bin/bash",
       async versao(cli) {
         return respostaDaCli(ensaio.clis[cli], "versao");
       },

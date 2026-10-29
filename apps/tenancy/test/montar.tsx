@@ -1,6 +1,14 @@
 // Montagem pequena para os testes da tela, sem biblioteca: React no jsdom com act.
 import { act, type ReactElement } from "react";
 import { createRoot, type Root } from "react-dom/client";
+import { Terminal } from "@xterm/headless";
+import type { CriarTerminal, TerminalDaTela } from "../src/bancada/terminal";
+
+/** O xterm headless no lugar do xterm.js: o mesmo buffer, sem canvas. */
+export const criarHeadless: CriarTerminal = () => {
+  const t = new Terminal({ cols: 100, rows: 30, allowProposedApi: true });
+  return Object.assign(t, { abrirEm: () => {}, focus: () => {}, paste: (x: string) => t.input(x) }) as unknown as TerminalDaTela;
+};
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 

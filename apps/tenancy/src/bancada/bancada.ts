@@ -64,8 +64,10 @@ export interface SessaoDaBancada {
   worktree?: Worktree;
   pendencia?: Pendencia;
   codigoDeSaida?: number;
-  /** A última fala da pessoa, para o nome automático. */
+  /** A última fala do agente, para o nome automático. */
   ultimaFala?: string;
+  /** O segundo painel, um shell na mesma pasta (UC21). */
+  extra?: TerminalAberto | null;
 }
 
 export interface PedidoDeSessao {
@@ -121,9 +123,28 @@ export function pedidoDeTerminal(
 /** O nome que a sessão ganha sem a pessoa dar um: os dois últimos trechos do caminho, a partir da home. */
 export function nomeDaPasta(pasta: string, home = ""): string {
   const limpa = pasta.replace(/\/+$/, "");
-  if (home && limpa === home.replace(/\/+$/, "")) return "~";
-  const partes = limpa.split("/").filter(Boolean);
+  const casa = home.replace(/\/+$/, "");
+  if (casa && limpa === casa) return "~";
+  const relativa = casa && limpa.startsWith(casa + "/") ? limpa.slice(casa.length + 1) : limpa;
+  const partes = relativa.split("/").filter(Boolean);
   return partes.slice(-2).join("/") || pasta;
+}
+
+/**
+ * O nome pela última fala do agente, como o Mac: sem marcador nem aspas no
+ * começo, a primeira frase se ela tem 8 caracteres ou mais, teto de 38 com a
+ * última palavra inteira e reticências. Menos de 8 caracteres não vira nome.
+ */
+export function nomeDaFala(fala: string): string | null {
+  let t = fala.trim().replace(/^[⏺✻✽·●—\-*>\s]+/u, "").replace(/^["'`“”]+|["'`“”]+$/gu, "").trim();
+  if (t.length < 8) return null;
+  const fim = /(\n|;|[.:](\s|$))/.exec(t);
+  if (fim && fim.index >= 8) t = t.slice(0, fim.index);
+  t = t.replace(/\s+/g, " ").trim();
+  if (t.length <= 38) return t;
+  const corte = t.slice(0, 38);
+  const espaco = corte.lastIndexOf(" ");
+  return (espaco > 0 ? corte.slice(0, espaco) : corte).replace(/[\s,;:.]+$/, "") + "…";
 }
 
 /** Quem espera a pessoa: viva e terminou ou pediu permissão. */
@@ -223,10 +244,12 @@ export class Bancada {
     await this.subir(s, { programa: s.programa, pasta: s.pasta, comando: s.comando, opcoes });
   }
 
+  private opcoesDoTerminal(escuro: boolean) {
+    return { shell: this.mao.cli.shell(), lang: "pt_BR.UTF-8", escuro, colunas: 80, linhas: 24 };
+  }
+
   private async subir(sessao: SessaoDaBancada, p: PedidoDeSessao): Promise<void> {
-    sessao.terminal = await this.mao.terminal.abrir(
-      pedidoDeTerminal({ ...sessao, opcoes: p.opcoes }, { shell: "/bin/bash", lang: "pt_BR.UTF-8", escuro: !!p.escuro, colunas: 80, linhas: 24 }),
-    );
+    sessao.terminal = await this.mao.terminal.abrir(pedidoDeTerminal({ ...sessao, opcoes: p.opcoes }, this.opcoesDoTerminal(!!p.escuro)));
     sessao.ultimaVez = this.relogio();
     const desligar = this.mao.terminal.aoSair(sessao.terminal.id, (codigo) => {
       desligar();
@@ -239,23 +262,37 @@ export class Bancada {
     this.avisar();
   }
 
+  /** Vazio volta ao automático (a última fala, senão a pasta); preenchido fixa. */
   renomear(id: string, nome: string): void {
     const s = this.sessao(id);
     if (!s) return;
     const limpo = nome.trim();
-    s.nome = limpo || nomeDaPasta(s.pasta, this.mao.arquivos.home());
+    s.nome = limpo || (s.ultimaFala && nomeDaFala(s.ultimaFala)) || nomeDaPasta(s.pasta, this.mao.arquivos.home());
     s.nomeManual = !!limpo;
     this.avisar();
   }
 
-  /** O nome automático pela última fala; nunca por cima de um nome dado pela pessoa. */
+  /** O nome automático pela última fala; nunca por cima de um nome dado pela pessoa, nunca para shell. */
   nomeAutomatico(id: string, fala: string): void {
     const s = this.sessao(id);
-    if (!s || s.nomeManual) return;
-    const curto = fala.replace(/\s+/g, " ").trim().slice(0, 40);
-    if (!curto) return;
+    if (!s || s.programa === "shell" || s.programa === "comando") return;
     s.ultimaFala = fala;
-    s.nome = curto;
+    const nome = nomeDaFala(fala);
+    if (s.nomeManual || !nome || nome === s.nome) return;
+    s.nome = nome;
+    this.avisar();
+  }
+
+  /** Dividir: um shell na mesma pasta, ao lado. Só um painel a mais por sessão. */
+  async dividir(id: string, escuro = false): Promise<void> {
+    const s = this.sessao(id);
+    if (!s?.terminal || s.extra) return;
+    s.extra = await this.mao.terminal.abrir(pedidoDeTerminal({ id: s.id, programa: "shell", pasta: s.pasta }, this.opcoesDoTerminal(escuro)));
+    const desligar = this.mao.terminal.aoSair(s.extra.id, () => {
+      desligar();
+      s.extra = null;
+      this.avisar();
+    });
     this.avisar();
   }
 

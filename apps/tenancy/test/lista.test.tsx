@@ -7,7 +7,7 @@ import { bancoNaMemoria } from "../src/bancada/banco";
 import { ALTURA_DA_LINHA, detalheDaSessao } from "../src/bancada/lista/ListaDeSessoes";
 import { preferenciasNaMemoria } from "../src/casca/preferencias";
 import { maoDeEnsaio, repoNovo } from "../src/mao/ensaio";
-import { montar, type Montado } from "./montar";
+import { criarHeadless, montar, type Montado } from "./montar";
 
 let m: Montado | null = null;
 afterEach(() => {
@@ -50,7 +50,7 @@ async function bancadaCom(n: number, o: { comWorktree?: boolean } = {}) {
 }
 
 async function montarBancada(bancada: Bancada) {
-  return montar(<App mao={bancada.mao} preferencias={preferenciasNaMemoria({ modoAvancado: true })} bancada={bancada} />);
+  return montar(<App mao={bancada.mao} preferencias={preferenciasNaMemoria({ modoAvancado: true })} bancada={bancada} criarTerminal={criarHeadless} />);
 }
 
 const linhas = (raiz: HTMLElement) => Array.from(raiz.querySelectorAll<HTMLElement>("[data-sessao]"));
