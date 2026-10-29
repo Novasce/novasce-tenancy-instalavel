@@ -126,9 +126,7 @@ describe("os casos de casos-de-prova/", () => {
     expect(erros).toEqual([]);
   });
 
-  // Pulado de propósito: os casos chegam das sessões 2, 3 e 4 da Execução 2.
-  // A sessão 5 (integração) liga este teste quando os três PRs estiverem mesclados.
-  it.skip("nenhum id do ids.json falta (liga na sessão 5, depois dos casos das sessões 2, 3 e 4)", () => {
+  it("nenhum id do ids.json falta", () => {
     const { casos } = carregar(arquivosDaPasta, esquema, ids);
     expect(faltam(casos, ids)).toEqual([]);
   });
