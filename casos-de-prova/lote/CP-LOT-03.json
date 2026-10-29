@@ -1,0 +1,76 @@
+{
+  "id": "CP-LOT-03",
+  "contrato": "lote",
+  "regra": "Cada chamada leva só a prova e o comentário do seu cartão; cartão já em Review não recebe anexo de novo",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "cartoes": [
+      {
+        "id": "cartao-a",
+        "titulo": "Peça de exemplo A",
+        "status": "FAZENDO",
+        "comentario": "ok A",
+        "prova": {
+          "nome": "revisao-a.md"
+        }
+      },
+      {
+        "id": "cartao-b",
+        "titulo": "Peça de exemplo B",
+        "status": "FAZENDO",
+        "comentario": "ok B",
+        "prova": {
+          "nome": "revisao-b.md"
+        }
+      }
+    ],
+    "repetir": [
+      {
+        "id": "cartao-a",
+        "titulo": "Peça de exemplo A",
+        "status": "REVIEW",
+        "comentario": "ok A",
+        "prova": {
+          "nome": "revisao-a.md"
+        }
+      },
+      {
+        "id": "cartao-b",
+        "titulo": "Peça de exemplo B",
+        "status": "FAZENDO",
+        "comentario": "ok B",
+        "prova": {
+          "nome": "revisao-b.md"
+        }
+      }
+    ]
+  },
+  "esperado": {
+    "chamadas": [
+      {
+        "cartao": "cartao-a",
+        "anexo": "revisao-a.md",
+        "comentario": "ok A"
+      },
+      {
+        "cartao": "cartao-b",
+        "anexo": "revisao-b.md",
+        "comentario": "ok B"
+      }
+    ],
+    "repetir": {
+      "chamadas": [
+        {
+          "cartao": "cartao-b",
+          "anexo": "revisao-b.md",
+          "comentario": "ok B"
+        }
+      ],
+      "jaEmReview": [
+        "cartao-a"
+      ]
+    }
+  },
+  "mac": "pendente: sem lote"
+}

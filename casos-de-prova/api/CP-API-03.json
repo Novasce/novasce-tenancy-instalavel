@@ -1,0 +1,91 @@
+{
+  "id": "CP-API-03",
+  "contrato": "api",
+  "regra": "Rede, 401 e 403 são distintos; 403 não desloga",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "base": "https://api.exemplo.invalid",
+    "estado": {
+      "sessao": {
+        "payload": {
+          "exp": 1793192400,
+          "jti": "sessao-de-exemplo"
+        }
+      },
+      "eu": {
+        "id": "00000000-0000-4000-8000-000000000001",
+        "nome": "Lia Pereira"
+      },
+      "tarefas": [
+        {
+          "id": "00000000-0000-4000-8000-0000000000a1",
+          "titulo": "Peça de exemplo A"
+        }
+      ],
+      "linhas": [
+        {
+          "slug": "EXEMPLO",
+          "nome": "Linha de exemplo"
+        }
+      ],
+      "leituras": {
+        "cartoes": 1
+      },
+      "pessoal": {
+        "notas": [
+          "Pessoal/Ideias.md"
+        ]
+      },
+      "rascunhos": {
+        "comentario": "Texto que a Lia ainda não enviou"
+      }
+    },
+    "pedido": {
+      "metodo": "GET",
+      "rota": "/tasks",
+      "linha": "EXEMPLO"
+    },
+    "respostas": [
+      {
+        "nome": "rede",
+        "falhaDeRede": "sem rota até o servidor"
+      },
+      {
+        "nome": "401",
+        "status": 401,
+        "corpo": "{}"
+      },
+      {
+        "nome": "403",
+        "status": 403,
+        "corpo": "{\"message\": \"Forbidden\"}"
+      }
+    ]
+  },
+  "esperado": {
+    "respostas": [
+      {
+        "nome": "rede",
+        "erro": "rede",
+        "desloga": false,
+        "online": false
+      },
+      {
+        "nome": "401",
+        "erro": "sessao-vencida",
+        "desloga": true,
+        "online": true
+      },
+      {
+        "nome": "403",
+        "erro": "sem-acesso",
+        "desloga": false,
+        "online": true,
+        "foraDoPapel": true,
+        "tarefas": []
+      }
+    ]
+  },
+  "mac": "passa"
+}

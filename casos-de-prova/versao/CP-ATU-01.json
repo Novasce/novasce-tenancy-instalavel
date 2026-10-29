@@ -1,0 +1,51 @@
+{
+  "id": "CP-ATU-01",
+  "contrato": "versao",
+  "regra": "Só sobe: compara número a número, parte que falta vale zero",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "pares": [
+      {
+        "servidor": "0.17.10",
+        "instalada": "0.17.2"
+      },
+      {
+        "servidor": "0.18",
+        "instalada": "0.17.2"
+      },
+      {
+        "servidor": "0.17.2",
+        "instalada": "0.17.10"
+      },
+      {
+        "servidor": "0.17.2",
+        "instalada": "0.18"
+      },
+      {
+        "servidor": "0.17.2",
+        "instalada": "0.17.2"
+      },
+      {
+        "servidor": "0.2.0",
+        "instalada": "0.2"
+      },
+      {
+        "servidor": "0.2.1",
+        "instalada": "0.2"
+      }
+    ]
+  },
+  "esperado": {
+    "atualiza": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  "mac": "passa"
+}

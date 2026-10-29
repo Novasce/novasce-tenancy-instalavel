@@ -1,0 +1,1482 @@
+{
+  "id": "CP-PAP-06",
+  "contrato": "papel",
+  "regra": "Ações por estado: Review para responsável ou admin; em Review admin devolve e dá parecer, os outros só parecer; FEITO nada; mover só entre Backlog e Fazendo",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "acoes": [
+      {
+        "pessoa": "responsável DEV",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-backlog-task",
+          "status": "BACKLOG",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "responsável DEV",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-fazendo-task",
+          "status": "FAZENDO",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "responsável DEV",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-review-task",
+          "status": "REVIEW",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "responsável DEV",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-feito-task",
+          "status": "FEITO",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "responsável DEV",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-backlog-ticket",
+          "status": "BACKLOG",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "responsável DEV",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-fazendo-ticket",
+          "status": "FAZENDO",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "responsável DEV",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-review-ticket",
+          "status": "REVIEW",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "responsável DEV",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-feito-ticket",
+          "status": "FEITO",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-backlog-task",
+          "status": "BACKLOG",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-fazendo-task",
+          "status": "FAZENDO",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-review-task",
+          "status": "REVIEW",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-feito-task",
+          "status": "FEITO",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-backlog-ticket",
+          "status": "BACKLOG",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-fazendo-ticket",
+          "status": "FAZENDO",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-review-ticket",
+          "status": "REVIEW",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-feito-ticket",
+          "status": "FEITO",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "ADMIN",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-backlog-task",
+          "status": "BACKLOG",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "ADMIN",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-fazendo-task",
+          "status": "FAZENDO",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "ADMIN",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-review-task",
+          "status": "REVIEW",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "ADMIN",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-feito-task",
+          "status": "FEITO",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "ADMIN",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-backlog-ticket",
+          "status": "BACKLOG",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "ADMIN",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-fazendo-ticket",
+          "status": "FAZENDO",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "ADMIN",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-review-ticket",
+          "status": "REVIEW",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "ADMIN",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-feito-ticket",
+          "status": "FEITO",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "SOCIO",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "SOCIO"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-backlog-task",
+          "status": "BACKLOG",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "SOCIO",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "SOCIO"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-fazendo-task",
+          "status": "FAZENDO",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "SOCIO",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "SOCIO"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-review-task",
+          "status": "REVIEW",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "SOCIO",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "SOCIO"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-feito-task",
+          "status": "FEITO",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "SOCIO",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "SOCIO"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-backlog-ticket",
+          "status": "BACKLOG",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "SOCIO",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "SOCIO"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-fazendo-ticket",
+          "status": "FAZENDO",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "SOCIO",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "SOCIO"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-review-ticket",
+          "status": "REVIEW",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "SOCIO",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "SOCIO"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-feito-ticket",
+          "status": "FEITO",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000001",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "VENDEDOR"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-backlog-task",
+          "status": "BACKLOG",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "VENDEDOR"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-fazendo-task",
+          "status": "FAZENDO",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "VENDEDOR"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-review-task",
+          "status": "REVIEW",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "VENDEDOR"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-feito-task",
+          "status": "FEITO",
+          "kind": "TASK",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "VENDEDOR"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-backlog-ticket",
+          "status": "BACKLOG",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "VENDEDOR"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-fazendo-ticket",
+          "status": "FAZENDO",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "VENDEDOR"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-review-ticket",
+          "status": "REVIEW",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "eu": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "VENDEDOR"
+            }
+          ]
+        },
+        "cartao": {
+          "id": "c-feito-ticket",
+          "status": "FEITO",
+          "kind": "TICKET",
+          "assigneeId": "00000000-0000-4000-8000-000000000002",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      }
+    ],
+    "mover": [
+      {
+        "de": "BACKLOG",
+        "para": "FAZENDO"
+      },
+      {
+        "de": "FAZENDO",
+        "para": "BACKLOG"
+      },
+      {
+        "de": "FAZENDO",
+        "para": "FEITO"
+      },
+      {
+        "de": "FAZENDO",
+        "para": "REVIEW"
+      },
+      {
+        "de": "FAZENDO",
+        "para": "ARQUIVO"
+      },
+      {
+        "de": "FEITO",
+        "para": "FAZENDO"
+      },
+      {
+        "de": "REVIEW",
+        "para": "FAZENDO"
+      },
+      {
+        "de": "FAZENDO",
+        "para": "FAZENDO"
+      }
+    ]
+  },
+  "esperado": {
+    "acoes": [
+      {
+        "pessoa": "responsável DEV",
+        "status": "BACKLOG",
+        "kind": "TASK",
+        "acoes": [
+          "review"
+        ]
+      },
+      {
+        "pessoa": "responsável DEV",
+        "status": "FAZENDO",
+        "kind": "TASK",
+        "acoes": [
+          "review"
+        ]
+      },
+      {
+        "pessoa": "responsável DEV",
+        "status": "REVIEW",
+        "kind": "TASK",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "responsável DEV",
+        "status": "FEITO",
+        "kind": "TASK",
+        "acoes": []
+      },
+      {
+        "pessoa": "responsável DEV",
+        "status": "BACKLOG",
+        "kind": "TICKET",
+        "acoes": [
+          "responder",
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "responsável DEV",
+        "status": "FAZENDO",
+        "kind": "TICKET",
+        "acoes": [
+          "responder",
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "responsável DEV",
+        "status": "REVIEW",
+        "kind": "TICKET",
+        "acoes": [
+          "responder",
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "responsável DEV",
+        "status": "FEITO",
+        "kind": "TICKET",
+        "acoes": []
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "status": "BACKLOG",
+        "kind": "TASK",
+        "acoes": []
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "status": "FAZENDO",
+        "kind": "TASK",
+        "acoes": []
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "status": "REVIEW",
+        "kind": "TASK",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "status": "FEITO",
+        "kind": "TASK",
+        "acoes": []
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "status": "BACKLOG",
+        "kind": "TICKET",
+        "acoes": [
+          "responder",
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "status": "FAZENDO",
+        "kind": "TICKET",
+        "acoes": [
+          "responder",
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "status": "REVIEW",
+        "kind": "TICKET",
+        "acoes": [
+          "responder",
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "DEV que não é responsável",
+        "status": "FEITO",
+        "kind": "TICKET",
+        "acoes": []
+      },
+      {
+        "pessoa": "ADMIN",
+        "status": "BACKLOG",
+        "kind": "TASK",
+        "acoes": [
+          "review"
+        ]
+      },
+      {
+        "pessoa": "ADMIN",
+        "status": "FAZENDO",
+        "kind": "TASK",
+        "acoes": [
+          "review"
+        ]
+      },
+      {
+        "pessoa": "ADMIN",
+        "status": "REVIEW",
+        "kind": "TASK",
+        "acoes": [
+          "devolver",
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "ADMIN",
+        "status": "FEITO",
+        "kind": "TASK",
+        "acoes": []
+      },
+      {
+        "pessoa": "ADMIN",
+        "status": "BACKLOG",
+        "kind": "TICKET",
+        "acoes": [
+          "responder",
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "ADMIN",
+        "status": "FAZENDO",
+        "kind": "TICKET",
+        "acoes": [
+          "responder",
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "ADMIN",
+        "status": "REVIEW",
+        "kind": "TICKET",
+        "acoes": [
+          "responder",
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "ADMIN",
+        "status": "FEITO",
+        "kind": "TICKET",
+        "acoes": []
+      },
+      {
+        "pessoa": "SOCIO",
+        "status": "BACKLOG",
+        "kind": "TASK",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "SOCIO",
+        "status": "FAZENDO",
+        "kind": "TASK",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "SOCIO",
+        "status": "REVIEW",
+        "kind": "TASK",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "SOCIO",
+        "status": "FEITO",
+        "kind": "TASK",
+        "acoes": []
+      },
+      {
+        "pessoa": "SOCIO",
+        "status": "BACKLOG",
+        "kind": "TICKET",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "SOCIO",
+        "status": "FAZENDO",
+        "kind": "TICKET",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "SOCIO",
+        "status": "REVIEW",
+        "kind": "TICKET",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "SOCIO",
+        "status": "FEITO",
+        "kind": "TICKET",
+        "acoes": []
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "status": "BACKLOG",
+        "kind": "TASK",
+        "acoes": []
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "status": "FAZENDO",
+        "kind": "TASK",
+        "acoes": []
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "status": "REVIEW",
+        "kind": "TASK",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "status": "FEITO",
+        "kind": "TASK",
+        "acoes": []
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "status": "BACKLOG",
+        "kind": "TICKET",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "status": "FAZENDO",
+        "kind": "TICKET",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "status": "REVIEW",
+        "kind": "TICKET",
+        "acoes": [
+          "parecer"
+        ]
+      },
+      {
+        "pessoa": "VENDEDOR",
+        "status": "FEITO",
+        "kind": "TICKET",
+        "acoes": []
+      }
+    ],
+    "mover": [
+      null,
+      null,
+      "FEITO é no Tenancy web.",
+      "Review vai com prova: use Enviar para Review com prova.",
+      "Essa coluna não existe aqui.",
+      "Cartão em FEITO volta pelo Tenancy web.",
+      "Cartão em Review volta por Devolver com orientação.",
+      "O cartão já está em Fazendo."
+    ]
+  },
+  "mac": "passa"
+}

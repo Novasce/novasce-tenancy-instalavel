@@ -1,0 +1,159 @@
+{
+  "id": "CP-PAP-05",
+  "contrato": "papel",
+  "regra": "Criar cartão sem produto só com papel na Casa",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "tentativas": [
+      {
+        "nome": "ADMIN só da EXEMPLO",
+        "eu": {
+          "id": "lia",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "produtoId": null,
+        "produtos": [
+          {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        ]
+      },
+      {
+        "nome": "ADMIN só da EXEMPLO sem produtos",
+        "eu": {
+          "id": "lia",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "produtoId": null,
+        "produtos": []
+      },
+      {
+        "nome": "ADMIN só da EXEMPLO com produto",
+        "eu": {
+          "id": "lia",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "produtoId": "p1",
+        "produtos": [
+          {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        ]
+      },
+      {
+        "nome": "ADMIN da Casa",
+        "eu": {
+          "id": "lia",
+          "casaAccess": true,
+          "linhas": [
+            {
+              "slug": "CASA",
+              "kind": "CASA",
+              "nome": "Casa de exemplo",
+              "papel": "ADMIN"
+            },
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        },
+        "produtoId": null,
+        "produtos": [
+          {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        ]
+      },
+      {
+        "nome": "SOCIO da Casa",
+        "eu": {
+          "id": "lia",
+          "casaAccess": true,
+          "linhas": [
+            {
+              "slug": "CASA",
+              "kind": "CASA",
+              "nome": "Casa de exemplo",
+              "papel": "SOCIO"
+            }
+          ]
+        },
+        "produtoId": null,
+        "produtos": [
+          {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "esperado": {
+    "tentativas": [
+      {
+        "nome": "ADMIN só da EXEMPLO",
+        "recusa": "Escolha um produto da sua linha: sem produto, o cartão é da Casa."
+      },
+      {
+        "nome": "ADMIN só da EXEMPLO sem produtos",
+        "recusa": "Nenhum produto da sua linha chegou do Tenancy: sem produto, o cartão seria da Casa."
+      },
+      {
+        "nome": "ADMIN só da EXEMPLO com produto",
+        "recusa": null
+      },
+      {
+        "nome": "ADMIN da Casa",
+        "recusa": null
+      },
+      {
+        "nome": "SOCIO da Casa",
+        "recusa": "Escolha um produto da sua linha: sem produto, o cartão é da Casa."
+      }
+    ]
+  },
+  "mac": "passa"
+}

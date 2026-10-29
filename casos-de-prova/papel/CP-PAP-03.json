@@ -1,0 +1,88 @@
+{
+  "id": "CP-PAP-03",
+  "contrato": "papel",
+  "regra": "Em todas as linhas, o papel é o da linha do registro; sem produto conta como Casa",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "cartoes": [
+      {
+        "nome": "da EXEMPLO",
+        "cartao": {
+          "id": "a1",
+          "product": {
+            "id": "p1",
+            "nome": "Produto A",
+            "line": {
+              "slug": "EXEMPLO"
+            }
+          }
+        }
+      },
+      {
+        "nome": "sem produto",
+        "cartao": {
+          "id": "a2",
+          "product": null
+        }
+      }
+    ],
+    "pessoas": [
+      {
+        "nome": "ADMIN só da EXEMPLO",
+        "eu": {
+          "id": "lia",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "ADMIN"
+            }
+          ]
+        }
+      },
+      {
+        "nome": "DEV na Casa e MARKETING na EXEMPLO",
+        "eu": {
+          "id": "lia",
+          "casaAccess": true,
+          "linhas": [
+            {
+              "slug": "CASA",
+              "kind": "CASA",
+              "nome": "Casa de exemplo",
+              "papel": "DEV"
+            },
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "MARKETING"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "esperado": {
+    "pessoas": [
+      {
+        "nome": "ADMIN só da EXEMPLO",
+        "papeis": [
+          "ADMIN",
+          null
+        ]
+      },
+      {
+        "nome": "DEV na Casa e MARKETING na EXEMPLO",
+        "papeis": [
+          "MARKETING",
+          "DEV"
+        ]
+      }
+    ]
+  },
+  "mac": "passa"
+}
