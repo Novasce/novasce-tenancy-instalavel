@@ -1,0 +1,73 @@
+{
+  "id": "CP-LOT-04",
+  "contrato": "lote",
+  "regra": "401 num cartão vence a sessão e para o resto do lote, que fica como estava, com a prova e o comentário na tela",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "cartoes": [
+      {
+        "id": "cartao-a",
+        "titulo": "Peça de exemplo A",
+        "status": "FAZENDO",
+        "comentario": "Pronto A",
+        "prova": {
+          "nome": "revisao-a.md"
+        }
+      },
+      {
+        "id": "cartao-b",
+        "titulo": "Peça de exemplo B",
+        "status": "FAZENDO",
+        "comentario": "Pronto B",
+        "prova": {
+          "nome": "revisao-b.md"
+        }
+      },
+      {
+        "id": "cartao-c",
+        "titulo": "Peça de exemplo C",
+        "status": "FAZENDO",
+        "comentario": "Pronto C",
+        "prova": {
+          "nome": "revisao-c.md"
+        }
+      }
+    ],
+    "respostas": {
+      "cartao-a": {
+        "status": 200,
+        "corpo": "{\"data\": {\"status\": \"REVIEW\"}}"
+      },
+      "cartao-b": {
+        "status": 401,
+        "corpo": "{}"
+      }
+    }
+  },
+  "esperado": {
+    "chamadas": [
+      "cartao-a",
+      "cartao-b"
+    ],
+    "resultado": {
+      "cartao-a": {
+        "status": "REVIEW",
+        "aviso": null
+      },
+      "cartao-b": {
+        "status": "FAZENDO",
+        "aviso": "sessao-vencida",
+        "prova": "revisao-b.md",
+        "comentario": "Pronto B"
+      },
+      "cartao-c": {
+        "status": "FAZENDO",
+        "aviso": "nao-enviado",
+        "prova": "revisao-c.md",
+        "comentario": "Pronto C"
+      }
+    }
+  },
+  "mac": "pendente: sem lote"
+}

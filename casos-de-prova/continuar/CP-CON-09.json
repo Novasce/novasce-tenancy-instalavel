@@ -1,0 +1,33 @@
+{
+  "id": "CP-CON-09",
+  "contrato": "continuar",
+  "regra": "LEIA gravado com \\r\\n: cada \\r\\n conta como uma quebra só, então a frase quebrada segue uma linha lógica",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "leia": "Retomada da peça de exemplo.\r\n\r\nONDE PAROU\r\nO rascunho está pronto\r\ne falta a revisão.\r\n\r\nO QUE ESPERA\r\n- A cor da capa\r\n- O prazo\r\n"
+  },
+  "esperado": {
+    "preambulo": [
+      "Retomada da peça de exemplo."
+    ],
+    "secoes": [
+      {
+        "titulo": "ONDE PAROU",
+        "detalhe": null,
+        "linhas": [
+          "O rascunho está pronto e falta a revisão."
+        ]
+      },
+      {
+        "titulo": "O QUE ESPERA",
+        "detalhe": null,
+        "linhas": [
+          "A cor da capa",
+          "O prazo"
+        ]
+      }
+    ]
+  },
+  "mac": "pendente: o Mac parte por .newlines e conta \\r\\n como duas quebras, o que fecha o parágrafo no meio"
+}

@@ -49,7 +49,7 @@ const hoje = (c: Caso, relogio = c.relogio) => hojeNoFuso(relogio, c.fuso);
 
 describe("casos de prova de pastas", () => {
   it("tem todos os casos de Para continuar e de Envios", () => {
-    expect(continuar.map((c) => c.id)).toEqual(idsEsperados("CP-CON-", 8));
+    expect(continuar.map((c) => c.id)).toEqual(idsEsperados("CP-CON-", 9));
     expect(envios.map((c) => c.id)).toEqual(idsEsperados("CP-ENV-", 7));
   });
 });
@@ -70,6 +70,13 @@ describe("Para continuar", () => {
 
   it("CP-CON-02 lê as seções do LEIA", () => {
     const c = caso(continuar, "CP-CON-02");
+    const leia = lerLeia(c.entrada.leia);
+    expect(leia.preambulo).toEqual(c.esperado.preambulo);
+    expect(leia.secoes).toEqual(c.esperado.secoes);
+  });
+
+  it("CP-CON-09 conta \\r\\n como uma quebra só", () => {
+    const c = caso(continuar, "CP-CON-09");
     const leia = lerLeia(c.entrada.leia);
     expect(leia.preambulo).toEqual(c.esperado.preambulo);
     expect(leia.secoes).toEqual(c.esperado.secoes);

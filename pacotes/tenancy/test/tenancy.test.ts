@@ -82,7 +82,7 @@ describe("casos de prova do tenancy", () => {
     expect(api.map((c) => c.id)).toEqual(idsEsperados("CP-API-", 5));
     expect(papel.map((c) => c.id)).toEqual(idsEsperados("CP-PAP-", 6));
     expect(versao.map((c) => c.id)).toEqual(idsEsperados("CP-ATU-", 1));
-    expect(lote.map((c) => c.id)).toEqual(idsEsperados("CP-LOT-", 3));
+    expect(lote.map((c) => c.id)).toEqual(idsEsperados("CP-LOT-", 4));
   });
 });
 
@@ -286,14 +286,12 @@ describe("lote para Review", () => {
     expect(repetir.jaEmReview).toEqual(c.esperado.repetir.jaEmReview);
   });
 
-  it("401 no meio do lote para o resto, que fica como estava", async () => {
-    const c = caso(lote, "CP-LOT-02");
+  it("CP-LOT-04 401 num cartão para o resto, que fica como estava", async () => {
+    const c = caso(lote, "CP-LOT-04");
     const plano = planejarLote(c.entrada.cartoes);
-    const r = await enviarLote(plano, async (ch) =>
-      ch.cartao === "cartao-a" ? { status: 401, corpo: "{}" } : { status: 200, corpo: "{}" },
-    );
-    expect(r.chamadas).toEqual(["cartao-a"]);
-    expect(r.resultado["cartao-b"]).toMatchObject({ status: "FAZENDO", aviso: "nao-enviado" });
+    const r = await enviarLote(plano, async (ch) => c.entrada.respostas[ch.cartao]);
+    expect(r.chamadas).toEqual(c.esperado.chamadas);
+    expect(r.resultado).toEqual(c.esperado.resultado);
   });
 });
 

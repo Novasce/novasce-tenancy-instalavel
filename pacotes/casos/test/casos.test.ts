@@ -118,9 +118,9 @@ describe("carregar a pasta", () => {
 });
 
 describe("a lista de ids", () => {
-  it("tem os 83 ids das tabelas 6.3 e 6.5, sem repetição, cada um com contrato", () => {
-    expect(ids).toHaveLength(83);
-    expect(new Set(ids).size).toBe(83);
+  it("tem os 85 ids das tabelas 6.3 e 6.5, sem repetição, cada um com contrato", () => {
+    expect(ids).toHaveLength(85);
+    expect(new Set(ids).size).toBe(85);
     const semContrato = ids.filter((id) => !(id.slice(0, 6) in CONTRATO_DO_PREFIXO));
     expect(semContrato).toEqual([]);
   });
