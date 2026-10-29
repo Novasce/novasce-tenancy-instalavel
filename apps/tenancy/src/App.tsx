@@ -15,6 +15,7 @@ import { Telas } from "./bancada/telas";
 import { LER_A_CADA_MS } from "./bancada/tela";
 import { criarTerminalXterm, type CriarTerminal } from "./bancada/terminal";
 import { Ajustes } from "./casca/Ajustes";
+import { FaixaDeAtualizar, impactoDaAtualizacao, type Impacto } from "./casca/atualizar";
 import { EstadoDaTela } from "./casca/estado";
 import { Lateral, type Pagina } from "./casca/Lateral";
 import type { Escolhas, Preferencias } from "./casca/preferencias";
@@ -44,6 +45,16 @@ export function App(p: {
   const [foraDaMain, setForaDaMain] = useState<ForaDaMain[]>([]);
   const [orfaos, setOrfaos] = useState<Orfao[]>([]);
   const [sair, setSair] = useState<string | null>(null);
+  const [impacto, setImpacto] = useState<Impacto | null>(null);
+
+  useEffect(() => {
+    const versaoNova = (e: Event) => {
+      const aoReiniciar = !!(e as CustomEvent<{ aoReiniciar?: boolean } | undefined>).detail?.aoReiniciar;
+      void impactoDaAtualizacao(bancada, aoReiniciar).then(setImpacto);
+    };
+    window.addEventListener("tenancy:versao-nova", versaoNova);
+    return () => window.removeEventListener("tenancy:versao-nova", versaoNova);
+  }, [bancada]);
 
   const atualizarForaDaMain = async () => setForaDaMain(await listarForaDaMain(bancada));
 
@@ -176,6 +187,16 @@ export function App(p: {
             sair={async () => {
               setSair(null);
               bancada.recado("Encerrando as sessões…", false);
+              await bancada.encerrarTudo();
+              await p.mao.sair();
+            }}
+          />
+        ) : impacto ? (
+          <FaixaDeAtualizar
+            impacto={impacto}
+            depois={() => setImpacto(null)}
+            reabrir={async () => {
+              setImpacto(null);
               await bancada.encerrarTudo();
               await p.mao.sair();
             }}

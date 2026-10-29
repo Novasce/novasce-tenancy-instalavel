@@ -1205,3 +1205,7 @@ button:disabled {
   gap: 8px;
   min-height: 30px;
 }
+
+.faixa-do-pe.acento {
+  border-top-color: var(--nv-acento);
+}
