@@ -98,10 +98,13 @@ export async function encerrar(
 ): Promise<Encerramento> {
   const chave = (p: Processo) => `${p.pid}@${p.inicio}`;
   const conhecidos = new Map<string, Processo>();
+  // Só as raízes vivas no começo, com o mesmo início: raiz que já tinha saído
+  // não leva a sessão, porque o pid dela pode ter voltado como líder de outra.
+  const noComeco = mao.tabela();
+  const vivas = raizes.filter((r) => noComeco.some((p) => p.pid === r.pid && p.inicio === r.inicio));
   const juntar = (tabela: Processo[]): Processo[] => {
     const novos: Processo[] = [];
-    for (const r of raizes) {
-      if (!tabela.some((p) => p.pid === r.pid && p.inicio === r.inicio) && !conhecidos.size) continue;
+    for (const r of vivas) {
       for (const p of alvos(r.pid, r.inicio, tabela, o.protegidos)) {
         if (!conhecidos.has(chave(p))) {
           conhecidos.set(chave(p), p);
@@ -134,7 +137,7 @@ export async function encerrar(
     }
   };
 
-  const iniciais = juntar(mao.tabela());
+  const iniciais = juntar(noComeco);
   if (!iniciais.length) return { alvos: 0, precisouDoKill: false, sobrou: [] };
   mandar(iniciais, ["HUP", "TERM"]);
   for (let t = 0; t < PRAZO_DO_PEDIDO_MS; t += PASSO_MS) {
@@ -177,13 +180,16 @@ export function rotuloDaRaiz(argv: string[]): RotuloDeRaiz | null {
   return null;
 }
 
+/** Só os números do processo: argumentos e ambiente nunca saem num órfão. */
+export type ProcessoDoOrfao = Pick<Processo, "pid" | "ppid" | "pgid" | "sid" | "inicio" | "mb">;
+
 export interface Orfao {
   raiz: number;
   inicio: string;
   rotulo: RotuloDeRaiz;
   /** Só o script ou o pacote, nunca os argumentos. */
   script: string | null;
-  processos: Processo[];
+  processos: ProcessoDoOrfao[];
 }
 
 /**
@@ -210,7 +216,8 @@ export function orfaos(tabela: Processo[], prot: Set<number>, app: { marca: stri
     const grupo = alvos(p.pid, p.inicio, tabela, new Set());
     if (grupo.some((g) => prot.has(g.pid))) continue;
     const script = rotulo === "node" ? oQueRoda(p.argv!) : rotulo === "npm exec" ? pacoteDoNpx(p.argv!) : null;
-    achados.push({ raiz: p.pid, inicio: p.inicio, rotulo, script, processos: grupo });
+    const processos = grupo.map(({ pid, ppid, pgid, sid, inicio, mb }) => ({ pid, ppid, pgid, sid, inicio, mb }));
+    achados.push({ raiz: p.pid, inicio: p.inicio, rotulo, script, processos });
   }
   return achados;
 }

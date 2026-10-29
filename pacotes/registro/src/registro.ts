@@ -57,9 +57,13 @@ export function podeDesfazer(registro: Entrada[], id: string): PodeDesfazer {
   return { pode: true };
 }
 
-/** O Desfazer do rodapé dura 10 s; depois disso só pelo Registro. */
-export function ofereceDesfazerNoRodape(entrada: Entrada, agora: string): boolean {
+/**
+ * O Desfazer do rodapé dura 10 s; depois disso só pelo Registro. Com o
+ * registro, some também quando a ação já foi desfeita ou ficou presa.
+ */
+export function ofereceDesfazerNoRodape(entrada: Entrada, agora: string, registro?: Entrada[]): boolean {
   if (!regraDa(entrada.acao).reversivel || entrada.desfaz || entrada.refaz) return false;
+  if (registro && !podeDesfazer(registro, entrada.id).pode) return false;
   const passou = Date.parse(agora) - Date.parse(entrada.hora);
   return passou >= 0 && passou < DESFAZER_NO_RODAPE_MS;
 }
@@ -177,7 +181,9 @@ export function exportar(registro: Entrada[], formato: "md" | "csv", de: string,
   return { caminho, conteudo, linhas: linhas.length };
 }
 
-function csv(v: string): string {
+function csv(bruto: string): string {
+  // Título que começa como fórmula não vira fórmula na planilha.
+  const v = /^[=+\-@]/.test(bruto) ? `'${bruto}` : bruto;
   return /[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
 }
 

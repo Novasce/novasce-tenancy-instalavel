@@ -24,7 +24,7 @@ export function lerPedido(texto: string): Pedido | null {
   const limpas = texto
     .replace(/\n$/, "")
     .split("\n")
-    .map((l) => l.replace(/[\u0000 ]/g, " ").replace(APARAR, ""));
+    .map((l) => l.replace(/[\u0000\u00a0]/g, " ").replace(APARAR, ""));
   let pergunta = -1;
   for (let i = limpas.length - 1; i >= 0; i--) if (limpas[i].toLowerCase().startsWith("do you want to")) {
     pergunta = i;

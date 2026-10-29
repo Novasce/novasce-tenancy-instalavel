@@ -15,7 +15,7 @@ export type AcaoDeTecla =
   | "ir-a-busca"
   | "limpar-busca";
 
-const TECLAS: Record<string, AcaoDeTecla> = {
+export const TABELA_DE_TECLAS: Readonly<Record<string, AcaoDeTecla>> = {
   ArrowUp: "foco-acima",
   ArrowDown: "foco-abaixo",
   Enter: "abrir",
@@ -34,7 +34,7 @@ const TECLAS: Record<string, AcaoDeTecla> = {
 export const ACOES_QUE_APAGAM: readonly string[] = ["apagar-permanente", "esvaziar-lixeira"];
 
 export function acaoDaTecla(tecla: string): AcaoDeTecla | null {
-  return TECLAS[tecla] ?? null;
+  return TABELA_DE_TECLAS[tecla] ?? null;
 }
 
 export type Efeito =
@@ -90,6 +90,8 @@ export function pressionar(lista: Lista, tecla: string): Pressionado {
     case "ir-a-busca":
       return { lista, efeito: { tipo: "ir-a-busca" } };
     case "limpar-busca": {
+      // Busca já vazia: Esc não mexe na seleção.
+      if (!lista.busca) return { lista };
       const r = trocarBusca(lista, "");
       return { lista: r.lista, aviso: r.aviso };
     }

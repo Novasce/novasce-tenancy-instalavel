@@ -90,6 +90,8 @@ describe("casos de prova do registro", () => {
     expect(c.entrada.instantes.map(() => podeDesfazer(registro, e.id).pode)).toEqual(c.esperado.noRegistro);
     const volta = desfazer(registro, e.id, c.entrada.instantes[1], "Lia Pereira");
     expect(aplicar(depois, volta)).toEqual(inicial);
+    // Desfeita, o rodapé some mesmo dentro dos 10 s.
+    expect(ofereceDesfazerNoRodape(e, c.entrada.instantes[0], [...registro, volta])).toBe(false);
   });
 
   it("CP-DES-02 irreversível confirma com o alcance", () => {

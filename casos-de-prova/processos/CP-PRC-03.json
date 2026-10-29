@@ -6,7 +6,7 @@
   "fuso": "America/Maceio",
   "entrada": {
     "marca": "TENANCY_SESSAO",
-    "pacoteDoApp": "com.novasce.Tenancy",
+    "pacoteDoApp": "com.exemplo.Tenancy",
     "tabela": [
       {
         "pid": 300,
@@ -119,8 +119,7 @@
     "naoTem": [
       "valor-de-exemplo",
       "--chave"
-    ],
-    "sinais": []
+    ]
   },
   "mac": "pendente: o Mac lê a marca TENANCY_MACOS_SESSAO e o pacote com.novasce.tenancy fixos; o caso passa marca e pacote como parâmetro"
 }

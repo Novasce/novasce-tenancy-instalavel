@@ -11,14 +11,16 @@
         "mudouHa": 2,
         "vistaHa": 300,
         "abertaHa": 900,
-        "cpu": 0.1
+        "cpu": 0.1,
+        "prontaHa": 900
       },
       {
         "tela": "CP-TEL-04.txt",
         "mudouHa": 1,
         "vistaHa": 300,
         "abertaHa": 900,
-        "cpu": 0.1
+        "cpu": 0.1,
+        "prontaHa": 900
       }
     ]
   },

@@ -27,3 +27,11 @@ describe("bordas do registro", () => {
     expect(() => desfazer([e], "a1", "2026-10-28T09:00:01-03:00", "Lia Pereira")).toThrow(/não tem Desfazer/);
   });
 });
+
+describe("exportar", () => {
+  it("título com cara de fórmula não vira fórmula no CSV", async () => {
+    const { exportar } = await import("../src/index");
+    const e = { id: "a1", hora: "2026-10-28T09:00:00-03:00", autor: "Lia Pereira", acao: "editar" as const, titulo: "=SOMA(A1)", mudancas: [] };
+    expect(exportar([e], "csv", "2026-10-28", "2026-10-28", "America/Maceio").conteudo).toContain("'=SOMA(A1)");
+  });
+});

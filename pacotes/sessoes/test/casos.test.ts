@@ -41,6 +41,7 @@ interface LeituraDoCaso {
   mudouHa: number;
   vistaHa: number;
   abertaHa: number;
+  prontaHa: number | null;
   cpu: number;
 }
 
@@ -53,7 +54,7 @@ function ler(caso: Caso, l: LeituraDoCaso) {
       mudouEm: agora - l.mudouHa * 1000,
       vistaEm: agora - l.vistaHa * 1000,
       abertaEm: agora - l.abertaHa * 1000,
-      prontaEm: leitura.promptLivre ? agora - l.abertaHa * 1000 : null,
+      prontaEm: l.prontaHa === null ? null : agora - l.prontaHa * 1000,
     },
     l.cpu,
     agora,
@@ -178,8 +179,8 @@ describe("casos de prova das sessões", () => {
     const linhas = achados.map((o) => linhaDoOrfao(o, agora));
     expect(linhas).toEqual(c.esperado.linhas);
     for (const t of c.esperado.naoTem) for (const l of linhas) expect(l).not.toContain(t);
-    // Achar órfão não manda sinal: a função não recebe mão nenhuma.
-    expect(c.esperado.sinais).toEqual([]);
+    // O órfão leva só números: nem argumento nem ambiente saem dele.
+    for (const o of achados) expect(JSON.stringify(o)).not.toMatch(/valor-de-exemplo|TENANCY_SESSAO/);
   });
 
   it("CP-PRC-04 o app nunca é alvo", () => {

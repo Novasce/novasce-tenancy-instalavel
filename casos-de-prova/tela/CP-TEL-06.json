@@ -11,7 +11,8 @@
         "mudouHa": 600,
         "vistaHa": 30,
         "abertaHa": 900,
-        "cpu": 0.1
+        "cpu": 0.1,
+        "prontaHa": 900
       }
     ]
   },

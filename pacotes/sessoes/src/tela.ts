@@ -36,8 +36,10 @@ export interface LeituraDaTela {
 }
 
 export function lerTela(texto: string): LeituraDaTela {
-  const todas = texto.replace(/\n$/, "").split("\n");
-  const linhas = todas.slice(-24).map((l) => l.replace(/[\u0000 ]/g, " "));
+  const todas = texto.split("\n");
+  // Sem as linhas vazias do fim, que o terminal deixa abaixo do rodapé.
+  while (todas.length && todas[todas.length - 1].replace(/[\u0000\u00a0]/g, " ").trim() === "") todas.pop();
+  const linhas = todas.slice(-24).map((l) => l.replace(/[\u0000\u00a0]/g, " "));
   const aparadas = linhas.map((l) => l.trim());
   const caixa = caixaVazia(aparadas);
   return {

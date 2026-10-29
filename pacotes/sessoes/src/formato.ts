@@ -2,7 +2,7 @@
 
 /** "40 s", "12 min", "3 h", "3 h 05" (até 10 h), "14 h". */
 export function duracao(segundos: number): string {
-  const s = Math.round(segundos);
+  const s = Math.max(0, Math.round(segundos));
   if (s < 60) return `${s} s`;
   const min = Math.floor(s / 60);
   if (min < 60) return `${min} min`;

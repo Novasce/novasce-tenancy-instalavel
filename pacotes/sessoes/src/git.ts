@@ -9,9 +9,12 @@ export interface SessaoAberta {
 }
 
 export function normalizar(pasta: string, home: string): string {
-  let p = pasta.trim();
-  if (p === "~" || p.startsWith("~/")) p = home.replace(/\/+$/, "") + p.slice(1);
-  return p.replace(/\/+$/, "") || "/";
+  let p = pasta.trim().replace(/\\/g, "/");
+  const casa = home.replace(/\\/g, "/").replace(/\/+$/, "");
+  if (p === "~" || p.startsWith("~/")) p = casa + p.slice(1);
+  p = p.replace(/\/+$/, "") || "/";
+  // No Windows a letra do disco não tem caixa: C:/ e c:/ são a mesma pasta.
+  return /^[A-Za-z]:/.test(p) ? p[0].toLowerCase() + p.slice(1) : p;
 }
 
 /**
@@ -101,7 +104,7 @@ export function enderecoDoPR(remoto: string, principal: string, branch: string):
   else if (r.startsWith("ssh://git@github.com/")) r = "https://github.com/" + r.slice("ssh://git@github.com/".length);
   else r = r.replace(/^https:\/\/[^/@]*@github\.com\//, "https://github.com/");
   if (!r.startsWith("https://github.com/")) return null;
-  r = r.replace(/\.git$/, "").replace(/\/+$/, "");
+  r = r.replace(/\/+$/, "").replace(/\.git$/, "");
   return `${r}/compare/${principal}...${branch}?expand=1`;
 }
 

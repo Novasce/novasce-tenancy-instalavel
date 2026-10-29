@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   ACOES_QUE_APAGAM,
+  TABELA_DE_TECLAS,
   abrirLista,
   acaoDaTecla,
   contagem,
@@ -103,7 +104,8 @@ describe("casos de prova da lista", () => {
     const c = por["CP-LST-04"];
     const acoes = c.entrada.teclas.map((t: string) => acaoDaTecla(t));
     expect(acoes).toEqual(c.esperado.acoes);
-    expect(acoes.some((a: string | null) => a !== null && ACOES_QUE_APAGAM.includes(a))).toBe(!c.esperado.nenhumaApaga);
+    const todas: string[] = Object.values(TABELA_DE_TECLAS);
+    expect(todas.some((a) => ACOES_QUE_APAGAM.includes(a))).toBe(!c.esperado.nenhumaApaga);
   });
 
   it("CP-LST-05 janela visível", () => {
