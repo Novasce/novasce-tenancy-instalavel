@@ -1,0 +1,25 @@
+{
+  "id": "CP-VLT-02",
+  "contrato": "vault",
+  "regra": "O briefing troca só o bloco; sem bloco, entra depois do primeiro título",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "briefing": "Bom dia.",
+    "notas": {
+      "nova": null,
+      "comBloco": "# Sexta-feira, 23 de outubro\n\n<!-- jarvis:briefing -->\nvelho\n<!-- /jarvis:briefing -->\n\nminha linha\n",
+      "semBloco": "# Sexta-feira, 23 de outubro\n\nminha linha\n\n- item da Lia\n",
+      "semTitulo": "minha linha\n"
+    }
+  },
+  "esperado": {
+    "notas": {
+      "nova": "# Sexta-feira, 23 de outubro\n\n<!-- jarvis:briefing -->\nBom dia.\n<!-- /jarvis:briefing -->\n",
+      "comBloco": "# Sexta-feira, 23 de outubro\n\n<!-- jarvis:briefing -->\nBom dia.\n<!-- /jarvis:briefing -->\n\nminha linha\n",
+      "semBloco": "# Sexta-feira, 23 de outubro\n\n<!-- jarvis:briefing -->\nBom dia.\n<!-- /jarvis:briefing -->\n\nminha linha\n\n- item da Lia\n",
+      "semTitulo": "<!-- jarvis:briefing -->\nBom dia.\n<!-- /jarvis:briefing -->\n\nminha linha\n"
+    }
+  },
+  "mac": "passa"
+}

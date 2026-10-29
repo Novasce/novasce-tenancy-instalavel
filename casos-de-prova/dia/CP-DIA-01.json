@@ -1,0 +1,32 @@
+{
+  "id": "CP-DIA-01",
+  "contrato": "dia",
+  "regra": "Ficha Meu dia = marketing leva o dia de marketing",
+  "relogio": "2026-10-26T07:15:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "pessoa": {
+      "usuario": "u-lia",
+      "papel": "MARKETING",
+      "meuDia": "marketing"
+    },
+    "founder": "u-founder-exemplo",
+    "pessoal": {}
+  },
+  "esperado": {
+    "dia": "marketing",
+    "arquivos": {
+      "rotinas/o-dia.md": "---\nnome: O dia\nquando: dias úteis 07:15\nia: claude\nhabilidade: briefing-de-marketing\navisa: não\nonde: topo\npermite: [Read, mcp__tenancy__list_tasks, mcp__tenancy__get_task, mcp__tenancy__list_market_studies]\nligada: sim\nrascunho: não\n---\n\nfaça o briefing de marketing do dia em até 8 linhas, para o topo da minha nota de hoje: o que vai ao ar hoje e se está pronto, o que espera aprovação, o ritual do dia da semana e o que andou sem mim. A pauta é do quadro: não proponha peça nova. Não grave nada: a resposta vai para a nota.\n",
+      ".agents/skills/briefing-do-dia/SKILL.md": "---\nname: briefing-do-dia\ndescription: O briefing da manhã, em até 8 linhas, para o topo da nota do dia. Lê os seus cartões no Tenancy pelo MCP e não grava nada.\n---\n# Briefing do dia\n\n1. Liste os seus cartões no Tenancy (list_tasks) em Fazendo e em Review. Os que vencem hoje ou já venceram vêm primeiro.\n2. Para o que estiver parado há mais tempo, leia o cartão (get_task) e diga o próximo passo numa linha.\n3. Escreva em até 8 linhas: a uma coisa que fecha hoje, o que está parado e o que andou desde ontem.\n4. Se uma ferramenta recusar, diga numa linha o que faltou (por exemplo, a chave do Tenancy) e siga com o resto.\n5. Não grave nada no Tenancy: a resposta vai para a nota do dia.\n",
+      ".ia/semeada-briefing-do-dia": "",
+      ".agents/skills/briefing-de-marketing/SKILL.md": "---\nname: briefing-de-marketing\ndescription: O briefing da manhã de quem cuida do marketing, em até 8 linhas, para o topo da nota do dia: o que vai ao ar hoje, o que espera aprovação, o ritual do dia e o que andou. Lê o quadro pelo MCP e não grava nada.\n---\n# Briefing de marketing\n\n1. Liste os cartões de conteúdo e de marketing (list_tasks, kind CONTEUDO e depois MARKETING). O quadro é a verdade: não invente pauta nem proponha peça nova.\n2. O que vai ao ar hoje: peças com vencimento hoje. Em FEITO está aprovada e falta agendar ou publicar; em FAZENDO ou REVIEW com vencimento hoje é risco, diga qual. Vencida sem \"no ar\" nos comentários vem primeiro.\n3. O que espera o founder: peças em REVIEW e há quantos dias. Se FAZENDO passar de três, diga.\n4. O ritual do dia da semana, numa linha: segunda, agendar o que está em FEITO; quarta, a pergunta da semana; sexta, os 15 minutos do founder no REVIEW (na primeira sexta do mês, também os três números); sábado, o Radar. Terça e quinta lembram o bastidor cru de 15 s, que é do founder.\n5. Números D+7: peça publicada há sete dias ou mais sem métricas na descrição, até três, pedindo alcance, envios, comentários e DMs. Envio pesa mais que like. Se a pessoa cuida da linha Food, uma linha com os estudos de mercado que pedem decisão (list_market_studies).\n6. Escreva em até 8 linhas, nesta ordem: o que vai ao ar hoje, o que espera aprovação, o ritual do dia, os números pendentes e o que andou desde ontem.\n7. Se uma ferramenta recusar, diga numa linha o que faltou e siga com o resto. Não grave nada no Tenancy: a resposta vai para a nota do dia.\n",
+      ".ia/semeada-briefing-de-marketing": ""
+    },
+    "nasceram": [
+      "briefing-do-dia",
+      "briefing-de-marketing"
+    ],
+    "gravouODia": true
+  },
+  "mac": "pendente: dias de marketing e design e ADMIN que não é o founder (o Mac não tem)"
+}

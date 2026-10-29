@@ -1,0 +1,34 @@
+{
+  "id": "CP-CNV-03",
+  "contrato": "canvas",
+  "regra": "Arquivo de nó fora do espaço é recusado, inclusive nas formas do Windows",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "caminhos": [
+      "/x",
+      "~/x",
+      "../x",
+      "C:\\x",
+      "\\\\servidor\\x",
+      "..\\x",
+      "Notas/../../x.md",
+      "Notas/Referência da semana.md"
+    ]
+  },
+  "esperado": {
+    "recusados": [
+      "/x",
+      "~/x",
+      "../x",
+      "C:\\x",
+      "\\\\servidor\\x",
+      "..\\x",
+      "Notas/../../x.md"
+    ],
+    "aceitos": [
+      "Notas/Referência da semana.md"
+    ]
+  },
+  "mac": "pendente: o Mac recusa /x, ~/x e caminho com .. entre barras; C:\\x, \\\\servidor\\x e ..\\x passam"
+}

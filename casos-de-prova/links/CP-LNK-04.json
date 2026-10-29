@@ -1,0 +1,55 @@
+{
+  "id": "CP-LNK-04",
+  "contrato": "links",
+  "regra": "Nome tomado recusa sem mexer; trocar só a caixa funciona em disco que ignora caixa",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "tomado": {
+      "raiz": "/home/lia/Ateliê de exemplo",
+      "arquivos": {
+        "Notas/Referência da semana.md": "# Referência da semana\n\nO recorte da semana.\n\n## Recorte\n\nPeça de exemplo A.\n",
+        "Notas/Referência antiga.md": "# Referência antiga\n",
+        "Notas/Plano.md": "Ver [[Referência da semana]].\n"
+      },
+      "passos": [
+        {
+          "renomear": "Notas/Referência da semana.md",
+          "nome": "Referência antiga"
+        }
+      ]
+    },
+    "caixa": {
+      "raiz": "/home/lia/Ateliê de exemplo",
+      "ignoraCaixa": true,
+      "arquivos": {
+        "Notas/nota.md": "# nota\n\ntexto\n",
+        "Notas/Plano.md": "Ver [[nota]].\n"
+      },
+      "passos": [
+        {
+          "renomear": "Notas/nota.md",
+          "nome": "Nota"
+        }
+      ]
+    }
+  },
+  "esperado": {
+    "tomado": {
+      "erro": "Já existe uma nota com esse nome: Referência antiga.md.",
+      "arquivos": {
+        "Notas/Referência da semana.md": "# Referência da semana\n\nO recorte da semana.\n\n## Recorte\n\nPeça de exemplo A.\n",
+        "Notas/Referência antiga.md": "# Referência antiga\n",
+        "Notas/Plano.md": "Ver [[Referência da semana]].\n"
+      }
+    },
+    "caixa": {
+      "arquivos": {
+        "Notas/Nota.md": "# Nota\n\ntexto\n",
+        "Notas/Plano.md": "Ver [[nota]].\n"
+      },
+      "religadas": 0
+    }
+  },
+  "mac": "passa"
+}

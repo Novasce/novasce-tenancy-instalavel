@@ -1,0 +1,30 @@
+{
+  "id": "CP-LNK-02",
+  "contrato": "links",
+  "regra": "Mover troca só o link com caminho e o de Markdown; o link pelo nome fica",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "raiz": "/home/lia/Ateliê de exemplo",
+    "arquivos": {
+      "Notas/Referência da semana.md": "# Referência da semana\n\nO recorte da semana.\n\n## Recorte\n\nPeça de exemplo A.\n",
+      "Notas/Plano.md": "Ver [[Referência da semana]] e [o texto](Notas/Referência%20da%20semana.md).\n",
+      "Notas/Leituras.md": "Ler [[Notas/Referência da semana|a referência]].\n"
+    },
+    "passos": [
+      {
+        "mover": "Notas/Referência da semana.md",
+        "pasta": "Referências"
+      }
+    ]
+  },
+  "esperado": {
+    "arquivos": {
+      "Referências/Referência da semana.md": "# Referência da semana\n\nO recorte da semana.\n\n## Recorte\n\nPeça de exemplo A.\n",
+      "Notas/Plano.md": "Ver [[Referência da semana]] e [o texto](Referências/Referência%20da%20semana.md).\n",
+      "Notas/Leituras.md": "Ler [[Referências/Referência da semana|a referência]].\n"
+    },
+    "religadas": 2
+  },
+  "mac": "passa"
+}
