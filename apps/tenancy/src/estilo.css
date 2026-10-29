@@ -1153,3 +1153,55 @@ button:disabled {
   font-family: var(--nv-mono);
   font-size: 12px;
 }
+
+/* Para continuar: abas que reservam a largura em negrito, cartões de altura estável. */
+.abas-largas {
+  max-width: 480px;
+  margin: 12px 0;
+}
+
+.abas-largas .seg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.rotulo-reservado {
+  display: inline-grid;
+}
+
+.rotulo-reservado::after {
+  content: attr(data-rotulo);
+  font-weight: 700;
+  visibility: hidden;
+  height: 0;
+}
+
+.cartoes-continuar {
+  display: grid;
+  gap: 8px;
+  max-width: 760px;
+}
+
+.cartao-continuar {
+  display: grid;
+  gap: 6px;
+  padding: 12px 16px;
+  border-radius: var(--nv-raio-cartao);
+  background: var(--nv-cartao);
+  box-shadow: 0 0 0 1px var(--nv-linha);
+}
+
+.cartao-continuar .espera {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--nv-cinza);
+}
+
+.cartao-continuar .linha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+}

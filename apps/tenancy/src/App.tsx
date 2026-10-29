@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useReducer, useState } from "react";
 import { Bancada } from "./bancada/bancada";
 import { FolhaNova } from "./bancada/folha-nova";
+import { ParaContinuar } from "./pastas/ParaContinuar";
 import { ATUALIZAR_FORA_DA_MAIN_MS, TelaForaDaMain } from "./bancada/fora-da-main";
 import { listarForaDaMain, type ForaDaMain } from "./bancada/guardas";
 import { FaixaDeSair, FaixaDosOrfaos, perguntaDeSair, Recado } from "./bancada/pe";
@@ -155,6 +156,8 @@ export function App(p: {
           </div>
         ) : atual === "nova-sessao" ? (
           <FolhaNova bancada={bancada} escuro={escuro} aberta={irPara} cancelar={() => setPagina(ativa ? "bancada" : "agentes")} />
+        ) : atual === "para-continuar" ? (
+          <ParaContinuar bancada={bancada} aberta={irPara} />
         ) : atual === "fora-da-main" ? (
           <TelaForaDaMain bancada={bancada} lista={foraDaMain} atualizar={atualizarForaDaMain} />
         ) : atual === "bancada" ? (

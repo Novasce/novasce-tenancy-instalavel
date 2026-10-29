@@ -75,6 +75,8 @@ export interface MaoDeArquivos {
   recentes(): Promise<string[]>;
   /** As mãos de arquivo do pacote `pastas`, para ler e mover em `continuar/`. */
   arquivos(): Arquivos;
+  /** As pastas dos espaços registrados, que também têm `continuar/`. */
+  espacos(): string[];
 }
 
 export interface MaoDasClis {
@@ -97,6 +99,8 @@ export interface MaoDoHost {
   cli: MaoDasClis;
   /** Abre um endereço no navegador do sistema (o PR, um link de fora). */
   abrirNoNavegador(url: string): Promise<void>;
+  /** Põe o texto na área de transferência. */
+  copiar(texto: string): Promise<void>;
   /** Fecha o app, depois que a pessoa disse "Encerrar e sair". */
   sair(): Promise<void>;
 }

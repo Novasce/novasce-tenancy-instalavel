@@ -148,6 +148,7 @@ export interface Ensaio {
   /** Os endereços abertos no navegador. */
   abertos: string[];
   saiu: boolean;
+  copiado: string | null;
 }
 
 export type MaoDeEnsaio = MaoDoHost & { ensaio: Ensaio };
@@ -157,6 +158,10 @@ export interface OpcoesDoEnsaio {
   repos?: RepoDeEnsaio[];
   clis?: ClisDeEnsaio;
   arquivos?: Record<string, string>;
+  links?: Record<string, string>;
+  espacos?: string[];
+  /** Só os arquivos dados, sem o brain de fábrica. */
+  soEstesArquivos?: boolean;
   /** A tabela inteira no lugar da de fábrica (init, sessão gráfica e o app). */
   soEstesProcessos?: boolean;
   app?: { pid: number; pgid: number };
@@ -204,10 +209,11 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
     telaInicial: { claude: telaDeEnsaio("CP-TEL-01.txt") },
     login: { tem: true, troca: { codigo: "codigo-de-ensaio", validoAte: "2026-10-28T12:01:00Z" } },
     gits: [],
-    arquivos: new ArquivosNaMemoria({ ...brainDeEnsaio(), ...o.arquivos }),
+    arquivos: new ArquivosNaMemoria(o.soEstesArquivos ? { ...o.arquivos } : { ...brainDeEnsaio(), ...o.arquivos }, o.links ?? {}),
     recentes: [`${BRAIN}`, REPOS[1]],
     abertos: [],
     saiu: false,
+    copiado: null,
   };
 
   const vivos = () => ensaio.processos.filter((p) => (p.nasceEm ?? 0) <= ensaio.agora && !mortos.has(chave(p)));
@@ -305,6 +311,9 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
     async sair() {
       ensaio.saiu = true;
     },
+    async copiar(texto) {
+      ensaio.copiado = texto;
+    },
     cofre: {
       async temLogin() {
         return ensaio.login.tem;
@@ -323,6 +332,7 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
         return [...ensaio.recentes];
       },
       arquivos: () => ensaio.arquivos,
+      espacos: () => [...(o.espacos ?? [])],
     },
     cli: {
       shell: () => "/bin/bash",

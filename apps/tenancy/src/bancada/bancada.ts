@@ -77,6 +77,8 @@ export interface SessaoDaBancada {
   codigoDeSaida?: number;
   /** A última fala do agente, para o nome automático. */
   ultimaFala?: string;
+  /** A pasta de continuar/ de onde a sessão nasceu, para avisar se ela voltar. */
+  origem?: string;
   /** O segundo painel, um shell na mesma pasta (UC21). */
   extra?: TerminalAberto | null;
 }
