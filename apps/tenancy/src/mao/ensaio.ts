@@ -154,6 +154,9 @@ export interface OpcoesDoEnsaio {
   repos?: RepoDeEnsaio[];
   clis?: ClisDeEnsaio;
   arquivos?: Record<string, string>;
+  /** A tabela inteira no lugar da de fábrica (init, sessão gráfica e o app). */
+  soEstesProcessos?: boolean;
+  app?: { pid: number; pgid: number };
 }
 
 export const PID_DO_APP = 50;
@@ -185,12 +188,14 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
       matar(t.pid);
       for (const f of t.saidas) f(codigo);
     },
-    processos: [
-      { pid: 1, ppid: 0, pgid: 1, sid: 1, inicio: "1", argv: ["/sbin/init"] },
-      { pid: 40, ppid: 1, pgid: 40, sid: 40, inicio: "100", argv: ["plasmashell"] },
-      { pid: PID_DO_APP, ppid: 40, pgid: PID_DO_APP, sid: 40, inicio: "200", argv: ["novasce-tenancy"] },
-      ...(o.processos ?? []),
-    ],
+    processos: o.soEstesProcessos
+      ? [...(o.processos ?? [])]
+      : [
+          { pid: 1, ppid: 0, pgid: 1, sid: 1, inicio: "1", argv: ["/sbin/init"] },
+          { pid: 40, ppid: 1, pgid: 40, sid: 40, inicio: "100", argv: ["plasmashell"] },
+          { pid: PID_DO_APP, ppid: 40, pgid: PID_DO_APP, sid: 40, inicio: "200", argv: ["novasce-tenancy"] },
+          ...(o.processos ?? []),
+        ],
     repos: Object.fromEntries(reposIniciais.map((r) => [r.pasta, r])),
     clis: { ...CLIS_DE_ENSAIO, ...o.clis },
     telaInicial: { claude: telaDeEnsaio("CP-TEL-01.txt") },
@@ -212,8 +217,9 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
       }
     }
   }
+  const app = o.app ?? { pid: PID_DO_APP, pgid: PID_DO_APP };
   function receber(p: ProcessoDeEnsaio, s: Sinal) {
-    if (p.pid === PID_DO_APP) throw new Error("a mão de ensaio recusou um sinal ao próprio app");
+    if (p.pid === app.pid) throw new Error("a mão de ensaio recusou um sinal ao próprio app");
     if (s === "KILL" || !(p.ignora ?? []).includes(s)) matar(p.pid);
   }
 
@@ -227,7 +233,7 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
         const inicio = String(10_000 + pid);
         const cli = cliDoPedido(pedido);
         const ambiente: Record<string, string> = { ...pedido.ambiente };
-        ensaio.processos.push({ pid, ppid: PID_DO_APP, pgid: pid, sid: pid, inicio, argv: [pedido.programa, ...pedido.args], ambiente, mb: 120 });
+        ensaio.processos.push({ pid, ppid: app.pid, pgid: pid, sid: pid, inicio, argv: [pedido.programa, ...pedido.args], ambiente, mb: 120 });
         const t: TerminalDeEnsaio = {
           id,
           pid,
@@ -281,7 +287,7 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
         for (const p of vivos().filter((x) => x.pgid === lider.pid)) receber(p, sinal);
       },
       async doApp() {
-        return { pid: PID_DO_APP, pgid: PID_DO_APP };
+        return app;
       },
     },
     async git(pasta, args) {

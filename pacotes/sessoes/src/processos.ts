@@ -18,10 +18,11 @@ export interface Processo {
   mb?: number;
 }
 
+/** A mão do app pode responder já ou depois (a de verdade fala com o host). */
 export interface MaoDeProcessos {
-  tabela(): Processo[];
-  sinalAoGrupo(grupo: number, sinal: Sinal): void;
-  sinalAoPid(pid: number, sinal: Sinal): void;
+  tabela(): Processo[] | Promise<Processo[]>;
+  sinalAoGrupo(grupo: number, sinal: Sinal): void | Promise<void>;
+  sinalAoPid(pid: number, sinal: Sinal): void | Promise<void>;
   esperar(ms: number): Promise<void>;
 }
 
@@ -100,7 +101,7 @@ export async function encerrar(
   const conhecidos = new Map<string, Processo>();
   // Só as raízes vivas no começo, com o mesmo início: raiz que já tinha saído
   // não leva a sessão, porque o pid dela pode ter voltado como líder de outra.
-  const noComeco = mao.tabela();
+  const noComeco = await mao.tabela();
   const vivas = raizes.filter((r) => noComeco.some((p) => p.pid === r.pid && p.inicio === r.inicio));
   const juntar = (tabela: Processo[]): Processo[] => {
     const novos: Processo[] = [];
@@ -129,32 +130,32 @@ export async function encerrar(
     const agora = new Set(tabela.map(chave));
     return [...conhecidos.values()].filter((p) => agora.has(chave(p)));
   };
-  const mandar = (lista: Processo[], sinais: Sinal[]) => {
+  const mandar = async (lista: Processo[], sinais: Sinal[]) => {
     const plano = planoDeSinais(lista, o.protegidos, o.grupoDoApp, o.pidDoApp);
     for (const s of sinais) {
-      for (const g of plano.grupos) mao.sinalAoGrupo(g, s);
-      for (const pid of plano.avulsos) mao.sinalAoPid(pid, s);
+      for (const g of plano.grupos) await mao.sinalAoGrupo(g, s);
+      for (const pid of plano.avulsos) await mao.sinalAoPid(pid, s);
     }
   };
 
   const iniciais = juntar(noComeco);
   if (!iniciais.length) return { alvos: 0, precisouDoKill: false, sobrou: [] };
-  mandar(iniciais, ["HUP", "TERM"]);
+  await mandar(iniciais, ["HUP", "TERM"]);
   for (let t = 0; t < PRAZO_DO_PEDIDO_MS; t += PASSO_MS) {
     await mao.esperar(PASSO_MS);
-    const tabela = mao.tabela();
+    const tabela = await mao.tabela();
     const novos = juntar(tabela);
-    if (novos.length) mandar(novos, ["HUP", "TERM"]);
+    if (novos.length) await mandar(novos, ["HUP", "TERM"]);
     if (!vivosDe(tabela).length) return { alvos: conhecidos.size, precisouDoKill: false, sobrou: [] };
   }
-  const tabela = mao.tabela();
+  const tabela = await mao.tabela();
   juntar(tabela);
   const restantes = vivosDe(tabela);
-  mandar(restantes, ["KILL"]);
+  await mandar(restantes, ["KILL"]);
   let sobrou = restantes;
   for (let i = 0; i < 20 && sobrou.length; i++) {
     await mao.esperar(50);
-    sobrou = vivosDe(mao.tabela());
+    sobrou = vivosDe(await mao.tabela());
   }
   return { alvos: conhecidos.size, precisouDoKill: true, sobrou };
 }

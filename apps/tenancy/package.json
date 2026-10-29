@@ -16,6 +16,7 @@
     "@novasce/sessoes": "*",
     "@tauri-apps/api": "^2.6.0",
     "@tauri-apps/plugin-opener": "^2.2.6",
+    "@xterm/xterm": "^6.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -24,6 +25,7 @@
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.6.0",
+    "@xterm/headless": "^6.0.0",
     "jsdom": "^26.1.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
