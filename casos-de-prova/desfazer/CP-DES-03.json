@@ -21,5 +21,5 @@
     "vencidos": [[], ["n1"]],
     "rotulos": ["sai amanhã", "a exclusão já pode começar"]
   },
-  "mac": "passa"
+  "mac": "pendente: o Mac diz \"pode sair de vez\" no vencido e conta 30 vezes 24 h, sem o fuso"
 }

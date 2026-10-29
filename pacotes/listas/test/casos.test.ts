@@ -19,7 +19,7 @@ import {
 import { idsEsperados, lerCasos, type Caso } from "./ler-casos";
 
 const casos = lerCasos(
-  import.meta.glob("../../../casos-de-prova/listas/*.json", { eager: true, import: "default" }),
+  import.meta.glob("../../../casos-de-prova/lista/*.json", { eager: true, import: "default" }),
   "CP-LST-",
 );
 const por: Record<string, Caso> = Object.fromEntries(casos.map((c) => [c.id, c]));

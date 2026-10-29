@@ -123,6 +123,10 @@ export function carregar(arquivos: Arquivo[], esquema: Esquema, ids: string[]): 
     if (doPrefixo !== caso.contrato) {
       proprios.push(`${caso.id.slice(0, 6)} é do contrato ${doPrefixo ?? "nenhum"}, não ${caso.contrato}`);
     }
+    const pasta = arquivo.caminho.split("/")[0];
+    if (doPrefixo !== undefined && pasta !== doPrefixo) {
+      proprios.push(`${caso.id.slice(0, 6)} fica na pasta ${doPrefixo}/, não em ${pasta}/`);
+    }
     if (!conhecidos.has(caso.id)) proprios.push(`id fora do ids.json: ${caso.id}`);
     if (proprios.length > 0) {
       for (const erro of proprios) erros.push(`${arquivo.caminho}: ${erro}`);

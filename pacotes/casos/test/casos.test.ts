@@ -70,13 +70,19 @@ describe("carregar a pasta", () => {
     expect(casos.map((c) => c.id)).toEqual(["CP-VLT-01"]);
   });
 
+  it("falha com o caso fora da pasta do contrato", () => {
+    expect(carregar([arquivo(exemplo(), "espacos/CP-VLT-01.json")], esquema, ids).erros).toEqual([
+      "espacos/CP-VLT-01.json: CP-VLT fica na pasta vault/, não em espacos/",
+    ]);
+  });
+
   it("falha com id repetido", () => {
     const { erros } = carregar(
-      [arquivo(exemplo()), arquivo(exemplo(), "outra/CP-VLT-01.json")],
+      [arquivo(exemplo()), arquivo(exemplo(), "vault/copia/CP-VLT-01.json")],
       esquema,
       ids,
     );
-    expect(erros).toEqual(["id repetido: CP-VLT-01 em vault/CP-VLT-01.json e outra/CP-VLT-01.json"]);
+    expect(erros).toEqual(["id repetido: CP-VLT-01 em vault/CP-VLT-01.json e vault/copia/CP-VLT-01.json"]);
   });
 
   it("falha com id que não está no ids.json", () => {
