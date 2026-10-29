@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Tenancy
+Comment=A Bancada das sessões de IA e os agentes do Tenancy
+Exec=novasce-tenancy
+Icon=com.novasce.Tenancy
+Categories=Development;Office;
+Terminal=false

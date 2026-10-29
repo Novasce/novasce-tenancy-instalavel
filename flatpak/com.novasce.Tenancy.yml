@@ -1,0 +1,57 @@
+# Tenancy: RASCUNHO do pacote do caminho A (tudo em Flatpak), canal teste.
+# As permissões são as da sonda; a Parte F confirma ou troca pelo resultado
+# dos portões G1 a G9 (no caminho B entra o socket do ajudante; no C, este
+# arquivo não é usado). Não é montado pelo CI enquanto o caminho não for marcado.
+id: com.novasce.Tenancy
+runtime: org.gnome.Platform
+runtime-version: '51'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+  - org.freedesktop.Sdk.Extension.node22
+command: novasce-tenancy
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  # flatpak-spawn --host: a CLI de IA, o git e os processos da pessoa rodam no sistema
+  - --talk-name=org.freedesktop.Flatpak
+  # chaveiro do sistema, onde o Novasce OS guarda o login
+  - --talk-name=org.freedesktop.secrets
+  - --filesystem=~/Brain
+  - --filesystem=~/Espaços
+  - --filesystem=~/.local/state/novasce:ro
+  - --filesystem=xdg-config/novasce:ro
+  - --filesystem=~/.local/bin:ro
+modules:
+  - name: tenancy
+    buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/node22/bin
+      build-args:
+        - --share=network
+      env:
+        CARGO_HOME: /run/build/tenancy/cargo
+        npm_config_cache: /run/build/tenancy/npm-cache
+    build-commands:
+      - npm ci --no-audit --no-fund
+      - cd apps/tenancy && npx tauri build --no-bundle --ci
+      - install -Dm755 target/release/novasce-tenancy /app/bin/novasce-tenancy
+      - install -Dm644 flatpak/com.novasce.Tenancy.desktop /app/share/applications/com.novasce.Tenancy.desktop
+      - install -Dm644 flatpak/com.novasce.Tenancy.metainfo.xml /app/share/metainfo/com.novasce.Tenancy.metainfo.xml
+      - install -Dm644 flatpak/com.novasce.TenancySonda.png /app/share/icons/hicolor/256x256/apps/com.novasce.Tenancy.png
+    sources:
+      - type: dir
+        path: ..
+        skip:
+          - node_modules
+          - build-dir
+          - .flatpak-builder
+          - repo
+          - site
+          - target
+          - apps/sonda/src-tauri/target
+          - apps/sonda/dist
+          - apps/tenancy/dist
