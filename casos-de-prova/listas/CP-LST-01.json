@@ -1,0 +1,26 @@
+{
+  "id": "CP-LST-01",
+  "contrato": "lista",
+  "regra": "A contagem é do alcance da pessoa: item sem acesso nem aparece nem conta",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "acesso": ["Ateliê de exemplo"],
+    "gerar": { "quantos": 295, "espaco": "Ateliê de exemplo", "titulo": "Peça de exemplo {n}" },
+    "itens": [
+      { "id": "g1", "titulo": "Guia de cores", "espaco": "Ateliê de exemplo" },
+      { "id": "g2", "titulo": "Guia da linha EXEMPLO", "espaco": "Ateliê de exemplo" },
+      { "id": "g3", "titulo": "Guía de fotos", "espaco": "Ateliê de exemplo" },
+      { "id": "f1", "titulo": "Guia fechado", "espaco": "Espaço sem acesso" },
+      { "id": "f2", "titulo": "Plano fechado", "espaco": "Espaço sem acesso" }
+    ],
+    "busca": "guia"
+  },
+  "esperado": {
+    "total": 300,
+    "contagem": "298 itens",
+    "comBusca": "3 de 298",
+    "achados": ["g2", "g1", "g3"]
+  },
+  "mac": "pendente: o Mac não tem o componente de lista"
+}

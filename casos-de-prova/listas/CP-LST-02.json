@@ -1,0 +1,27 @@
+{
+  "id": "CP-LST-02",
+  "contrato": "lista",
+  "regra": "Seleção pelo teclado vira um lote só; trocar filtro ou busca limpa a seleção e diz quantos saíram",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "acesso": ["Ateliê de exemplo"],
+    "itens": [
+      { "id": "c1", "titulo": "Peça de exemplo A", "espaco": "Ateliê de exemplo", "estado": "fazendo" },
+      { "id": "c2", "titulo": "Peça de exemplo B", "espaco": "Ateliê de exemplo", "estado": "fazendo" },
+      { "id": "c3", "titulo": "Peça de exemplo C", "espaco": "Ateliê de exemplo", "estado": "fazendo" },
+      { "id": "c4", "titulo": "Peça de exemplo D", "espaco": "Ateliê de exemplo", "estado": "backlog" },
+      { "id": "c5", "titulo": "Peça de exemplo E", "espaco": "Ateliê de exemplo", "estado": "backlog" }
+    ],
+    "ordem": "titulo",
+    "teclas": [" ", "Shift+ArrowDown", "Shift+ArrowDown", "Delete"],
+    "depois": { "teclas": ["ArrowDown", "ArrowDown", "ArrowDown", " ", "ArrowDown", " "], "filtro": "fazendo" }
+  },
+  "esperado": {
+    "efeitos": [{ "tipo": "arquivar", "ids": ["c1", "c2", "c3"] }],
+    "selecaoAntesDoFiltro": ["c4", "c5"],
+    "selecaoDepoisDoFiltro": [],
+    "aviso": "2 itens saíram da seleção"
+  },
+  "mac": "pendente: o Mac não tem o componente de lista"
+}

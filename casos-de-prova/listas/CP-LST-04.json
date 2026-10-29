@@ -1,0 +1,15 @@
+{
+  "id": "CP-LST-04",
+  "contrato": "lista",
+  "regra": "O teclado é uma tabela de tecla para ação; Delete só arquiva e nenhuma tecla apaga permanente",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "teclas": ["ArrowUp", "ArrowDown", "Enter", " ", "Shift+ArrowUp", "Shift+ArrowDown", "Delete", "Shift+Delete", "Backspace", "Ctrl+Z", "/", "Escape", "Ctrl+Shift+Delete", "Alt+Delete"]
+  },
+  "esperado": {
+    "acoes": ["foco-acima", "foco-abaixo", "abrir", "selecionar", "estender-acima", "estender-abaixo", "arquivar", "arquivar", null, "desfazer", "ir-a-busca", "limpar-busca", "arquivar", null],
+    "nenhumaApaga": true
+  },
+  "mac": "pendente: o Mac não tem o componente de lista"
+}
