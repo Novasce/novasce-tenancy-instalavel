@@ -1,0 +1,48 @@
+{
+  "id": "CP-TEL-04",
+  "contrato": "tela",
+  "regra": "stop hooks no rodapé com a tela parada há 2 s é fim de resposta; antes disso ainda não",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "leituras": [
+      {
+        "tela": "CP-TEL-04.txt",
+        "mudouHa": 2,
+        "vistaHa": 300,
+        "abertaHa": 900,
+        "cpu": 0.1,
+        "prontaHa": 900
+      },
+      {
+        "tela": "CP-TEL-04.txt",
+        "mudouHa": 1,
+        "vistaHa": 300,
+        "abertaHa": 900,
+        "cpu": 0.1,
+        "prontaHa": 900
+      }
+    ]
+  },
+  "esperado": {
+    "leituras": [
+      {
+        "caixa": true,
+        "promptLivre": true,
+        "rodape": "fim-de-resposta",
+        "emSegundoPlano": null,
+        "estado": "terminou",
+        "linha": "terminou há 2 s · espera você"
+      },
+      {
+        "caixa": true,
+        "promptLivre": true,
+        "rodape": "fim-de-resposta",
+        "emSegundoPlano": null,
+        "estado": "livre",
+        "linha": "livre"
+      }
+    ]
+  },
+  "mac": "passa"
+}

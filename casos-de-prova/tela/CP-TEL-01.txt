@@ -1,0 +1,14 @@
+╭──────────────────────────────────────────────╮
+│ ✻ Claude Code                                │
+│   /home/lia/Ateliê de exemplo                │
+╰──────────────────────────────────────────────╯
+
+> Resuma as notas de hoje no bloco O dia
+
+⏺ Pronto: três notas resumidas no bloco O dia.
+
+────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────
+  [EXEMPLO] lia · Ateliê de exemplo
+  ⏵⏵ auto mode on (shift+tab to cycle)

@@ -1,0 +1,22 @@
+{
+  "id": "CP-DES-02",
+  "contrato": "desfazer",
+  "regra": "Irreversível confirma com o alcance escrito e não ganha Desfazer; esvaziar só depois de digitar a contagem",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "pedidos": [
+      { "acao": "esvaziar-lixeira", "quantos": 60, "digitado": ["", "6", "59", "60"] },
+      { "acao": "revogar-regra", "quantos": 9 },
+      { "acao": "enviar-para-review", "quantos": 4 }
+    ]
+  },
+  "esperado": {
+    "respostas": [
+      { "pergunta": true, "quantos": 60, "digitar": "60", "confirma": [false, false, false, true], "desfazer": false },
+      { "pergunta": true, "quantos": 9, "desfazer": false },
+      { "pergunta": true, "quantos": 4, "desfazer": false }
+    ]
+  },
+  "mac": "pendente: o Mac não tem a tabela única de reversível e irreversível"
+}

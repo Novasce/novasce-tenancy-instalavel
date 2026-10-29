@@ -1,0 +1,45 @@
+{
+  "id": "CP-GIT-09",
+  "contrato": "git",
+  "regra": "Trabalho fora da main conta só branch de sessão com commit fora da principal e sem aba aberta",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "branches": [
+      {
+        "nome": "sessao-1-2026-10-27",
+        "commitsForaDaMain": 2,
+        "data": 1793180000,
+        "assunto": "Peça de exemplo A"
+      },
+      {
+        "nome": "sessao-2-2026-10-28",
+        "commitsForaDaMain": 1,
+        "data": 1793260000,
+        "assunto": "Peça de exemplo B"
+      },
+      {
+        "nome": "sessao-3-2026-10-28",
+        "commitsForaDaMain": 0,
+        "data": 1793270000,
+        "assunto": ""
+      },
+      {
+        "nome": "feat-x",
+        "commitsForaDaMain": 4,
+        "data": 1793275000,
+        "assunto": "Fora do app"
+      }
+    ],
+    "abertas": [
+      "sessao-2-2026-10-28"
+    ]
+  },
+  "esperado": {
+    "lista": [
+      "sessao-1-2026-10-27"
+    ],
+    "rotulo": "Trabalho fora da main · 1"
+  },
+  "mac": "passa"
+}

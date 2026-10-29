@@ -1,0 +1,10 @@
+> Feche a nota do dia
+
+⏺ Nota do dia fechada com os três pontos de amanhã.
+
+✻ Running Stop hooks… 1/2
+
+────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────
+  ⏵⏵ auto mode on (shift+tab to cycle)

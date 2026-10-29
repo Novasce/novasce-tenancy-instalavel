@@ -1,0 +1,47 @@
+{
+  "id": "CP-PRC-02",
+  "contrato": "processos",
+  "regra": "Pedir com HUP e TERM, esperar até 3 s olhando a cada 100 ms, e só então forçar; quem nasceu no meio também recebe",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "cenarios": [
+      {
+        "raizes": [{ "pid": 100, "inicio": "2026-10-28T08:00:00-03:00" }],
+        "processos": [
+          { "pid": 100, "ppid": 90, "pgid": 100, "sid": 100, "inicio": "2026-10-28T08:00:00-03:00", "ignora": ["HUP", "TERM"] },
+          { "pid": 101, "ppid": 100, "pgid": 101, "sid": 101, "inicio": "2026-10-28T09:00:01-03:00", "nasceEm": 1000, "ignora": ["HUP", "TERM"] }
+        ]
+      },
+      {
+        "raizes": [{ "pid": 100, "inicio": "2026-10-28T08:00:00-03:00" }],
+        "processos": [
+          { "pid": 100, "ppid": 90, "pgid": 100, "sid": 100, "inicio": "2026-10-28T08:00:00-03:00", "ignora": [] }
+        ]
+      }
+    ]
+  },
+  "esperado": {
+    "cenarios": [
+      {
+        "sinais": [
+          { "em": 0, "grupo": 100, "sinal": "HUP" },
+          { "em": 0, "grupo": 100, "sinal": "TERM" },
+          { "em": 1000, "grupo": 101, "sinal": "HUP" },
+          { "em": 1000, "grupo": 101, "sinal": "TERM" },
+          { "em": 3000, "grupo": 100, "sinal": "KILL" },
+          { "em": 3000, "grupo": 101, "sinal": "KILL" }
+        ],
+        "resultado": { "alvos": 2, "precisouDoKill": true, "sobrou": [] }
+      },
+      {
+        "sinais": [
+          { "em": 0, "grupo": 100, "sinal": "HUP" },
+          { "em": 0, "grupo": 100, "sinal": "TERM" }
+        ],
+        "resultado": { "alvos": 1, "precisouDoKill": false, "sobrou": [] }
+      }
+    ]
+  },
+  "mac": "passa"
+}

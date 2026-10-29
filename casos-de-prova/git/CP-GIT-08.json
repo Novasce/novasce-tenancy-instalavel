@@ -1,0 +1,32 @@
+{
+  "id": "CP-GIT-08",
+  "contrato": "git",
+  "regra": "Worktree trocado de branch à mão: nada é removido, com ou sem commit",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "fechamentos": [
+      {
+        "commitsForaDaMain": 0,
+        "soltos": 0,
+        "headNaBranch": false
+      },
+      {
+        "commitsForaDaMain": 1,
+        "soltos": 0,
+        "headNaBranch": false
+      }
+    ]
+  },
+  "esperado": {
+    "destinos": [
+      {
+        "tipo": "ficar"
+      },
+      {
+        "tipo": "ficar"
+      }
+    ]
+  },
+  "mac": "passa"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "CP-GIT-05",
+  "contrato": "git",
+  "regra": "Fechar com commit pergunta: abrir PR é a principal, mesclar e deixar são as outras",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "branch": "sessao-2-2026-10-28",
+    "principal": "main",
+    "fechamentos": [
+      {
+        "commitsForaDaMain": 1,
+        "soltos": 0,
+        "headNaBranch": true
+      },
+      {
+        "commitsForaDaMain": 2,
+        "soltos": 3,
+        "headNaBranch": true
+      }
+    ]
+  },
+  "esperado": {
+    "destinos": [
+      {
+        "tipo": "perguntar",
+        "commits": 1,
+        "opcoes": [
+          "abrir-pr",
+          "mesclar",
+          "deixar"
+        ],
+        "principal": "abrir-pr",
+        "frase": "sessao-2-2026-10-28 tem 1 commit fora da main. O que fazer com ele?"
+      },
+      {
+        "tipo": "perguntar",
+        "commits": 2,
+        "opcoes": [
+          "abrir-pr",
+          "mesclar",
+          "deixar"
+        ],
+        "principal": "abrir-pr",
+        "frase": "sessao-2-2026-10-28 tem 2 commits fora da main. O que fazer com eles?"
+      }
+    ]
+  },
+  "mac": "passa"
+}

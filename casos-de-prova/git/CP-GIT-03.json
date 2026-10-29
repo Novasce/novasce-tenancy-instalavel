@@ -1,0 +1,24 @@
+{
+  "id": "CP-GIT-03",
+  "contrato": "git",
+  "regra": "Fechar a aba de um worktree com zero commit fora da principal e nada solto apaga worktree e branch",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "fechamentos": [
+      {
+        "commitsForaDaMain": 0,
+        "soltos": 0,
+        "headNaBranch": true
+      }
+    ]
+  },
+  "esperado": {
+    "destinos": [
+      {
+        "tipo": "apagar"
+      }
+    ]
+  },
+  "mac": "passa"
+}

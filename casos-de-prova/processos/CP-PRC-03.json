@@ -1,0 +1,125 @@
+{
+  "id": "CP-PRC-03",
+  "contrato": "processos",
+  "regra": "Órfão com a marca da sessão do app e sem pai vivo é oferecido um por linha, sem argumentos; sem a marca é ignorado; nada é encerrado sozinho",
+  "relogio": "2026-10-28T12:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "marca": "TENANCY_SESSAO",
+    "pacoteDoApp": "com.exemplo.Tenancy",
+    "tabela": [
+      {
+        "pid": 300,
+        "ppid": 1,
+        "pgid": 300,
+        "sid": 300,
+        "inicio": "2026-10-28T09:00:00-03:00",
+        "argv": [
+          "claude"
+        ],
+        "ambiente": {
+          "TENANCY_SESSAO": "s1"
+        },
+        "mb": 200
+      },
+      {
+        "pid": 310,
+        "ppid": 1,
+        "pgid": 305,
+        "sid": 305,
+        "inicio": "2026-10-28T11:00:00-03:00",
+        "argv": [
+          "node",
+          "/home/lia/.npm/_npx/0a1b/node_modules/servidor-exemplo/dist/index.js",
+          "--chave=valor-de-exemplo"
+        ],
+        "ambiente": {
+          "TENANCY_SESSAO": "s2"
+        },
+        "mb": 80
+      },
+      {
+        "pid": 320,
+        "ppid": 1,
+        "pgid": 320,
+        "sid": 320,
+        "inicio": "2026-10-28T09:00:00-03:00",
+        "argv": [
+          "claude"
+        ],
+        "ambiente": {},
+        "mb": 150
+      },
+      {
+        "pid": 330,
+        "ppid": 1,
+        "pgid": 330,
+        "sid": 325,
+        "inicio": "2026-10-28T11:30:00-03:00",
+        "argv": [
+          "npm exec pacote-exemplo --chave=valor-de-exemplo"
+        ],
+        "ambiente": {},
+        "mb": 60
+      },
+      {
+        "pid": 331,
+        "ppid": 330,
+        "pgid": 330,
+        "sid": 325,
+        "inicio": "2026-10-28T11:30:01-03:00",
+        "argv": [
+          "node",
+          "pacote-exemplo"
+        ],
+        "ambiente": {
+          "TENANCY_SESSAO": "s3"
+        },
+        "mb": 40
+      },
+      {
+        "pid": 340,
+        "ppid": 1,
+        "pgid": 340,
+        "sid": 340,
+        "inicio": "2026-10-28T08:00:00-03:00",
+        "argv": [
+          "/usr/bin/bash",
+          "-l"
+        ],
+        "ambiente": {
+          "TENANCY_SESSAO": "s4"
+        },
+        "mb": 5
+      },
+      {
+        "pid": 350,
+        "ppid": 1,
+        "pgid": 350,
+        "sid": 350,
+        "inicio": "2026-10-28T08:00:00-03:00",
+        "argv": [
+          "node",
+          "/usr/lib/daemon.js"
+        ],
+        "ambiente": {
+          "TENANCY_SESSAO": "s5"
+        },
+        "mb": 30
+      }
+    ]
+  },
+  "esperado": {
+    "linhas": [
+      "claude · há 3 h · 200 MB",
+      "node · servidor-exemplo/dist/index.js · há 1 h · 80 MB",
+      "npm exec · pacote-exemplo · há 30 min · 100 MB",
+      "shell · há 4 h · 5 MB"
+    ],
+    "naoTem": [
+      "valor-de-exemplo",
+      "--chave"
+    ]
+  },
+  "mac": "pendente: o Mac lê a marca TENANCY_MACOS_SESSAO e o pacote com.novasce.tenancy fixos; o caso passa marca e pacote como parâmetro"
+}
