@@ -1,0 +1,61 @@
+{
+  "id": "CP-PAP-01",
+  "contrato": "papel",
+  "regra": "Papel vem de linhas[].papel; desconhecido e SOCIO são só leitura",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "papeis": [
+      "CHEFE",
+      "SOCIO",
+      "ADMIN",
+      "DEV",
+      "VENDEDOR",
+      "MARKETING",
+      "SUPPORT",
+      "FINANCEIRO",
+      null
+    ]
+  },
+  "esperado": {
+    "papeis": [
+      {
+        "papel": "desconhecido",
+        "somenteLeitura": true
+      },
+      {
+        "papel": "SOCIO",
+        "somenteLeitura": true
+      },
+      {
+        "papel": "ADMIN",
+        "somenteLeitura": false
+      },
+      {
+        "papel": "DEV",
+        "somenteLeitura": false
+      },
+      {
+        "papel": "VENDEDOR",
+        "somenteLeitura": false
+      },
+      {
+        "papel": "MARKETING",
+        "somenteLeitura": false
+      },
+      {
+        "papel": "SUPPORT",
+        "somenteLeitura": false
+      },
+      {
+        "papel": "FINANCEIRO",
+        "somenteLeitura": false
+      },
+      {
+        "papel": null,
+        "somenteLeitura": null
+      }
+    ]
+  },
+  "mac": "passa"
+}

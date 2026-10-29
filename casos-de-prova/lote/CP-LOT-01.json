@@ -1,0 +1,76 @@
+{
+  "id": "CP-LOT-01",
+  "contrato": "lote",
+  "regra": "Sem prova fica de fora antes de qualquer chamada",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "cartoes": [
+      {
+        "id": "cartao-a",
+        "titulo": "Peça de exemplo A",
+        "status": "FAZENDO",
+        "comentario": "Pronto A",
+        "prova": {
+          "nome": "revisao-a.md"
+        }
+      },
+      {
+        "id": "cartao-b",
+        "titulo": "Peça de exemplo B",
+        "status": "FAZENDO",
+        "comentario": "Pronto B",
+        "prova": {
+          "nome": "revisao-b.md"
+        }
+      },
+      {
+        "id": "cartao-c",
+        "titulo": "Peça de exemplo C",
+        "status": "FAZENDO",
+        "comentario": "Pronto C",
+        "prova": {
+          "nome": "revisao-c.md"
+        }
+      },
+      {
+        "id": "cartao-d",
+        "titulo": "Peça de exemplo D",
+        "status": "FAZENDO",
+        "comentario": "Pronto D",
+        "prova": null
+      },
+      {
+        "id": "cartao-e",
+        "titulo": "Peça de exemplo E",
+        "status": "FEITO",
+        "comentario": "Pronto E",
+        "prova": {
+          "nome": "revisao-e.md"
+        }
+      }
+    ]
+  },
+  "esperado": {
+    "chamadas": [
+      "cartao-a",
+      "cartao-b",
+      "cartao-c"
+    ],
+    "foraAntes": [
+      {
+        "cartao": "cartao-d",
+        "motivo": "falta-a-prova"
+      },
+      {
+        "cartao": "cartao-e",
+        "motivo": "status"
+      }
+    ],
+    "continuamSelecionados": [
+      "cartao-d",
+      "cartao-e"
+    ]
+  },
+  "mac": "pendente: sem lote"
+}

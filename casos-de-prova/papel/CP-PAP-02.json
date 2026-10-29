@@ -1,0 +1,71 @@
+{
+  "id": "CP-PAP-02",
+  "contrato": "papel",
+  "regra": "A Casa só entra com casaAccess",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "pessoas": [
+      {
+        "nome": "sem casaAccess",
+        "eu": {
+          "id": "lia",
+          "casaAccess": false,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            },
+            {
+              "slug": "CASA",
+              "kind": "CASA",
+              "nome": "Casa de exemplo",
+              "papel": "DEV"
+            }
+          ]
+        }
+      },
+      {
+        "nome": "com casaAccess",
+        "eu": {
+          "id": "lia",
+          "casaAccess": true,
+          "linhas": [
+            {
+              "slug": "EXEMPLO",
+              "kind": "LINHA",
+              "nome": "Linha EXEMPLO",
+              "papel": "DEV"
+            },
+            {
+              "slug": "CASA",
+              "kind": "CASA",
+              "nome": "Casa de exemplo",
+              "papel": "DEV"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "esperado": {
+    "pessoas": [
+      {
+        "nome": "sem casaAccess",
+        "linhas": [
+          "EXEMPLO"
+        ]
+      },
+      {
+        "nome": "com casaAccess",
+        "linhas": [
+          "CASA",
+          "EXEMPLO"
+        ]
+      }
+    ]
+  },
+  "mac": "passa"
+}

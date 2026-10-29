@@ -1,0 +1,114 @@
+{
+  "id": "CP-CON-01",
+  "contrato": "continuar",
+  "regra": "Lista sem pasta repetida; continuados ficam as 60 mais novas por brain, pela ordem natural do nome",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "home": "/home/lia",
+    "brains": [
+      "/home/lia/Brain",
+      "/home/lia/Espaços/Ateliê de exemplo",
+      "/home/lia/Espaços/Atalho do brain",
+      "~/Brain/"
+    ],
+    "links": {
+      "/home/lia/Espaços/Atalho do brain": "/home/lia/Brain"
+    },
+    "arquivos": {
+      "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 10/prompt.txt": "Siga o passo 10.\n",
+      "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 9/prompt.txt": "Siga o passo 9.\n",
+      "/home/lia/Brain/continuar/a-continuar/.escondida/prompt.txt": "Nada.\n",
+      "/home/lia/Brain/continuar/a-continuar/solto.txt": "Arquivo solto.\n",
+      "/home/lia/Espaços/Ateliê de exemplo/continuar/a-continuar/2026-10-27 Peça de exemplo A - revisão/prompt.txt": "Revise a peça.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 1/prompt.txt": "Leva 1.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 2/prompt.txt": "Leva 2.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 3/prompt.txt": "Leva 3.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 4/prompt.txt": "Leva 4.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 5/prompt.txt": "Leva 5.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 6/prompt.txt": "Leva 6.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 7/prompt.txt": "Leva 7.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 8/prompt.txt": "Leva 8.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 9/prompt.txt": "Leva 9.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 10/prompt.txt": "Leva 10.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 11/prompt.txt": "Leva 11.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 12/prompt.txt": "Leva 12.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 13/prompt.txt": "Leva 13.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 14/prompt.txt": "Leva 14.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 15/prompt.txt": "Leva 15.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 16/prompt.txt": "Leva 16.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 17/prompt.txt": "Leva 17.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 18/prompt.txt": "Leva 18.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 19/prompt.txt": "Leva 19.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 20/prompt.txt": "Leva 20.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 21/prompt.txt": "Leva 21.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 22/prompt.txt": "Leva 22.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 23/prompt.txt": "Leva 23.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 24/prompt.txt": "Leva 24.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 25/prompt.txt": "Leva 25.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 26/prompt.txt": "Leva 26.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 27/prompt.txt": "Leva 27.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 28/prompt.txt": "Leva 28.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 29/prompt.txt": "Leva 29.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 30/prompt.txt": "Leva 30.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 31/prompt.txt": "Leva 31.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 32/prompt.txt": "Leva 32.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 33/prompt.txt": "Leva 33.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 34/prompt.txt": "Leva 34.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 35/prompt.txt": "Leva 35.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 36/prompt.txt": "Leva 36.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 37/prompt.txt": "Leva 37.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 38/prompt.txt": "Leva 38.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 39/prompt.txt": "Leva 39.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 40/prompt.txt": "Leva 40.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 41/prompt.txt": "Leva 41.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 42/prompt.txt": "Leva 42.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 43/prompt.txt": "Leva 43.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 44/prompt.txt": "Leva 44.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 45/prompt.txt": "Leva 45.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 46/prompt.txt": "Leva 46.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 47/prompt.txt": "Leva 47.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 48/prompt.txt": "Leva 48.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 49/prompt.txt": "Leva 49.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 50/prompt.txt": "Leva 50.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 51/prompt.txt": "Leva 51.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 52/prompt.txt": "Leva 52.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 53/prompt.txt": "Leva 53.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 54/prompt.txt": "Leva 54.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 55/prompt.txt": "Leva 55.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 56/prompt.txt": "Leva 56.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 57/prompt.txt": "Leva 57.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 58/prompt.txt": "Leva 58.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 59/prompt.txt": "Leva 59.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 60/prompt.txt": "Leva 60.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 61/prompt.txt": "Leva 61.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 62/prompt.txt": "Leva 62.\n",
+      "/home/lia/Espaços/Ateliê de exemplo/continuar/continuados/2026-10-26 Peça de exemplo A - rascunho/prompt.txt": "Rascunho.\n"
+    }
+  },
+  "esperado": {
+    "brains": [
+      "/home/lia/Brain",
+      "/home/lia/Espaços/Ateliê de exemplo"
+    ],
+    "aContinuar": [
+      "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 9",
+      "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 10",
+      "/home/lia/Espaços/Ateliê de exemplo/continuar/a-continuar/2026-10-27 Peça de exemplo A - revisão"
+    ],
+    "continuados": {
+      "quantos": 61,
+      "primeiros": [
+        "/home/lia/Espaços/Ateliê de exemplo/continuar/continuados/2026-10-26 Peça de exemplo A - rascunho",
+        "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 62",
+        "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 61"
+      ],
+      "ultimo": "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 3",
+      "fora": [
+        "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 1",
+        "/home/lia/Brain/continuar/continuados/2026-10-01 Produto A - leva 2"
+      ]
+    }
+  },
+  "mac": "passa"
+}

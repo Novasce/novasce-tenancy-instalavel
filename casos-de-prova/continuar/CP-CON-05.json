@@ -1,0 +1,121 @@
+{
+  "id": "CP-CON-05",
+  "contrato": "continuar",
+  "regra": "Confere o --help da CLI antes de abrir, com prazo de 5 s",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "motor": "claude",
+    "escolha": {
+      "modelo": "claude-opus-5-5",
+      "esforco": "alto"
+    },
+    "prazoMs": 5000,
+    "variantes": [
+      {
+        "nome": "com as opções",
+        "ajuda": {
+          "codigo": 0,
+          "saida": "Usage: claude [options]\n  --model <model>\n  --effort <level>\n"
+        }
+      },
+      {
+        "nome": "sem as opções",
+        "ajuda": {
+          "codigo": 0,
+          "saida": "Usage: claude [options]\n  --print\n"
+        }
+      },
+      {
+        "nome": "não responde",
+        "ajuda": {
+          "esgotou": true
+        }
+      },
+      {
+        "nome": "codex com as opções",
+        "motor": "codex",
+        "escolha": {
+          "modelo": "gpt-x",
+          "esforco": "alto"
+        },
+        "ajuda": {
+          "codigo": 0,
+          "saida": "Usage: codex [options]\n  -m, --model <MODEL>\n  -c, --config <key=value>\n"
+        }
+      },
+      {
+        "nome": "codex sem esforço",
+        "motor": "codex",
+        "escolha": {
+          "modelo": "gpt-x",
+          "esforco": "alto"
+        },
+        "ajuda": {
+          "codigo": 0,
+          "saida": "Usage: codex [options]\n  -m, --model <MODEL>\n"
+        }
+      },
+      {
+        "nome": "sem nada pedido",
+        "escolha": {
+          "modelo": null,
+          "esforco": null
+        },
+        "ajuda": {
+          "codigo": 0,
+          "saida": "Usage: claude\n"
+        }
+      }
+    ]
+  },
+  "esperado": {
+    "prazoMs": 5000,
+    "variantes": [
+      {
+        "nome": "com as opções",
+        "opcoes": [
+          "--model",
+          "claude-opus-5-5",
+          "--effort",
+          "high"
+        ],
+        "aviso": null
+      },
+      {
+        "nome": "sem as opções",
+        "opcoes": [],
+        "aviso": "nao-aceita-modelo-nem-esforco"
+      },
+      {
+        "nome": "não responde",
+        "opcoes": [],
+        "aviso": "ajuda-sem-resposta"
+      },
+      {
+        "nome": "codex com as opções",
+        "opcoes": [
+          "-m",
+          "gpt-x",
+          "-c",
+          "model_reasoning_effort=\"high\""
+        ],
+        "aviso": null
+      },
+      {
+        "nome": "codex sem esforço",
+        "opcoes": [
+          "-m",
+          "gpt-x"
+        ],
+        "aviso": "nao-aceita-esforco"
+      },
+      {
+        "nome": "sem nada pedido",
+        "opcoes": [],
+        "aviso": null
+      }
+    ]
+  },
+  "mac": "pendente: o Mac confere o --help sem prazo"
+}

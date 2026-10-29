@@ -1,0 +1,99 @@
+{
+  "id": "CP-CON-06",
+  "contrato": "continuar",
+  "regra": "Abrir: recusa prompt vazio ou acima de 256 KB, CLI ausente abre a ficha; move para continuados antes da CLI e devolve a pasta se a sessão falhar",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "brain": "/home/lia/Brain",
+    "app": "Tenancy",
+    "pasta": "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1",
+    "limiteBytes": 262144,
+    "variantes": [
+      {
+        "nome": "prompt vazio",
+        "prompt": "",
+        "cliExiste": true,
+        "sessaoAbre": true
+      },
+      {
+        "nome": "prompt grande",
+        "prompt": {
+          "repetir": "a",
+          "vezes": 262145
+        },
+        "cliExiste": true,
+        "sessaoAbre": true
+      },
+      {
+        "nome": "prompt no limite",
+        "prompt": {
+          "repetir": "a",
+          "vezes": 262144
+        },
+        "cliExiste": true,
+        "sessaoAbre": true
+      },
+      {
+        "nome": "cli ausente",
+        "prompt": "Siga o passo 1.\n",
+        "cliExiste": false,
+        "sessaoAbre": true
+      },
+      {
+        "nome": "tudo certo",
+        "prompt": "Siga o passo 1.\n",
+        "cliExiste": true,
+        "sessaoAbre": true
+      },
+      {
+        "nome": "sessão falha",
+        "prompt": "Siga o passo 1.\n",
+        "cliExiste": true,
+        "sessaoAbre": false
+      }
+    ]
+  },
+  "esperado": {
+    "variantes": [
+      {
+        "nome": "prompt vazio",
+        "abriu": false,
+        "motivo": "sem-prompt",
+        "pasta": "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1"
+      },
+      {
+        "nome": "prompt grande",
+        "abriu": false,
+        "motivo": "prompt-grande",
+        "pasta": "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1"
+      },
+      {
+        "nome": "prompt no limite",
+        "abriu": true,
+        "pasta": "/home/lia/Brain/continuar/continuados/2026-10-28 Produto A - passo 1"
+      },
+      {
+        "nome": "cli ausente",
+        "abriu": false,
+        "motivo": "cli-ausente",
+        "ficha": true,
+        "pasta": "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1"
+      },
+      {
+        "nome": "tudo certo",
+        "abriu": true,
+        "moveuAntesDaCli": true,
+        "pasta": "/home/lia/Brain/continuar/continuados/2026-10-28 Produto A - passo 1",
+        "promptEnviado": "(O Tenancy já moveu esta pasta para continuar/continuados/2026-10-28 Produto A - passo 1/: o primeiro passo está feito.)\n\nSiga o passo 1.\n"
+      },
+      {
+        "nome": "sessão falha",
+        "abriu": false,
+        "motivo": "sessao-falhou",
+        "pasta": "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1"
+      }
+    ]
+  },
+  "mac": "passa"
+}

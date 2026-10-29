@@ -1,0 +1,50 @@
+{
+  "id": "CP-CON-02",
+  "contrato": "continuar",
+  "regra": "Seções do LEIA: título em maiúsculas, com ou sem sublinhado, com parêntese e com valor na mesma linha",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "leia": "Retomada da peça de exemplo para a Lia.\n\nONDE PAROU\n==========\nO rascunho está pronto\ne falta a revisão.\n\nO QUE ESPERA (de você)\n- A cor da capa\n- O prazo\n\nPRAZO: sexta-feira\n\nPRODUTO  Produto A\nLinha EXEMPLO\n\nNOTA (ver abaixo) e mais um texto qualquer\n1. Primeiro item\n2) Segundo item\n"
+  },
+  "esperado": {
+    "preambulo": [
+      "Retomada da peça de exemplo para a Lia."
+    ],
+    "secoes": [
+      {
+        "titulo": "ONDE PAROU",
+        "detalhe": null,
+        "linhas": [
+          "O rascunho está pronto e falta a revisão."
+        ]
+      },
+      {
+        "titulo": "O QUE ESPERA",
+        "detalhe": "de você",
+        "linhas": [
+          "A cor da capa",
+          "O prazo"
+        ]
+      },
+      {
+        "titulo": "PRAZO",
+        "detalhe": null,
+        "linhas": [
+          "sexta-feira"
+        ]
+      },
+      {
+        "titulo": "PRODUTO",
+        "detalhe": null,
+        "linhas": [
+          "Produto A Linha EXEMPLO",
+          "NOTA (ver abaixo) e mais um texto qualquer",
+          "1. Primeiro item",
+          "2) Segundo item"
+        ]
+      }
+    ]
+  },
+  "mac": "passa"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "CP-ENV-04",
+  "contrato": "envios",
+  "regra": "LEIA que não diz o que volta: pergunta antes de mover, e a resposta decide",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "pasta": "/home/lia/Brain/envios/a-enviar/2026-10-27 Lia Pereira - proposta",
+    "arquivos": {
+      "/home/lia/Brain/envios/a-enviar/2026-10-27 Lia Pereira - proposta/LEIA.txt": "PRA QUEM\nLia Pereira\n"
+    },
+    "variantes": [
+      {
+        "nome": "sem resposta",
+        "resposta": null
+      },
+      {
+        "nome": "espera",
+        "resposta": true
+      },
+      {
+        "nome": "não espera",
+        "resposta": false
+      }
+    ]
+  },
+  "esperado": {
+    "variantes": [
+      {
+        "nome": "sem resposta",
+        "pergunta": true,
+        "pasta": "/home/lia/Brain/envios/a-enviar/2026-10-27 Lia Pereira - proposta"
+      },
+      {
+        "nome": "espera",
+        "pergunta": false,
+        "pasta": "/home/lia/Brain/envios/aguardando-resposta/2026-10-27 Lia Pereira - proposta"
+      },
+      {
+        "nome": "não espera",
+        "pergunta": false,
+        "pasta": "/home/lia/Brain/envios/enviados/2026-10-27 Lia Pereira - proposta"
+      }
+    ]
+  },
+  "mac": "passa"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "CP-CON-08",
+  "contrato": "continuar",
+  "regra": "Pasta em continuar/em-espera/ aparece à parte, com o LEIA, sem Abrir sessão",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "home": "/home/lia",
+    "brains": [
+      "/home/lia/Brain"
+    ],
+    "links": {},
+    "arquivos": {
+      "/home/lia/Brain/continuar/em-espera/2026-10-29 Produto A - depois da resposta/LEIA.txt": "ONDE PAROU\nEspera a resposta da Lia.\n",
+      "/home/lia/Brain/continuar/em-espera/2026-10-29 Produto A - depois da resposta/prompt.txt": "Siga.\n",
+      "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1/prompt.txt": "Siga.\n"
+    }
+  },
+  "esperado": {
+    "aContinuar": [
+      "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1"
+    ],
+    "emEspera": [
+      {
+        "pasta": "/home/lia/Brain/continuar/em-espera/2026-10-29 Produto A - depois da resposta",
+        "ondeParou": [
+          "Espera a resposta da Lia."
+        ],
+        "podeAbrir": false
+      }
+    ]
+  },
+  "mac": "pendente: o Mac não lê continuar/em-espera/"
+}

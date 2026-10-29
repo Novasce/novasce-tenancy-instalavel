@@ -1,0 +1,90 @@
+{
+  "id": "CP-API-04",
+  "contrato": "api",
+  "regra": "Validade pelo exp do token: o portão confere validade, não presença",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "agora": 1793188800,
+    "tokens": [
+      {
+        "nome": "sem exp",
+        "payload": {
+          "sub": "lia"
+        }
+      },
+      {
+        "nome": "vencido há 1 s",
+        "payload": {
+          "exp": 1793188799
+        }
+      },
+      {
+        "nome": "vence agora",
+        "payload": {
+          "exp": 1793188800
+        }
+      },
+      {
+        "nome": "exp fracionário válido",
+        "payload": {
+          "exp": 1793188800.5
+        }
+      },
+      {
+        "nome": "válido",
+        "payload": {
+          "exp": 1793192400
+        }
+      },
+      {
+        "nome": "fora do formato",
+        "bruto": "nao-e-um-token"
+      },
+      {
+        "nome": "ausente",
+        "bruto": null
+      }
+    ]
+  },
+  "esperado": {
+    "tokens": [
+      {
+        "nome": "sem exp",
+        "sessao": false,
+        "portao": "sem-sessao"
+      },
+      {
+        "nome": "vencido há 1 s",
+        "sessao": true,
+        "portao": "sessao-vencida"
+      },
+      {
+        "nome": "vence agora",
+        "sessao": true,
+        "portao": "sessao-vencida"
+      },
+      {
+        "nome": "exp fracionário válido",
+        "sessao": true,
+        "portao": "entra"
+      },
+      {
+        "nome": "válido",
+        "sessao": true,
+        "portao": "entra"
+      },
+      {
+        "nome": "fora do formato",
+        "sessao": false,
+        "portao": "sem-sessao"
+      },
+      {
+        "nome": "ausente",
+        "sessao": false,
+        "portao": "sem-sessao"
+      }
+    ]
+  },
+  "mac": "passa"
+}
