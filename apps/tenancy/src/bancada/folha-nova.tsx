@@ -1,6 +1,7 @@
 // A folha "Nova sessão" do Mac (UC16): onde, qual IA, nome e o comando por trás.
 import { useEffect, useMemo, useState } from "react";
 import { linhaDaCli, nomeDaPasta, type Bancada, type Programa } from "./bancada";
+import { abrirEmWorktree, perguntaDeWorktree } from "./guardas";
 
 type Onde = "brain" | "recentes" | "outra";
 const ABAS: { id: Onde; rotulo: string }[] = [
@@ -53,6 +54,7 @@ export function FolhaNova(p: { bancada: Bancada; escuro: boolean; aberta: (id: s
   const [recentes, setRecentes] = useState<string[]>([]);
   const [clis, setClis] = useState<Record<string, EstadoDaCli>>({ claude: "conferindo…", codex: "conferindo…", agy: "conferindo…" });
   const [abrindo, setAbrindo] = useState(false);
+  const [worktree, setWorktree] = useState<{ texto: string; repo: string } | null>(null);
 
   useEffect(() => {
     let vivo = true;
@@ -69,7 +71,7 @@ export function FolhaNova(p: { bancada: Bancada; escuro: boolean; aberta: (id: s
   }, [mao]);
 
   const lugares = useMemo(() => {
-    const todos = [brain, ...repos];
+    const todos = [brain, ...repos.filter((r) => r !== brain)];
     const f = filtro.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
     return todos.filter((x) => !f || x.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().includes(f)).slice(0, 9);
   }, [brain, repos, filtro]);
@@ -85,10 +87,24 @@ export function FolhaNova(p: { bancada: Bancada; escuro: boolean; aberta: (id: s
       : null;
   const podeAbrir = !abrindo && !ausente && !(ia === "comando" && !comando.trim());
 
+  const pedido = { programa: ia, nome, comando: ia === "comando" ? comando : undefined, escuro: p.escuro };
   const abrir = async () => {
     if (!podeAbrir) return;
     setAbrindo(true);
-    const s = await p.bancada.abrir({ programa: ia, pasta: onde, nome, comando: ia === "comando" ? comando : undefined, escuro: p.escuro });
+    const pergunta = await perguntaDeWorktree(p.bancada, onde);
+    if (pergunta) {
+      setWorktree(pergunta);
+      setAbrindo(false);
+      return;
+    }
+    const s = await p.bancada.abrir({ ...pedido, pasta: onde });
+    p.aberta(s.id);
+  };
+  const responderWorktree = async (emWorktree: boolean) => {
+    if (!worktree) return;
+    setAbrindo(true);
+    const s = emWorktree ? await abrirEmWorktree(p.bancada, { ...pedido, repo: worktree.repo }) : await p.bancada.abrir({ ...pedido, pasta: onde });
+    setWorktree(null);
     p.aberta(s.id);
   };
 
@@ -179,15 +195,30 @@ export function FolhaNova(p: { bancada: Bancada; escuro: boolean; aberta: (id: s
           {comandoPorTras({ pasta: onde, home, shell: mao.cli.shell(), programa: ia, comando })}
         </code>
 
-        <p className="aviso-da-folha" data-regiao="aviso-da-folha" aria-live="polite">
-          {aviso ?? ""}
-        </p>
+        <div className="aviso-da-folha" aria-live="polite">
+          {worktree ? (
+            <div className="faixa ambar" data-regiao="worktree">
+              <span className="rotulo-da-faixa">worktree</span>
+              <span className="texto-da-faixa" title={worktree.texto}>
+                {worktree.texto}
+              </span>
+              <button type="button" className="botao-da-faixa primario" disabled={abrindo} onClick={() => void responderWorktree(true)}>
+                worktree
+              </button>
+              <button type="button" className="botao-da-faixa" disabled={abrindo} onClick={() => void responderWorktree(false)}>
+                mesma pasta
+              </button>
+            </div>
+          ) : (
+            <p data-regiao="aviso-da-folha">{aviso ?? ""}</p>
+          )}
+        </div>
 
         <div className="botoes fim">
           <button type="button" className="secundario" onClick={p.cancelar}>
             Cancelar
           </button>
-          <button type="button" className="primario" disabled={!podeAbrir} onClick={() => void abrir()}>
+          <button type="button" className="primario" disabled={!podeAbrir || !!worktree} onClick={() => void abrir()}>
             Abrir
           </button>
         </div>

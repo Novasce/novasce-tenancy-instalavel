@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { nomeDaPasta, type Bancada, type SessaoDaBancada } from "./bancada";
 import { detalheDaSessao } from "./lista/ListaDeSessoes";
 import { Ponto } from "./Ponto";
+import { FaixasDaSessao } from "./faixas";
 import { ColunaQuemEspera, FaixaDaSuaVez } from "./quem-espera";
 import type { Telas } from "./telas";
 import { colarPergunta } from "./vigia";
@@ -33,6 +34,7 @@ function PainelDoTerminal(p: { telas: Telas; terminalId: string; aoColar: (texto
 }
 
 export function Cabeca(p: { bancada: Bancada; s: SessaoDaBancada; renomear: () => void; dividir: () => void }) {
+  const fechar = () => void p.bancada.fechar(p.s.id);
   const home = p.bancada.mao.arquivos.home();
   return (
     <header className="cabeca-da-sessao" data-regiao="cabeca-da-sessao">
@@ -47,6 +49,9 @@ export function Cabeca(p: { bancada: Bancada; s: SessaoDaBancada; renomear: () =
       </button>
       <button type="button" className="icone-texto" disabled={!p.s.terminal || !!p.s.extra} onClick={p.dividir}>
         Dividir o painel
+      </button>
+      <button type="button" className="icone-texto" disabled={!p.s.terminal || p.s.estado === "encerrando"} onClick={fechar}>
+        Fechar a sessão
       </button>
     </header>
   );
@@ -81,7 +86,6 @@ export function TelaDaSessao(p: {
   ativa: string | null;
   ir: (id: string) => void;
   escuro: boolean;
-  faixas?: (s: SessaoDaBancada) => React.ReactNode;
 }) {
   const s = p.ativa ? p.bancada.sessao(p.ativa) : undefined;
   const [renomeando, setRenomeando] = useState(false);
@@ -103,7 +107,7 @@ export function TelaDaSessao(p: {
             <>
               <Cabeca bancada={p.bancada} s={s} renomear={() => setRenomeando(!renomeando)} dividir={() => void p.bancada.dividir(s.id, p.escuro)} />
               <div className="faixas-da-sessao">
-                {p.faixas?.(s)}
+                <FaixasDaSessao bancada={p.bancada} s={s} />
                 {colar ? (
                   <div className="faixa ambar" data-regiao="colar">
                     <span className="rotulo-da-faixa">colar</span>

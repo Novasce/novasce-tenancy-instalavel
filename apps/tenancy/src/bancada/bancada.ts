@@ -43,7 +43,18 @@ export interface Worktree {
 /** O que a sessão espera da pessoa numa faixa (UC20 e UC22). */
 export type Pendencia =
   | { tipo: "fora-da-main"; frase: string; commits: number }
-  | { tipo: "sem-commit"; soltos: number };
+  | { tipo: "sem-commit"; soltos: number }
+  | { tipo: "encerrar" }
+  | { tipo: "retomar"; fechadaEm: number }
+  | { tipo: "do-disco" };
+
+/** Quanto tempo depois de fechada uma sessão de Claude ou Codex ainda oferece retomar. */
+export const RETOMAR_ATE_MS = 7 * 24 * 3600 * 1000;
+
+export interface Recado {
+  texto: string;
+  erro: boolean;
+}
 
 export interface SessaoDaBancada {
   id: string;
@@ -163,6 +174,9 @@ export class Bancada {
   private ouvintes = new Set<() => void>();
   private proximo = 1;
   readonly banco: BancoDeSessoes;
+  /** O recado do pé: sucesso some em 12 s, falha fica até "Entendi". */
+  recadoAtual: Recado | null = null;
+  private restaurada = false;
 
   constructor(
     readonly mao: MaoDoHost,
@@ -203,6 +217,69 @@ export class Bancada {
     for (const f of this.ouvintes) f();
   }
 
+  recado(texto: string, erro: boolean): void {
+    this.recadoAtual = { texto, erro };
+    this.avisar();
+  }
+
+  limparRecado(): void {
+    this.recadoAtual = null;
+    this.avisar();
+  }
+
+  /**
+   * As sessões do banco ao abrir o app. Só o shell sobe sozinho; Claude e Codex
+   * fechados há menos de 7 dias oferecem retomar; o resto, abrir de novo.
+   */
+  async restaurar(): Promise<void> {
+    if (this.restaurada) return;
+    this.restaurada = true;
+    const agora = this.relogio();
+    for (const s of this.sessoes()) {
+      if (s.terminal) continue;
+      if (s.programa === "shell") await this.reabrir(s.id);
+      else if ((s.programa === "claude" || s.programa === "codex") && agora - s.ultimaVez < RETOMAR_ATE_MS) s.pendencia = { tipo: "retomar", fechadaEm: s.ultimaVez };
+      else s.pendencia = { tipo: "do-disco" };
+    }
+    this.avisar();
+  }
+
+  /**
+   * Fechar pela tela: worktree passa pela guarda; agente vivo pergunta numa
+   * faixa; shell sem nada sai direto.
+   */
+  async fechar(id: string): Promise<void> {
+    const s = this.sessao(id);
+    if (!s?.terminal) return;
+    if (s.worktree) {
+      await this.encerrar([id]);
+      return;
+    }
+    if (s.programa === "claude" || s.programa === "codex" || s.programa === "agy") {
+      s.pendencia = { tipo: "encerrar" };
+      this.avisar();
+      return;
+    }
+    await this.encerrar([id]);
+  }
+
+  /** Sair do app: encerra todas; worktree fica como está, a branch nunca sai. */
+  async encerrarTudo(): Promise<void> {
+    const ids = this.abertas().map((s) => s.id);
+    const guardados = new Map<string, Worktree | undefined>();
+    for (const id of ids) {
+      const s = this.sessao(id)!;
+      guardados.set(id, s.worktree);
+      s.worktree = undefined;
+    }
+    await this.encerrar(ids);
+    for (const [id, w] of guardados) {
+      const s = this.sessao(id);
+      if (s) s.worktree = w;
+    }
+    this.avisar();
+  }
+
   mudarEstado(id: string, estado: EstadoDaSessao): void {
     const s = this.sessao(id);
     if (!s || s.estado === estado) return;
@@ -238,6 +315,7 @@ export class Bancada {
   async reabrir(id: string, opcoes?: string[]): Promise<void> {
     const s = this.sessao(id);
     if (!s || s.terminal) return;
+    s.pendencia = undefined;
     s.estado = s.programa === "shell" || s.programa === "comando" ? "terminal" : "abrindo";
     s.estadoDesde = this.relogio();
     s.codigoDeSaida = undefined;
@@ -339,6 +417,7 @@ export class Bancada {
     for (const id of ids) {
       const s = this.sessao(id);
       if (!s?.terminal) continue;
+      s.pendencia = undefined;
       if (s.worktree) {
         const d = aoFechar({ ...(await retratoAoFechar(this.mao, s.worktree)), branch: s.worktree.branch });
         destinos.set(id, d);

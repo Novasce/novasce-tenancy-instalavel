@@ -145,6 +145,9 @@ export interface Ensaio {
   gits: { pasta: string; args: string[] }[];
   arquivos: ArquivosNaMemoria;
   recentes: string[];
+  /** Os endereços abertos no navegador. */
+  abertos: string[];
+  saiu: boolean;
 }
 
 export type MaoDeEnsaio = MaoDoHost & { ensaio: Ensaio };
@@ -203,6 +206,8 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
     gits: [],
     arquivos: new ArquivosNaMemoria({ ...brainDeEnsaio(), ...o.arquivos }),
     recentes: [`${BRAIN}`, REPOS[1]],
+    abertos: [],
+    saiu: false,
   };
 
   const vivos = () => ensaio.processos.filter((p) => (p.nasceEm ?? 0) <= ensaio.agora && !mortos.has(chave(p)));
@@ -294,6 +299,12 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
       ensaio.gits.push({ pasta, args });
       return gitDeEnsaio(ensaio.repos, pasta, args);
     },
+    async abrirNoNavegador(url) {
+      ensaio.abertos.push(url);
+    },
+    async sair() {
+      ensaio.saiu = true;
+    },
     cofre: {
       async temLogin() {
         return ensaio.login.tem;
@@ -375,6 +386,11 @@ export function gitDeEnsaio(repos: Record<string, RepoDeEnsaio>, pasta: string, 
       ...Array.from({ length: aqui.soltos }, (_, i) => `?? novo-${i + 1}.txt`),
     ];
     return ok(linhas.map((l) => l + "\n").join(""));
+  }
+  if (a === "rev-parse --short HEAD") return ok("abc1234\n");
+  if (args[0] === "push" && args[1] === "-u" && args[2] === "origin") {
+    if (!repo.remoto || !/github\.com/.test(repo.remoto)) return falha("fatal: could not read from remote repository", 128);
+    return repo.branches[args[3]] ? ok() : falha(`error: src refspec ${args[3]} does not match any`, 1);
   }
   if (a === "remote get-url origin") return repo.remoto ? ok(repo.remoto + "\n") : falha("error: No such remote 'origin'", 2);
   if (args[0] === "for-each-ref") {

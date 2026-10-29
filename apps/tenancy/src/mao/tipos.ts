@@ -95,4 +95,8 @@ export interface MaoDoHost {
   cofre: MaoDoCofre;
   arquivos: MaoDeArquivos;
   cli: MaoDasClis;
+  /** Abre um endereço no navegador do sistema (o PR, um link de fora). */
+  abrirNoNavegador(url: string): Promise<void>;
+  /** Fecha o app, depois que a pessoa disse "Encerrar e sair". */
+  sair(): Promise<void>;
 }

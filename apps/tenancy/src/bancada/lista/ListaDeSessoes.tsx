@@ -8,6 +8,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { esperaVoce, ROTULO_DO_ESTADO, type Bancada, type SessaoDaBancada } from "../bancada";
 import { Ponto } from "../Ponto";
 import { useBancada } from "../../casca/usar";
+import { quandoFechou } from "../guardas";
 
 /** 30 px de linha e 2 de vão, como o Mac. */
 export const ALTURA_DA_LINHA = 32;
@@ -23,6 +24,9 @@ export function detalheDaSessao(s: SessaoDaBancada, agora: number): string {
   if (s.estado === "encerrando") return "encerrando…";
   if (s.pendencia?.tipo === "fora-da-main") return `${plural(s.pendencia.commits, "commit", "commits")} fora da main · fechar?`;
   if (s.pendencia?.tipo === "sem-commit") return `${s.pendencia.soltos} sem commit · fechar?`;
+  if (s.pendencia?.tipo === "encerrar") return `encerrar o ${s.programa}?`;
+  if (s.pendencia?.tipo === "retomar") return `${quandoFechou(agora - s.pendencia.fechadaEm)} · retomar?`;
+  if (s.pendencia?.tipo === "do-disco") return "abrir de novo";
   if (!s.terminal) return s.codigoDeSaida !== undefined ? `encerrada · saiu com ${s.codigoDeSaida}` : "encerrada";
   switch (s.estado) {
     case "pediu-permissao":

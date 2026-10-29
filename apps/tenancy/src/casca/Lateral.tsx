@@ -15,16 +15,23 @@ export function Lateral(p: {
   espaco: string;
   conta: string;
   sessoes?: React.ReactNode;
+  foraDaMain?: number;
 }) {
   useBancada(p.bancada);
-  const item = (pagina: Pagina, rotulo: string) => (
+  const item = (pagina: Pagina, rotulo: string, contador?: { n: number; regiao: string }) => (
     <button
       type="button"
       className={p.pagina === pagina ? "nav ativo" : "nav"}
       aria-current={p.pagina === pagina ? "page" : undefined}
+      aria-label={contador ? rotulo : undefined}
       onClick={() => p.ir(pagina)}
     >
-      {rotulo}
+      {contador ? <span className="nav-rotulo">{rotulo}</span> : rotulo}
+      {contador ? (
+        <span className={contador.n > 0 ? "contador ambar" : "contador"} data-regiao={contador.regiao}>
+          {contador.n}
+        </span>
+      ) : null}
     </button>
   );
   return (
@@ -41,7 +48,7 @@ export function Lateral(p: {
         <section className="sessoes" data-regiao="sessoes" aria-label="Sessões">
           <h2 className="titulo-de-bloco">SESSÕES</h2>
           {item("para-continuar", "Para continuar")}
-          {item("fora-da-main", "Trabalho fora da main")}
+          {item("fora-da-main", "Trabalho fora da main", { n: p.foraDaMain ?? 0, regiao: "contador-fora-da-main" })}
           <div className="lista-de-sessoes">{p.sessoes}</div>
           <button type="button" className="nova-sessao" onClick={() => p.ir("nova-sessao")}>
             Nova sessão
