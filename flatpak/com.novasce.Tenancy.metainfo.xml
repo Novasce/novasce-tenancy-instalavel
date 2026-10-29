@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.novasce.Tenancy</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <name>Tenancy</name>
+  <summary>A Bancada das sessões de IA e os agentes do Tenancy</summary>
+  <description>
+    <p>Várias sessões de Claude Code, Codex e agy numa tela só, com quem espera você, as guardas do git e a aba dos agentes do Tenancy web.</p>
+  </description>
+  <developer id="com.novasce">
+    <name>Novasce</name>
+  </developer>
+  <url type="vcs-browser">https://github.com/Novasce/novasce-tenancy-instalavel</url>
+  <launchable type="desktop-id">com.novasce.Tenancy.desktop</launchable>
+  <content_rating type="oars-1.1" />
+  <releases>
+    <release version="0.1.0" date="2026-10-29" />
+  </releases>
+</component>

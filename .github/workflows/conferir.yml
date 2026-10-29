@@ -53,3 +53,60 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm run build -w apps/sonda
       - run: cargo test --locked --manifest-path apps/sonda/src-tauri/Cargo.toml
+
+  app:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - name: dependências do Tauri no Linux
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev patchelf
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build -w apps/tenancy
+      - run: cargo test --locked --workspace
+
+  # Autoteste de geometria da 0.1 (E9): o app de teste no WebKitGTK sem tela,
+  # com a mão de ensaio, em 1024 e 1264 × 728, escala 1 e 1,25, claro e escuro.
+  # Dentro do Flatpak ele roda pelo canal de teste e na sede (Parte F).
+  autoteste:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - name: dependências do Tauri no Linux e tela virtual
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev patchelf xvfb xauth
+      - run: npm ci --no-audit --no-fund
+      - name: montar o app de teste
+        working-directory: apps/tenancy
+        run: npx tauri build --debug --no-bundle --ci
+      - name: rodar o autoteste
+        env:
+          WEBKIT_DISABLE_DMABUF_RENDERER: "1"
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          mkdir -p autoteste
+          for janela in 1024x728 1264x728; do
+            for escala in 1 1.25; do
+              for tema in claro escuro; do
+                timeout 180 xvfb-run -a -s "-screen 0 1700x1100x24" \
+                  target/debug/novasce-tenancy --autoteste --janela "$janela" --escala "$escala" --tema "$tema" \
+                  > "autoteste/$janela-$escala-$tema.json" 2> "autoteste/$janela-$escala-$tema.log" || true
+              done
+            done
+          done
+          node apps/tenancy/autoteste-conferir.mjs autoteste/*.json
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: autoteste-geometria
+          path: autoteste/
