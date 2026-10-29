@@ -43,6 +43,8 @@ O arquivo se chama `<id>.json` e fica na pasta do contrato. O formato está em [
 
 `npm test -w pacotes/casos` lê todos os JSON desta pasta e falha com formato errado, nome de arquivo diferente do id, prefixo de outro contrato, id repetido ou id fora do `ids.json`. Cada pacote de núcleo lê os casos da sua pasta e confere o comportamento.
 
+Quando o `esperado` traz `arquivos`, valem os arquivos que o contrato do caso toca. Arquivo que outro contrato grava no mesmo passo (no Mac, a marca `.ia/rotinas-semeadas` e o `rotinas/Leia-me.md` da semeadura das rotinas) fica fora da comparação.
+
 ## Regras
 
 - Só nomes fictícios. Nada do time, de cliente ou de sócio.
