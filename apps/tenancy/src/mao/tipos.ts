@@ -97,6 +97,8 @@ export interface MaoDoHost {
   cofre: MaoDoCofre;
   arquivos: MaoDeArquivos;
   cli: MaoDasClis;
+  /** A base do Tenancy web, herdada do OS (o mesmo endereço do Começar); null no ensaio. */
+  baseDoWeb(): string | null;
   /** Abre um endereço no navegador do sistema (o PR, um link de fora). */
   abrirNoNavegador(url: string): Promise<void>;
   /** Põe o texto na área de transferência. */

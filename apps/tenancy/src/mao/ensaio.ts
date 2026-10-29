@@ -305,6 +305,7 @@ export function maoDeEnsaio(o: OpcoesDoEnsaio = {}): MaoDeEnsaio {
       ensaio.gits.push({ pasta, args });
       return gitDeEnsaio(ensaio.repos, pasta, args);
     },
+    baseDoWeb: () => null,
     async abrirNoNavegador(url) {
       ensaio.abertos.push(url);
     },

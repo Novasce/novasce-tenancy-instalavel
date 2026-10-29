@@ -7,6 +7,10 @@
   "permissions": [
     "core:default",
     "opener:default",
-    "core:window:allow-destroy"
+    "core:window:allow-destroy",
+    "allow-tipo-da-mao",
+    "allow-info",
+    "allow-imprimir-e-sair",
+    "allow-abrir-agentes"
   ]
 }

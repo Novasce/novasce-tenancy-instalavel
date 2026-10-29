@@ -5,7 +5,7 @@ import { rodarAutoteste } from "./autoteste/roteiro";
 import { criarTerminalXterm } from "./bancada/terminal";
 import { preferenciasDoNavegador } from "./casca/preferencias";
 import { maoDoApp } from "./mao";
-import { imprimirESair, info } from "./ponte";
+import { imprimirESair, info, ouvirNavegacaoDosAgentes } from "./ponte";
 import "./estilo.css";
 
 async function iniciar() {
@@ -17,6 +17,7 @@ async function iniciar() {
     await imprimirESair(JSON.stringify(saida));
     return;
   }
+  void ouvirNavegacaoDosAgentes();
   createRoot(document.getElementById("raiz")!).render(
     <StrictMode>
       <App mao={maoDoApp()} preferencias={preferenciasDoNavegador()} />

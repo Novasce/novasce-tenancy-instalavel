@@ -15,6 +15,9 @@ import { Telas } from "./bancada/telas";
 import { LER_A_CADA_MS } from "./bancada/tela";
 import { criarTerminalXterm, type CriarTerminal } from "./bancada/terminal";
 import { Ajustes } from "./casca/Ajustes";
+import { enderecoDosAgentes, estadoPelaUrl, type EstadoDosAgentes } from "./agentes/agentes";
+import { PaginaDosAgentes } from "./agentes/pagina";
+import { abrirAgentes } from "./ponte";
 import { FaixaDeAtualizar, impactoDaAtualizacao, type Impacto } from "./casca/atualizar";
 import { EstadoDaTela } from "./casca/estado";
 import { Lateral, type Pagina } from "./casca/Lateral";
@@ -34,6 +37,8 @@ export function App(p: {
   criarTerminal?: CriarTerminal;
   /** Sem o relógio de 2 s: a leitura só corre pelo evento `tenancy:ler` (testes e autoteste). */
   semRelogio?: boolean;
+  online?: () => boolean;
+  abrirJanelaDosAgentes?: (url: string) => Promise<void>;
 }) {
   const bancada = useMemo(() => p.bancada ?? new Bancada(p.mao), [p.bancada, p.mao]);
   const [escolhas, setEscolhas] = useState<Escolhas>(() => p.preferencias.ler());
@@ -46,6 +51,30 @@ export function App(p: {
   const [orfaos, setOrfaos] = useState<Orfao[]>([]);
   const [sair, setSair] = useState<string | null>(null);
   const [impacto, setImpacto] = useState<Impacto | null>(null);
+  const [agentes, setAgentes] = useState<EstadoDosAgentes>("abrindo");
+  const abrirJanela = p.abrirJanelaDosAgentes ?? abrirAgentes;
+
+  // A aba Agentes entra sem digitar: troca o login do OS por um código e abre a janela do web.
+  const entrarNosAgentes = async () => {
+    if (!(p.online ?? (() => navigator.onLine))()) return setAgentes("offline");
+    if (!(await p.mao.cofre.temLogin())) return setAgentes("sem-login");
+    setAgentes("abrindo");
+    const troca = await p.mao.cofre.trocar();
+    if ("falha" in troca) {
+      return setAgentes(troca.falha === "sem-rede" ? "offline" : troca.falha === "sem-login" ? "sem-login" : troca.falha === "sessao-vencida" ? "vencida" : "recusado");
+    }
+    await abrirJanela(enderecoDosAgentes(p.mao.baseDoWeb(), troca.codigo));
+    setAgentes("aberta");
+  };
+
+  useEffect(() => {
+    void entrarNosAgentes();
+    const navegou = (e: Event) => {
+      if (estadoPelaUrl(String((e as CustomEvent<string>).detail)) === "vencida") setAgentes("vencida");
+    };
+    window.addEventListener("agentes:navegou", navegou);
+    return () => window.removeEventListener("agentes:navegou", navegou);
+  }, [p.mao]);
 
   useEffect(() => {
     const versaoNova = (e: Event) => {
@@ -162,9 +191,7 @@ export function App(p: {
         {atual === "ajustes" ? (
           <Ajustes escolhas={escolhas} mudar={mudar} bancada={bancada} regras={escolhas.modoAvancado ? <RegrasSempre bancada={bancada} /> : null} />
         ) : atual === "agentes" ? (
-          <div className="pagina" data-pagina="agentes">
-            <EstadoDaTela estado="carregando" titulo="Abrindo os agentes" texto="A página dos agentes do Tenancy abre numa janela própria." />
-          </div>
+          <PaginaDosAgentes estado={agentes} trazer={() => void abrirJanela(enderecoDosAgentes(p.mao.baseDoWeb(), ""))} tentar={() => void entrarNosAgentes()} />
         ) : atual === "nova-sessao" ? (
           <FolhaNova bancada={bancada} escuro={escuro} aberta={irPara} cancelar={() => setPagina(ativa ? "bancada" : "agentes")} />
         ) : atual === "para-continuar" ? (

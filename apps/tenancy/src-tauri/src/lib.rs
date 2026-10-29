@@ -2,6 +2,7 @@
 //! caminho escolhido pelos portões entra na Parte F, em `mao`. Com
 //! `--autoteste` o app roda o roteiro de geometria, imprime o JSON e fecha.
 
+pub mod janela_web;
 pub mod mao;
 
 use serde::Serialize;
@@ -69,7 +70,7 @@ pub fn run() {
             }
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![mao::tipo_da_mao, info, imprimir_e_sair])
+        .invoke_handler(tauri::generate_handler![mao::tipo_da_mao, info, imprimir_e_sair, janela_web::abrir_agentes])
         .run(tauri::generate_context!())
         .expect("o Tenancy não abriu");
 }
