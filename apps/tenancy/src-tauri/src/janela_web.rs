@@ -24,8 +24,15 @@ pub fn origem_do_app(u: &Url) -> bool {
 }
 
 /// Fica na janela só o que é da origem do web (ou do app, no ensaio); o resto vai ao navegador.
-pub fn decidir(_base: Option<&Url>, _destino: &Url) -> Destino {
-    Destino::Fica
+pub fn decidir(base: Option<&Url>, destino: &Url) -> Destino {
+    if destino.scheme() == "about" {
+        return Destino::Fica;
+    }
+    match base {
+        Some(b) if mesma_origem(b, destino) => Destino::Fica,
+        None if origem_do_app(destino) => Destino::Fica,
+        _ => Destino::Navegador,
+    }
 }
 
 /// Abre a janela com o endereço da troca, ou traz para a frente a que já está aberta.
