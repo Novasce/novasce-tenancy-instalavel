@@ -1,0 +1,5 @@
+# Workspace do app e das mãos do host. A sonda fica fora, com o lock dela.
+[workspace]
+resolver = "2"
+members = ["apps/tenancy/src-tauri"]
+exclude = ["apps/sonda/src-tauri"]

@@ -1,0 +1,397 @@
+/* Tokens do Tenancy: os do Mac (claro) e a direção D do escuro (Mac, Tema.swift).
+   Trocar de tema só troca cor: nenhuma medida depende do tema. */
+:root {
+  --nv-fundo: #f5f5f7;
+  --nv-cartao: #ffffff;
+  --nv-folha: #ffffff;
+  --nv-selecao: #e8f2f2;
+  --nv-tinta: #1d1d1f;
+  --nv-tinta-2: #3b4446;
+  --nv-cinza: #647073;
+  --nv-sutil: #8a9496;
+  --nv-linha: #e5e9e8;
+  --nv-linha-2: #cbd3d1;
+  --nv-acento: #00666c;
+  --nv-acento-forte: #004d52;
+  --nv-suave: #e8f2f2;
+  --nv-sobre-acento: #ffffff;
+  --nv-alerta: #a85408;
+  --nv-perigo: #b42318;
+  --nv-ok: #1f7a3a;
+  --nv-curva: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --nv-troca: 160ms;
+  --nv-raio: 6px;
+  --nv-raio-cartao: 8px;
+  --nv-fonte: system-ui, "Noto Sans", "Segoe UI", sans-serif;
+  --nv-mono: ui-monospace, "Noto Sans Mono", "DejaVu Sans Mono", monospace;
+  color-scheme: light;
+}
+
+:root[data-tema="escuro"] {
+  --nv-fundo: #1e1e20;
+  --nv-cartao: #29292c;
+  --nv-folha: #2c2c2f;
+  --nv-selecao: #3a3a40;
+  --nv-tinta: #f2f2f4;
+  --nv-tinta-2: #d4d4d8;
+  --nv-cinza: #a0a0a6;
+  --nv-sutil: #9e9ea4;
+  --nv-linha: #3a3a40;
+  --nv-linha-2: #4a4a52;
+  --nv-acento: #00c4cc;
+  --nv-acento-forte: #4dd6dc;
+  --nv-suave: #0c3437;
+  --nv-sobre-acento: #0a2528;
+  --nv-alerta: #f0a35c;
+  --nv-perigo: #ff6f66;
+  --nv-ok: #5fd28a;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-tema="sistema"] {
+    --nv-fundo: #1e1e20;
+    --nv-cartao: #29292c;
+    --nv-folha: #2c2c2f;
+    --nv-selecao: #3a3a40;
+    --nv-tinta: #f2f2f4;
+    --nv-tinta-2: #d4d4d8;
+    --nv-cinza: #a0a0a6;
+    --nv-sutil: #9e9ea4;
+    --nv-linha: #3a3a40;
+    --nv-linha-2: #4a4a52;
+    --nv-acento: #00c4cc;
+    --nv-acento-forte: #4dd6dc;
+    --nv-suave: #0c3437;
+    --nv-sobre-acento: #0a2528;
+    --nv-alerta: #f0a35c;
+    --nv-perigo: #ff6f66;
+    --nv-ok: #5fd28a;
+    color-scheme: dark;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --nv-troca: 0ms;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--nv-fundo);
+  color: var(--nv-tinta);
+  font-family: var(--nv-fonte);
+  font-size: 13px;
+}
+
+h1,
+h2,
+p,
+ul {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: var(--nv-raio);
+  background: transparent;
+  transition: background-color var(--nv-troca) var(--nv-curva), color var(--nv-troca) var(--nv-curva),
+    border-color var(--nv-troca) var(--nv-curva);
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--nv-acento);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+/* Grade fixa: a lateral tem largura fixa e o conteúdo rola dentro de si. */
+.janela {
+  display: grid;
+  grid-template-columns: 228px minmax(0, 1fr);
+  height: 100vh;
+  min-width: 1024px;
+  min-height: 728px;
+}
+
+.lateral {
+  display: grid;
+  grid-template-rows: 44px auto minmax(0, 1fr) 44px;
+  background: var(--nv-cartao);
+  border-right: 1px solid var(--nv-linha);
+  min-height: 0;
+}
+
+.espaco {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--nv-linha);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.navegacao {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+}
+
+.nav {
+  height: 30px;
+  padding: 0 10px;
+  text-align: left;
+  color: var(--nv-tinta-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav:hover {
+  background: var(--nv-fundo);
+}
+
+.nav:active,
+.nav.ativo {
+  background: var(--nv-selecao);
+  color: var(--nv-tinta);
+}
+
+.sessoes {
+  display: grid;
+  grid-template-rows: 24px 30px 30px minmax(0, 1fr) 36px;
+  gap: 2px;
+  padding: 0 8px 8px;
+  min-height: 0;
+}
+
+.titulo-de-bloco {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--nv-cinza);
+  padding: 8px 10px 0;
+}
+
+.lista-de-sessoes {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.nova-sessao {
+  height: 32px;
+  border-color: var(--nv-linha-2);
+  color: var(--nv-tinta);
+}
+
+.nova-sessao:hover {
+  background: var(--nv-fundo);
+}
+
+.pe-da-lateral {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-top: 1px solid var(--nv-linha);
+  color: var(--nv-cinza);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.conteudo {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.pagina {
+  height: 100%;
+  overflow: auto;
+  scrollbar-gutter: stable;
+  padding: 20px 24px;
+}
+
+.pagina h1 {
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 16px;
+}
+
+.grupo {
+  display: grid;
+  gap: 8px;
+  max-width: 560px;
+  padding: 16px 0;
+  border-top: 1px solid var(--nv-linha);
+}
+
+.grupo h2 {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.explica {
+  color: var(--nv-cinza);
+}
+
+.segmentado {
+  display: flex;
+  gap: 4px;
+}
+
+.chip {
+  height: 28px;
+  padding: 0 12px;
+  border-color: var(--nv-linha-2);
+}
+
+.chip.ativo {
+  background: var(--nv-suave);
+  border-color: var(--nv-acento);
+  color: var(--nv-acento-forte);
+}
+
+.interruptor {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 28px;
+  padding: 0;
+  justify-self: start;
+}
+
+.interruptor-trilho {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--nv-linha-2);
+  transition: background-color var(--nv-troca) var(--nv-curva);
+}
+
+.interruptor-trilho::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--nv-cartao);
+  transition: transform var(--nv-troca) var(--nv-curva);
+}
+
+.interruptor[aria-checked="true"] .interruptor-trilho {
+  background: var(--nv-acento);
+}
+
+.interruptor[aria-checked="true"] .interruptor-trilho::after {
+  transform: translateX(14px);
+}
+
+/* O aviso nasce dentro de uma área já reservada: aparecer não empurra nada. */
+.aviso-reservado {
+  min-height: 92px;
+}
+
+.aviso {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--nv-raio-cartao);
+  background: var(--nv-folha);
+  box-shadow: inset 0 0 0 1px var(--nv-alerta);
+}
+
+.botoes {
+  display: flex;
+  gap: 8px;
+}
+
+.primario,
+.secundario {
+  height: 28px;
+  padding: 0 12px;
+}
+
+.primario {
+  background: var(--nv-acento);
+  color: var(--nv-sobre-acento);
+}
+
+.primario:hover {
+  background: var(--nv-acento-forte);
+}
+
+.secundario {
+  border-color: var(--nv-linha-2);
+}
+
+.secundario:hover {
+  background: var(--nv-fundo);
+}
+
+.estado-da-tela {
+  display: grid;
+  grid-template-rows: 32px 22px 40px 32px;
+  align-content: center;
+  justify-items: center;
+  gap: 6px;
+  height: 100%;
+  min-height: 200px;
+  text-align: center;
+}
+
+.estado-da-tela p {
+  max-width: 420px;
+  color: var(--nv-cinza);
+}
+
+.estado-marca {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px var(--nv-linha-2);
+}
+
+.estado-da-tela[data-estado="carregando"] .estado-marca {
+  box-shadow: inset 0 0 0 2px var(--nv-acento);
+  animation: girar 1.2s linear infinite;
+  border-top: 2px solid transparent;
+}
+
+.estado-da-tela[data-estado="erro"] .estado-marca,
+.estado-da-tela[data-estado="sem-permissao"] .estado-marca {
+  box-shadow: inset 0 0 0 2px var(--nv-perigo);
+}
+
+.estado-da-tela[data-estado="offline"] .estado-marca,
+.estado-da-tela[data-estado="desatualizado"] .estado-marca {
+  box-shadow: inset 0 0 0 2px var(--nv-alerta);
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}

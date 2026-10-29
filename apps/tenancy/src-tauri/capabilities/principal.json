@@ -1,0 +1,6 @@
+{
+  "identifier": "principal",
+  "description": "Só a janela local do app fala com o Rust. A janela agentes (página do web) não tem capacidade nenhuma.",
+  "windows": ["principal"],
+  "permissions": ["core:default", "opener:default"]
+}
