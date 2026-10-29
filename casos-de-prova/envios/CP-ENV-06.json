@@ -1,0 +1,60 @@
+{
+  "id": "CP-ENV-06",
+  "contrato": "envios",
+  "regra": "Copiar por bloco MENSAGEM n; com um bloco só, o arquivo inteiro; copiar não move",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "variantes": [
+      {
+        "nome": "dois blocos",
+        "mensagem": "Antes do primeiro bloco, some.\nMENSAGEM 1 · para a Lia\n----------\nOi, Lia!\nSegue a proposta.\n\nMENSAGEM 2\nE o prazo é sexta.\n\nmensagem 3 não é título\n"
+      },
+      {
+        "nome": "um bloco",
+        "mensagem": "MENSAGEM 1\nOi, Lia!\n"
+      },
+      {
+        "nome": "sem bloco",
+        "mensagem": "\nOi, Lia!\nTudo bem?\n\n"
+      }
+    ]
+  },
+  "esperado": {
+    "variantes": [
+      {
+        "nome": "dois blocos",
+        "blocos": [
+          {
+            "titulo": "Mensagem 1 · para a Lia",
+            "texto": "Oi, Lia!\nSegue a proposta."
+          },
+          {
+            "titulo": "Mensagem 2",
+            "texto": "E o prazo é sexta.\n\nmensagem 3 não é título"
+          }
+        ]
+      },
+      {
+        "nome": "um bloco",
+        "blocos": [
+          {
+            "titulo": "Mensagem",
+            "texto": "MENSAGEM 1\nOi, Lia!"
+          }
+        ]
+      },
+      {
+        "nome": "sem bloco",
+        "blocos": [
+          {
+            "titulo": "Mensagem",
+            "texto": "Oi, Lia!\nTudo bem?"
+          }
+        ]
+      }
+    ],
+    "copiarMove": false
+  },
+  "mac": "passa"
+}

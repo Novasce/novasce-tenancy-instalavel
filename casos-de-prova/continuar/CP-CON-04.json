@@ -1,0 +1,51 @@
+{
+  "id": "CP-CON-04",
+  "contrato": "continuar",
+  "regra": "Modelo e esforço do LEIA por CLI; a linha dos subagentes e o porquê não contam",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "leia": "MODELO E ESFORÇO PARA ABRIR\n- Subagentes (Claude, Codex e agy): Sonnet, esforço médio.\n- Claude: Opus 5.5, esforço alto. Por quê: mexe em permissão; Sonnet não basta.\n- Codex ou agy: gpt-x, raciocínio alto.\n",
+    "motores": [
+      "claude",
+      "codex",
+      "agy"
+    ]
+  },
+  "esperado": {
+    "claude": {
+      "modelo": "claude-opus-5-5",
+      "rotulo": "Opus 5.5",
+      "esforco": "alto",
+      "opcoes": [
+        "--model",
+        "claude-opus-5-5",
+        "--effort",
+        "high"
+      ]
+    },
+    "codex": {
+      "modelo": "gpt-x",
+      "rotulo": "gpt-x",
+      "esforco": "alto",
+      "opcoes": [
+        "-m",
+        "gpt-x",
+        "-c",
+        "model_reasoning_effort=\"high\""
+      ]
+    },
+    "agy": {
+      "modelo": "gpt-x",
+      "rotulo": "gpt-x",
+      "esforco": "alto",
+      "opcoes": [
+        "--model",
+        "gpt-x",
+        "--effort",
+        "high"
+      ]
+    }
+  },
+  "mac": "passa"
+}

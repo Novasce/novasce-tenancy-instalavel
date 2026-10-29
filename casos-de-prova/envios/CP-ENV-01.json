@@ -1,0 +1,33 @@
+{
+  "id": "CP-ENV-01",
+  "contrato": "envios",
+  "regra": "Anexos são os arquivos da pasta fora LEIA, mensagem, data e ocultos",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "pasta": "/home/lia/Brain/envios/a-enviar/2026-10-28 Lia Pereira - proposta",
+    "arquivos": {
+      "/home/lia/Brain/envios/a-enviar/2026-10-28 Lia Pereira - proposta/LEIA.txt": "PRA QUEM\nLia Pereira\n\nPOR ONDE\nWhatsApp\n",
+      "/home/lia/Brain/envios/a-enviar/2026-10-28 Lia Pereira - proposta/mensagem.txt": "Oi, Lia!\n",
+      "/home/lia/Brain/envios/a-enviar/2026-10-28 Lia Pereira - proposta/enviado-em.txt": "2026-10-28\n",
+      "/home/lia/Brain/envios/a-enviar/2026-10-28 Lia Pereira - proposta/tabela 10.csv": "a,b\n",
+      "/home/lia/Brain/envios/a-enviar/2026-10-28 Lia Pereira - proposta/tabela 2.csv": "a,b\n",
+      "/home/lia/Brain/envios/a-enviar/2026-10-28 Lia Pereira - proposta/.oculto": "x\n"
+    }
+  },
+  "esperado": {
+    "estado": "a-enviar",
+    "pessoa": "Lia Pereira",
+    "assunto": "proposta",
+    "data": "2026-10-28",
+    "anexos": [
+      "tabela 2.csv",
+      "tabela 10.csv"
+    ],
+    "paraQuem": "Lia Pereira",
+    "porOnde": "WhatsApp",
+    "temMensagem": true,
+    "enviadaEm": "2026-10-28"
+  },
+  "mac": "passa"
+}
