@@ -118,7 +118,7 @@ describe("lista de sessões (E4)", () => {
     expect(s1.terminal).toBeNull();
     expect(s2.terminal).toBeNull();
     expect(s3.terminal).not.toBeNull();
-    expect(s3.pendencia).toEqual({ tipo: "fora-da-main", frase: "sessao-3-2026-10-28 tem 2 commits fora da main. O que fazer com eles?", commits: 2 });
+    expect(s3.pendencia).toEqual({ tipo: "fora-da-main", frase: "sessao-3-2026-10-28 tem 2 commits fora da main. O que fazer com eles?", commits: 2, principal: "main", soltos: 0 });
     expect(linhas(m.raiz)[2].getAttribute("title")).toBe("2 commits fora da main · fechar?");
     expect(mao.ensaio.repos[REPO].branches["sessao-3-2026-10-28"]).toBeDefined();
     expect(linhas(m.raiz)[0].getAttribute("title")).toBe("encerrada · saiu com 129");

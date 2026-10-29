@@ -88,24 +88,33 @@ export function FolhaNova(p: { bancada: Bancada; escuro: boolean; aberta: (id: s
   const podeAbrir = !abrindo && !ausente && !(ia === "comando" && !comando.trim());
 
   const pedido = { programa: ia, nome, comando: ia === "comando" ? comando : undefined, escuro: p.escuro };
+  // Quem não subiu já virou recado na Bancada; a folha volta a abrir.
   const abrir = async () => {
     if (!podeAbrir) return;
     setAbrindo(true);
-    const pergunta = await perguntaDeWorktree(p.bancada, onde);
-    if (pergunta) {
-      setWorktree(pergunta);
+    try {
+      const pergunta = await perguntaDeWorktree(p.bancada, onde);
+      if (pergunta) return setWorktree(pergunta);
+      const s = await p.bancada.abrir({ ...pedido, pasta: onde });
+      p.aberta(s.id);
+    } catch {
+      // o recado já está no pé
+    } finally {
       setAbrindo(false);
-      return;
     }
-    const s = await p.bancada.abrir({ ...pedido, pasta: onde });
-    p.aberta(s.id);
   };
   const responderWorktree = async (emWorktree: boolean) => {
     if (!worktree) return;
     setAbrindo(true);
-    const s = emWorktree ? await abrirEmWorktree(p.bancada, { ...pedido, repo: worktree.repo }) : await p.bancada.abrir({ ...pedido, pasta: onde });
-    setWorktree(null);
-    p.aberta(s.id);
+    try {
+      const s = emWorktree ? await abrirEmWorktree(p.bancada, { ...pedido, repo: worktree.repo }) : await p.bancada.abrir({ ...pedido, pasta: onde });
+      setWorktree(null);
+      p.aberta(s.id);
+    } catch {
+      // o recado já está no pé
+    } finally {
+      setAbrindo(false);
+    }
   };
 
   const nomeCurto = (x: string) => (x === brain ? "Brain" : x.split("/").pop() ?? x);

@@ -28,6 +28,8 @@ export interface BranchDeEnsaio {
   commitsForaDaMain: number;
   data: number;
   assunto: string;
+  /** O merge desta branch dá conflito. */
+  conflito?: boolean;
 }
 
 export interface PastaDeTrabalho {
@@ -433,8 +435,17 @@ export function gitDeEnsaio(repos: Record<string, RepoDeEnsaio>, pasta: string, 
     delete repo.branches[nome];
     return ok();
   }
+  if (a === "merge --abort") {
+    if (!aqui.mergeEmCurso) return falha("fatal: There is no merge to abort (MERGE_HEAD missing).");
+    aqui.mergeEmCurso = false;
+    return ok();
+  }
   if (args[0] === "merge") {
     const branch = args[args.length - 1];
+    if (repo.branches[branch]?.conflito) {
+      aqui.mergeEmCurso = true;
+      return { codigo: 1, saida: "CONFLICT (content): Merge conflict in arquivo-1.txt\n", erro: "Automatic merge failed; fix conflicts and then commit the result." };
+    }
     if (!repo.branches[branch]) return falha(`merge: ${branch} - not something we can merge`, 1);
     repo.branches[branch].commitsForaDaMain = 0;
     return ok("Merge made by the 'ort' strategy.\n");

@@ -54,8 +54,9 @@ export function FaixasDaSessao({ bancada, s }: { bancada: Bancada; s: SessaoDaBa
 
   if (p.tipo === "fora-da-main" && s.worktree) {
     const w = s.worktree;
-    const partes = [`${plural(p.commits, "commit", "commits")} fora da main`];
+    const partes = [`${plural(p.commits, "commit", "commits")} fora da ${p.principal}`];
     if (s.terminal && nomeDoAgente) partes.push(`o ${nomeDoAgente} sai junto`);
+    if (p.soltos > 0) partes.push(`${p.soltos} sem commit ficam`);
     partes.push(w.branch);
     return (
       <Faixa

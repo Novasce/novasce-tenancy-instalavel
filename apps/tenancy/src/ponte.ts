@@ -31,7 +31,7 @@ export async function imprimirESair(json: string): Promise<void> {
 /** Abre (ou traz para a frente) a janela `agentes`, que carrega a página do web. */
 export async function abrirAgentes(endereco: string): Promise<void> {
   if (!noTauri()) {
-    window.open(endereco, "agentes", "noopener");
+    if (endereco) window.open(endereco, "agentes", "noopener");
     return;
   }
   await invoke("abrir_agentes", { endereco });
@@ -42,4 +42,5 @@ export async function ouvirNavegacaoDosAgentes(): Promise<void> {
   if (!noTauri()) return;
   const { listen } = await import("@tauri-apps/api/event");
   await listen<string>("agentes:navegou", (e) => window.dispatchEvent(new CustomEvent("agentes:navegou", { detail: e.payload })));
+  await listen("agentes:fechou", () => window.dispatchEvent(new CustomEvent("agentes:fechou")));
 }

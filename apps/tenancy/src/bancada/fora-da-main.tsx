@@ -16,7 +16,7 @@ export function TelaForaDaMain(p: { bancada: Bancada; lista: ForaDaMain[]; atual
       programa: "comando",
       pasta: b.repo,
       nome: `${b.nome} · ${b.repo.split("/").pop()}`,
-      comando: `git --no-pager log --oneline --stat 'main..${b.nome}'; exec $SHELL -l`,
+      comando: `git --no-pager log --oneline --stat '${b.principal}..${b.nome}'; exec $SHELL -l`,
     });
   return (
     <div className="pagina fora-da-main" data-pagina="fora-da-main">
@@ -46,7 +46,7 @@ export function TelaForaDaMain(p: { bancada: Bancada; lista: ForaDaMain[]; atual
               <div className="linha">
                 {confirmar === chave(b) ? (
                   <>
-                    <span className="texto-da-faixa">{`Mesclar ${b.nome} na main de ${nomeDaPasta(b.repo, home)}?`}</span>
+                    <span className="texto-da-faixa">{`Mesclar ${b.nome} na ${b.principal} de ${nomeDaPasta(b.repo, home)}?`}</span>
                     <button type="button" className="secundario" onClick={() => setConfirmar(null)}>
                       Cancelar
                     </button>

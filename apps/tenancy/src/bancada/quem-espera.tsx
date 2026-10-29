@@ -1,6 +1,6 @@
 // Sua vez (UC19): a faixa no alto da Bancada e a coluna Quem espera, fila única.
 import { podeSempre, TECLAS_DO_PEDIDO } from "@novasce/sessoes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { esperaVoce, type Bancada, type SessaoDaBancada } from "./bancada";
 import { detalheDaSessao } from "./lista/ListaDeSessoes";
 import { Ponto } from "./Ponto";
@@ -19,6 +19,13 @@ export function filaDaSuaVez(bancada: Bancada): SessaoDaBancada[] {
 export function FaixaDaSuaVez(p: { bancada: Bancada; telas: Telas; ativa: string | null; ir: (id: string) => void }) {
   const fila = filaDaSuaVez(p.bancada);
   const [mudou, setMudou] = useState<string | null>(null);
+  const [enviando, setEnviando] = useState(false);
+  // "A pergunta mudou" fica 4 s, como o Mac.
+  useEffect(() => {
+    if (!mudou) return;
+    const t = setTimeout(() => setMudou(null), 4_000);
+    return () => clearTimeout(t);
+  }, [mudou]);
   const s = fila.find((x) => x.id !== p.ativa) ?? fila[0];
   if (!s) {
     return (
@@ -30,8 +37,14 @@ export function FaixaDaSuaVez(p: { bancada: Bancada; telas: Telas; ativa: string
   const pedido = p.telas.pedidos.get(s.id) ?? null;
   const responde = s.programa === "claude" && pedido !== null && pedido.tipo !== "outro";
   const enviar = async (tecla: string) => {
-    const foi = await p.telas.responder(s.id, tecla);
-    setMudou(foi ? null : s.id);
+    if (enviando) return;
+    setEnviando(true);
+    try {
+      const foi = await p.telas.responder(s.id, tecla);
+      setMudou(foi ? null : s.id);
+    } finally {
+      setEnviando(false);
+    }
   };
   return (
     <div className="faixa-sua-vez" data-regiao="sua-vez">
@@ -42,20 +55,21 @@ export function FaixaDaSuaVez(p: { bancada: Bancada; telas: Telas; ativa: string
       <span className="acoes">
         {responde ? (
           <>
-            <button type="button" className="resposta ok" onClick={() => void enviar(TECLAS_DO_PEDIDO.sim)}>
+            <button type="button" className="resposta ok" disabled={enviando} onClick={() => void enviar(TECLAS_DO_PEDIDO.sim)}>
               Sim, só agora
             </button>
             {podeSempre(pedido) ? (
               <button
                 type="button"
                 className="resposta"
+                disabled={enviando}
                 title={`Vira regra do próprio Claude Code, no .claude/settings.local.json desta pasta. Vale dentro e fora do app. Só para ${pedido.sempre}, nunca para qualquer comando.`}
                 onClick={() => void enviar(TECLAS_DO_PEDIDO.sempre)}
               >
                 Sempre para {pedido.sempre} aqui
               </button>
             ) : null}
-            <button type="button" className="resposta nao" onClick={() => void enviar(TECLAS_DO_PEDIDO.nao)}>
+            <button type="button" className="resposta nao" disabled={enviando} onClick={() => void enviar(TECLAS_DO_PEDIDO.nao)}>
               Não
             </button>
           </>

@@ -72,8 +72,13 @@ export function App(p: {
     const navegou = (e: Event) => {
       if (estadoPelaUrl(String((e as CustomEvent<string>).detail)) === "vencida") setAgentes("vencida");
     };
+    const fechou = () => setAgentes("fechada");
     window.addEventListener("agentes:navegou", navegou);
-    return () => window.removeEventListener("agentes:navegou", navegou);
+    window.addEventListener("agentes:fechou", fechou);
+    return () => {
+      window.removeEventListener("agentes:navegou", navegou);
+      window.removeEventListener("agentes:fechou", fechou);
+    };
   }, [p.mao]);
 
   useEffect(() => {
@@ -191,7 +196,7 @@ export function App(p: {
         {atual === "ajustes" ? (
           <Ajustes escolhas={escolhas} mudar={mudar} bancada={bancada} regras={escolhas.modoAvancado ? <RegrasSempre bancada={bancada} /> : null} />
         ) : atual === "agentes" ? (
-          <PaginaDosAgentes estado={agentes} trazer={() => void abrirJanela(enderecoDosAgentes(p.mao.baseDoWeb(), ""))} tentar={() => void entrarNosAgentes()} />
+          <PaginaDosAgentes estado={agentes} trazer={() => void abrirJanela("")} tentar={() => void entrarNosAgentes()} />
         ) : atual === "nova-sessao" ? (
           <FolhaNova bancada={bancada} escuro={escuro} aberta={irPara} cancelar={() => setPagina(ativa ? "bancada" : "agentes")} />
         ) : atual === "para-continuar" ? (
@@ -202,7 +207,7 @@ export function App(p: {
           <TelaDaSessao bancada={bancada} telas={telas} ativa={ativa ?? bancada.sessoes()[0]?.id ?? null} ir={irPara} escuro={escuro} />
         ) : (
           <div className="pagina" data-pagina={atual}>
-            <EstadoDaTela estado="vazio" titulo="Nada aqui ainda" texto="Esta área chega na próxima parte." />
+            <EstadoDaTela estado="vazio" titulo="Nada aqui" texto="Escolha um item na lateral." />
           </div>
         )}
       </main>

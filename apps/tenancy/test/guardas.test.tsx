@@ -105,9 +105,12 @@ async function cenaComWorktree(commits: number, soltos = 0, headNaBranch = true)
 }
 
 describe("fechar o worktree (CP-GIT-03, 04, 05, 08)", () => {
-  it("sem commit e nada solto: worktree e branch saem", async () => {
+  it("sem commit e nada solto: o agente pergunta, e worktree e branch saem", async () => {
     const { c } = await cenaComWorktree(0);
     await c.m.clicar("Fechar a sessão");
+    expect(faixa(c, "faixa")).toContain("Encerrar o Claude desta aba?");
+    expect(c.mao.ensaio.repos[REPO].branches["sessao-1-2026-10-28"]).toBeDefined();
+    await c.m.clicar("encerrar");
     expect(c.mao.ensaio.repos[REPO].branches["sessao-1-2026-10-28"]).toBeUndefined();
     expect(c.bancada.sessoes()[0].terminal).toBeNull();
   });

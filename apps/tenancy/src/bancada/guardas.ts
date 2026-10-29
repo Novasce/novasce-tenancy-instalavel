@@ -16,7 +16,7 @@ export async function perguntaDeWorktree(bancada: Bancada, pasta: string): Promi
     pasta,
     temGit: comGit,
     abertas: bancada.abertas().map((s) => ({ pasta: s.pasta, programa: s.programa === "comando" ? "comando" : s.programa, desde: String(s.criadaEm), viva: true })),
-    espacos: [mao.arquivos.brain()],
+    espacos: [mao.arquivos.brain(), ...mao.arquivos.espacos()],
     home,
   });
   if (!aberta) return null;
@@ -72,6 +72,8 @@ export async function mesclar(bancada: Bancada, repo: string, branch: string): P
   }
   const s = await mao.git(repo, d.git);
   if (s.codigo !== 0) {
+    // Conflito: o merge é desfeito na hora, para a pasta principal ficar como estava.
+    if ((await mao.git(repo, ["rev-parse", "--verify", "--quiet", "MERGE_HEAD"])).codigo === 0) await mao.git(repo, ["merge", "--abort"]);
     bancada.recado(`Não mesclou: o git recusou (conflito). Nada mudou na main; a branch ${branch} ficou.`, true);
     return false;
   }
@@ -99,6 +101,7 @@ export async function abrirPR(bancada: Bancada, repo: string, branch: string): P
 
 export interface ForaDaMain extends BranchDeSessao {
   repo: string;
+  principal: string;
 }
 
 /** Os repos que já tiveram worktree do app e os das sessões abertas; as branches de sessão com commit e sem aba. */
@@ -111,7 +114,8 @@ export async function listarForaDaMain(bancada: Bancada): Promise<ForaDaMain[]> 
   const lista: ForaDaMain[] = [];
   for (const repo of repos) {
     const r = trabalhoForaDaMain(await branchesDeSessao(mao, repo), abertas);
-    lista.push(...r.lista.map((b) => ({ ...b, repo })));
+    const principal = (await principalDe(mao, repo)) ?? "main";
+    lista.push(...r.lista.map((b) => ({ ...b, repo, principal })));
   }
   return lista.sort((a, b) => (b.data ?? 0) - (a.data ?? 0));
 }

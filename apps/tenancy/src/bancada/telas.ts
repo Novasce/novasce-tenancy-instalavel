@@ -88,6 +88,7 @@ export class Telas {
   /** Uma volta da leitura (a cada 2 s): estado de cada sessão de agente. */
   ler(ativa: string | null): void {
     const agora = this.bancada.agora();
+    this.bancada.carimbar();
     for (const p of this.paineis.values()) {
       if (!p.vigia) continue;
       const s = this.bancada.sessao(p.sessao);

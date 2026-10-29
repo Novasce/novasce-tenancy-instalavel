@@ -6,6 +6,7 @@ import type { EstadoDosAgentes } from "./agentes";
 const TEXTOS: Record<EstadoDosAgentes, { estado: Parameters<typeof EstadoDaTela>[0]["estado"]; titulo: string; texto: string }> = {
   abrindo: { estado: "carregando", titulo: "Abrindo os agentes", texto: "Entrando no Tenancy com o login do sistema." },
   aberta: { estado: "vazio", titulo: "Agentes", texto: "A página dos agentes do Tenancy está aberta numa janela própria." },
+  fechada: { estado: "vazio", titulo: "Agentes", texto: "A janela dos agentes foi fechada." },
   "sem-login": { estado: "sem-permissao", titulo: "Sem login do Tenancy", texto: "Entre pelo Começar do sistema para ver os agentes aqui." },
   vencida: { estado: "erro", titulo: "Sessão vencida", texto: "Entre de novo pelo Começar do sistema." },
   offline: { estado: "offline", titulo: "Sem internet", texto: "A página dos agentes abre quando a rede voltar." },
@@ -19,7 +20,9 @@ export function PaginaDosAgentes(p: { estado: EstadoDosAgentes; trazer: () => vo
       ? { rotulo: "Trazer a janela para a frente", fazer: p.trazer }
       : p.estado === "offline"
         ? { rotulo: "Tentar de novo", fazer: p.tentar }
-        : undefined;
+        : p.estado === "fechada" || p.estado === "vencida" || p.estado === "recusado"
+          ? { rotulo: "Abrir os agentes", fazer: p.tentar }
+          : undefined;
   return (
     <div className="pagina" data-pagina="agentes">
       <EstadoDaTela estado={t.estado} titulo={t.titulo} texto={t.texto} acao={acao} />

@@ -18,4 +18,4 @@ export function estadoPelaUrl(url: string): "vencida" | "aberta" {
   }
 }
 
-export type EstadoDosAgentes = "abrindo" | "aberta" | "sem-login" | "vencida" | "offline" | "recusado";
+export type EstadoDosAgentes = "abrindo" | "aberta" | "fechada" | "sem-login" | "vencida" | "offline" | "recusado";

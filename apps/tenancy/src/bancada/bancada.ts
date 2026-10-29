@@ -4,7 +4,7 @@ import { aoFechar, encerrar, type DestinoAoFechar } from "@novasce/sessoes";
 import type { MaoDoHost, PedidoDeTerminal, TerminalAberto } from "../mao/tipos";
 import { bancoNaMemoria, type BancoDeSessoes } from "./banco";
 import { maoDeProcessosDe, protegidosDoHost } from "./processos";
-import { retratoAoFechar } from "./repos";
+import { principalDe, retratoAoFechar } from "./repos";
 
 export type Programa = "shell" | "claude" | "codex" | "agy" | "comando";
 
@@ -42,7 +42,7 @@ export interface Worktree {
 
 /** O que a sessão espera da pessoa numa faixa (UC20 e UC22). */
 export type Pendencia =
-  | { tipo: "fora-da-main"; frase: string; commits: number }
+  | { tipo: "fora-da-main"; frase: string; commits: number; principal: string; soltos: number }
   | { tipo: "sem-commit"; soltos: number }
   | { tipo: "encerrar" }
   | { tipo: "retomar"; fechadaEm: number }
@@ -98,6 +98,7 @@ export interface PedidoDeSessao {
 /** O que sai do ambiente antes da CLI subir: uma sessão do Claude dentro de outra se confunde. */
 export const AMBIENTE_QUE_SAI = ["CLAUDECODE", "CLAUDE_CODE*"];
 export const MARCA = "TENANCY_SESSAO";
+const AGENTES = new Set<Programa>(["claude", "codex", "agy"]);
 
 export function aspas(s: string): string {
   return /^[\w@%+=:,./-]+$/.test(s) ? s : `'${s.replace(/'/g, `'\\''`)}'`;
@@ -118,7 +119,8 @@ export function pedidoDeTerminal(
   const cli = linhaDaCli(s);
   return {
     programa: o.shell,
-    args: cli ? ["-l", "-c", `exec ${cli}`] : ["-l"],
+    // A CLI troca o shell (exec): fechar o agente fecha a aba. O comando livre roda inteiro no shell.
+    args: cli ? ["-l", "-c", s.programa === "comando" ? cli : `exec ${cli}`] : ["-l"],
     pasta: s.pasta,
     ambiente: {
       TERM: "xterm-256color",
@@ -219,6 +221,13 @@ export class Bancada {
     for (const f of this.ouvintes) f();
   }
 
+  /** A cada leitura: as vivas carimbam a última vez, para o retomar contar de quando fecharam mesmo se o app cair. */
+  carimbar(): void {
+    const agora = this.relogio();
+    for (const s of this.lista) if (s.terminal) s.ultimaVez = agora;
+    this.banco.gravar(this.lista);
+  }
+
   recado(texto: string, erro: boolean): void {
     this.recadoAtual = { texto, erro };
     this.avisar();
@@ -252,12 +261,15 @@ export class Bancada {
    */
   async fechar(id: string): Promise<void> {
     const s = this.sessao(id);
-    if (!s?.terminal) return;
+    if (!s?.terminal || s.estado === "encerrando") return;
     if (s.worktree) {
-      await this.encerrar([id]);
-      return;
+      const d = aoFechar({ ...(await retratoAoFechar(this.mao, s.worktree)), branch: s.worktree.branch });
+      if (d.tipo !== "apagar" || !AGENTES.has(s.programa)) {
+        await this.encerrar([id]);
+        return;
+      }
     }
-    if (s.programa === "claude" || s.programa === "codex" || s.programa === "agy") {
+    if (AGENTES.has(s.programa)) {
       s.pendencia = { tipo: "encerrar" };
       this.avisar();
       return;
@@ -267,19 +279,10 @@ export class Bancada {
 
   /** Sair do app: encerra todas; worktree fica como está, a branch nunca sai. */
   async encerrarTudo(): Promise<void> {
-    const ids = this.abertas().map((s) => s.id);
-    const guardados = new Map<string, Worktree | undefined>();
-    for (const id of ids) {
-      const s = this.sessao(id)!;
-      guardados.set(id, s.worktree);
-      s.worktree = undefined;
-    }
-    await this.encerrar(ids);
-    for (const [id, w] of guardados) {
-      const s = this.sessao(id);
-      if (s) s.worktree = w;
-    }
-    this.avisar();
+    await this.encerrar(
+      this.abertas().map((s) => s.id),
+      { semGuarda: true },
+    );
   }
 
   mudarEstado(id: string, estado: EstadoDaSessao): void {
@@ -309,7 +312,14 @@ export class Bancada {
       worktree: p.worktree,
     };
     this.lista.push(sessao);
-    await this.subir(sessao, p);
+    try {
+      await this.subir(sessao, p);
+    } catch (e) {
+      // Não subiu: a sessão sai da lista e a pessoa sabe por quê.
+      this.lista = this.lista.filter((x) => x !== sessao);
+      this.recado(`A sessão não abriu: ${e instanceof Error ? e.message : String(e)}.`, true);
+      throw e;
+    }
     return sessao;
   }
 
@@ -321,7 +331,12 @@ export class Bancada {
     s.estado = s.programa === "shell" || s.programa === "comando" ? "terminal" : "abrindo";
     s.estadoDesde = this.relogio();
     s.codigoDeSaida = undefined;
-    await this.subir(s, { programa: s.programa, pasta: s.pasta, comando: s.comando, opcoes });
+    try {
+      await this.subir(s, { programa: s.programa, pasta: s.pasta, comando: s.comando, opcoes });
+    } catch (e) {
+      s.estado = "encerrada";
+      this.recado(`A sessão não abriu de novo: ${e instanceof Error ? e.message : String(e)}.`, true);
+    }
   }
 
   private opcoesDoTerminal(escuro: boolean) {
@@ -335,6 +350,7 @@ export class Bancada {
       desligar();
       sessao.terminal = null;
       sessao.codigoDeSaida = codigo;
+      sessao.ultimaVez = this.relogio();
       sessao.estado = "encerrada";
       sessao.estadoDesde = this.relogio();
       this.avisar();
@@ -412,7 +428,7 @@ export class Bancada {
    * com arquivo solto não encerra; ganha a faixa e fica aberto. Os outros
    * recebem HUP e TERM, 3 s, e KILL (UC22). Worktree limpo sai com a branch.
    */
-  async encerrar(ids: string[]): Promise<ResultadoDoEncerrar> {
+  async encerrar(ids: string[], o: { semGuarda?: boolean } = {}): Promise<ResultadoDoEncerrar> {
     const r: ResultadoDoEncerrar = { encerradas: [], ficaram: [] };
     const vao: SessaoDaBancada[] = [];
     const destinos = new Map<string, DestinoAoFechar>();
@@ -420,16 +436,18 @@ export class Bancada {
       const s = this.sessao(id);
       if (!s?.terminal) continue;
       s.pendencia = undefined;
-      if (s.worktree) {
-        const d = aoFechar({ ...(await retratoAoFechar(this.mao, s.worktree)), branch: s.worktree.branch });
+      if (s.worktree && !o.semGuarda) {
+        const principal = (await principalDe(this.mao, s.worktree.repo)) ?? "main";
+        const retrato = await retratoAoFechar(this.mao, s.worktree);
+        const d = aoFechar({ ...retrato, branch: s.worktree.branch, principal });
         destinos.set(id, d);
         if (d.tipo === "perguntar") {
-          s.pendencia = { tipo: "fora-da-main", frase: d.frase, commits: d.commits };
+          s.pendencia = { tipo: "fora-da-main", frase: d.frase, commits: d.commits, principal, soltos: retrato.soltos };
           r.ficaram.push(id);
           continue;
         }
         if (d.tipo === "ficar") {
-          const st = await retratoAoFechar(this.mao, s.worktree);
+          const st = retrato;
           s.pendencia = { tipo: "sem-commit", soltos: st.soltos };
           r.ficaram.push(id);
           continue;
@@ -445,13 +463,15 @@ export class Bancada {
     if (vao.length) {
       const app = await this.mao.processos.doApp();
       await encerrar(
-        vao.map((s) => ({ pid: s.terminal!.pid, inicio: s.terminal!.inicio })),
+        vao.flatMap((s) => [s.terminal!, ...(s.extra ? [s.extra] : [])].map((t) => ({ pid: t.pid, inicio: t.inicio }))),
         maoDeProcessosDe(this.mao, this.esperar),
         { protegidos: await protegidosDoHost(this.mao), grupoDoApp: app.pgid, pidDoApp: app.pid },
       );
     }
     for (const s of vao) {
       s.terminal = null;
+      s.extra = null;
+      s.ultimaVez = this.relogio();
       s.estado = "encerrada";
       s.estadoDesde = this.relogio();
       s.pendencia = undefined;
@@ -472,11 +492,7 @@ export class Bancada {
   async encerrarDeixando(id: string): Promise<void> {
     const s = this.sessao(id);
     if (!s?.terminal) return;
-    const w = s.worktree;
-    s.worktree = undefined;
-    s.pendencia = undefined;
-    await this.encerrar([id]);
-    s.worktree = w;
+    await this.encerrar([id], { semGuarda: true });
   }
 
   ficar(id: string): void {

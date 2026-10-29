@@ -219,7 +219,7 @@ export function ListaDeSessoes(p: { bancada: Bancada; ativa: string | null; ir: 
             Descer a sessão
           </button>
           {s.terminal ? (
-            <button type="button" role="menuitem" className="perigo" onClick={() => (setMenu(null), void bancada.encerrar([s.id]))}>
+            <button type="button" role="menuitem" className="perigo" disabled={s.estado === "encerrando"} onClick={() => (setMenu(null), void bancada.fechar(s.id))}>
               Fechar a sessão
             </button>
           ) : (
