@@ -133,7 +133,7 @@ describe("mão de ensaio: git (CP-GIT)", () => {
           worktrees: { [WT]: { head: f.headNaBranch ? branch : "outra", mergeEmCurso: false, rastreadosMudados: 0, soltos: f.soltos } },
         });
         const mao = maoDeEnsaio({ repos: [repo] });
-        const r = await retratoAoFechar(mao, { repo: PASTA, worktree: WT, branch });
+        const r = await retratoAoFechar(mao, { repo: PASTA, caminho: WT, branch });
         expect(r).toEqual({ commitsForaDaMain: f.commitsForaDaMain, soltos: f.soltos, headNaBranch: f.headNaBranch });
         destinos.push(aoFechar({ ...r, branch: c.entrada.branch, principal: c.entrada.principal }));
       }

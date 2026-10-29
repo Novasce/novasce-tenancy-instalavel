@@ -40,11 +40,11 @@ async function commitsForaDa(mao: MaoDoHost, repo: string, principal: string | n
 /** Fechar a aba de um worktree: commits fora da principal, soltos e se o HEAD ainda é a branch. */
 export async function retratoAoFechar(
   mao: MaoDoHost,
-  w: { repo: string; worktree: string; branch: string },
+  w: { repo: string; caminho: string; branch: string },
 ): Promise<{ commitsForaDaMain: number | null; soltos: number; headNaBranch: boolean }> {
   const principal = await principalDe(mao, w.repo);
-  const head = await headDe(mao, w.worktree);
-  const st = await status(mao, w.worktree);
+  const head = await headDe(mao, w.caminho);
+  const st = await status(mao, w.caminho);
   return {
     commitsForaDaMain: await commitsForaDa(mao, w.repo, principal, w.branch),
     // Status que falhou conta como solto: nada é apagado sem saber.

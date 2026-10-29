@@ -3,6 +3,7 @@ import { Bancada } from "./bancada/bancada";
 import { Ajustes } from "./casca/Ajustes";
 import { EstadoDaTela } from "./casca/estado";
 import { Lateral, type Pagina } from "./casca/Lateral";
+import { ListaDeSessoes } from "./bancada/lista/ListaDeSessoes";
 import type { Escolhas, Preferencias } from "./casca/preferencias";
 import type { MaoDoHost } from "./mao/tipos";
 
@@ -10,6 +11,11 @@ export function App(p: { mao: MaoDoHost; preferencias: Preferencias; bancada?: B
   const bancada = useMemo(() => p.bancada ?? new Bancada(p.mao), [p.bancada, p.mao]);
   const [escolhas, setEscolhas] = useState<Escolhas>(() => p.preferencias.ler());
   const [pagina, setPagina] = useState<Pagina>("agentes");
+  const [ativa, setAtiva] = useState<string | null>(null);
+  const irPara = (id: string) => {
+    setAtiva(id);
+    setPagina("bancada");
+  };
 
   useEffect(() => {
     document.documentElement.dataset.tema = escolhas.tema;
@@ -25,7 +31,11 @@ export function App(p: { mao: MaoDoHost; preferencias: Preferencias; bancada?: B
 
   return (
     <div className="janela">
-      <Lateral pagina={atual} ir={setPagina} modoAvancado={escolhas.modoAvancado} bancada={bancada} espaco="Brain" conta="lia" />
+      <Lateral pagina={atual} ir={setPagina} modoAvancado={escolhas.modoAvancado} bancada={bancada}
+        espaco="Brain"
+        conta="lia"
+        sessoes={<ListaDeSessoes bancada={bancada} ativa={pagina === "bancada" ? ativa : null} ir={irPara} />}
+      />
       <main className="conteudo">
         {atual === "ajustes" ? (
           <Ajustes escolhas={escolhas} mudar={mudar} bancada={bancada} />

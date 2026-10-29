@@ -180,6 +180,7 @@ button:disabled {
 .sessoes {
   display: grid;
   grid-template-rows: 24px 30px 30px minmax(0, 1fr) 36px;
+  position: relative;
   gap: 2px;
   padding: 0 8px 8px;
   min-height: 0;
@@ -393,5 +394,211 @@ button:disabled {
 @keyframes girar {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Lista de sessões: cabeça, região que rola sozinha e lote em área reservada. */
+.lista-sessoes {
+  display: grid;
+  grid-template-rows: 30px minmax(0, 1fr) 30px;
+  gap: 2px;
+  height: 100%;
+  min-height: 0;
+  position: relative;
+}
+
+.cabeca-da-lista {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px 24px;
+  align-items: center;
+  gap: 4px;
+}
+
+.busca {
+  height: 26px;
+  min-width: 0;
+  padding: 0 8px;
+  font: inherit;
+  color: inherit;
+  background: var(--nv-fundo);
+  border: 1px solid var(--nv-linha);
+  border-radius: var(--nv-raio);
+}
+
+.contagem {
+  font-family: var(--nv-mono);
+  font-size: 10px;
+  color: var(--nv-cinza);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.icone {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  color: var(--nv-cinza);
+}
+
+.regiao-da-lista {
+  position: relative;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+}
+
+.trilho-da-lista {
+  position: relative;
+}
+
+.linha-da-sessao {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 30px;
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  padding: 0 8px;
+  border-radius: 5px;
+  cursor: default;
+  outline-offset: -2px;
+}
+
+.linha-da-sessao:hover {
+  background: var(--nv-fundo);
+}
+
+.linha-da-sessao.ativa {
+  background: var(--nv-selecao);
+}
+
+.linha-da-sessao.selecionada {
+  box-shadow: inset 0 0 0 1px var(--nv-acento);
+}
+
+.linha-da-sessao:focus-visible {
+  outline: 2px solid var(--nv-acento);
+}
+
+.nome-da-sessao {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.linha-da-sessao.ativa .nome-da-sessao {
+  font-weight: 600;
+  color: var(--nv-acento-forte);
+}
+
+.direita {
+  font-family: var(--nv-mono);
+  font-size: 10px;
+  color: var(--nv-cinza);
+}
+
+.direita.ambar {
+  color: var(--nv-alerta);
+}
+
+.lista-vazia {
+  padding: 6px 8px;
+  color: var(--nv-cinza);
+}
+
+.lote {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.lote button {
+  height: 24px;
+  padding: 0 8px;
+  font-size: 11px;
+}
+
+.perigo {
+  color: var(--nv-perigo);
+  border-color: var(--nv-perigo);
+}
+
+.menu {
+  position: absolute;
+  z-index: 10;
+  left: 8px;
+  right: 8px;
+  top: 40px;
+  display: grid;
+  padding: 4px;
+  background: var(--nv-folha);
+  border-radius: var(--nv-raio-cartao);
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.18), 0 0 0 1px var(--nv-linha);
+}
+
+.menu button {
+  height: 28px;
+  padding: 0 10px;
+  text-align: left;
+}
+
+.menu button:hover:not(:disabled) {
+  background: var(--nv-selecao);
+}
+
+/* O ponto: 12 × 12 sempre; muda cor e traço. */
+.ponto {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 1.5px solid var(--nv-sutil);
+}
+
+.ponto[data-estado="terminal"],
+.ponto[data-estado="livre"] {
+  border: 2.5px solid var(--nv-acento);
+}
+
+.ponto[data-estado="trabalhando"] {
+  border: 2.5px solid var(--nv-suave);
+  border-top-color: var(--nv-acento);
+  animation: girar 1.2s linear infinite;
+}
+
+.ponto[data-estado="abrindo"] {
+  border: 2px dashed var(--nv-acento);
+}
+
+.ponto[data-estado="pediu-permissao"] {
+  border: 0;
+  background: var(--nv-alerta);
+}
+
+.ponto[data-estado="terminou"] {
+  border: 0;
+  background: var(--nv-ok);
+}
+
+.ponto[data-estado="parada"] {
+  border: 0;
+  background: var(--nv-cinza);
+}
+
+.ponto[data-estado="sem-resposta"] {
+  border: 0;
+  background: var(--nv-perigo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ponto[data-estado="trabalhando"] {
+    animation: none;
   }
 }
