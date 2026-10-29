@@ -61,10 +61,15 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             if let Some(janela) = app.get_webview_window("principal") {
+                // A escala da tela no X sem tela é emulada como no monitor de verdade:
+                // a janela cresce na mesma proporção e o zoom devolve a área em CSS ao
+                // tamanho pedido, com devicePixelRatio igual à escala.
+                let escala = argumento(std::env::args(), "--escala").and_then(|e| e.parse::<f64>().ok()).unwrap_or(1.0);
                 if let Some((l, a)) = argumento(std::env::args(), "--janela").as_deref().and_then(tamanho) {
-                    let _ = janela.set_size(tauri::LogicalSize::new(l, a));
+                    let _ = janela.set_min_size(Some(tauri::LogicalSize::new(l * escala, a * escala)));
+                    let _ = janela.set_size(tauri::LogicalSize::new(l * escala, a * escala));
                 }
-                if let Some(escala) = argumento(std::env::args(), "--escala").and_then(|e| e.parse::<f64>().ok()) {
+                if escala != 1.0 {
                     let _ = janela.set_zoom(escala);
                 }
             }

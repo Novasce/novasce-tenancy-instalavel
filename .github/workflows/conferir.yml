@@ -98,7 +98,7 @@ jobs:
           for janela in 1024x728 1264x728; do
             for escala in 1 1.25; do
               for tema in claro escuro; do
-                timeout 180 xvfb-run -a -s "-screen 0 1600x1000x24" \
+                timeout 180 xvfb-run -a -s "-screen 0 1700x1100x24" \
                   target/debug/novasce-tenancy --autoteste --janela "$janela" --escala "$escala" --tema "$tema" \
                   > "autoteste/$janela-$escala-$tema.json" 2> "autoteste/$janela-$escala-$tema.log" || true
               done
