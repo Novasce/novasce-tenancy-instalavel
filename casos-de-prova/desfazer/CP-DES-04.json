@@ -1,0 +1,44 @@
+{
+  "id": "CP-DES-04",
+  "contrato": "desfazer",
+  "regra": "Restaurar volta ao lugar de origem; rotina volta pausada; pasta que sumiu pede outro destino antes",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "pastas": ["Ateliê de exemplo/Notas", "Ateliê de exemplo/Rotinas"],
+    "itens": [
+      {
+        "id": "n1",
+        "tipo": "nota",
+        "espaco": "Ateliê de exemplo",
+        "origem": "Ateliê de exemplo/Notas/Referência da semana.md",
+        "apagadoEm": "2026-10-27T15:00:00-03:00",
+        "conteudo": "# Referência da semana\n\nLigada a [[Plano]] e a [[Leituras|leituras]].\n"
+      },
+      {
+        "id": "r1",
+        "tipo": "rotina",
+        "espaco": "Ateliê de exemplo",
+        "origem": "Ateliê de exemplo/Rotinas/Resumo de sexta.md",
+        "apagadoEm": "2026-10-27T15:00:00-03:00",
+        "conteudo": "---\nativa: true\n---\n# Resumo de sexta\n"
+      },
+      {
+        "id": "c1",
+        "tipo": "canvas",
+        "espaco": "Ateliê de exemplo",
+        "origem": "Ateliê de exemplo/Mapas antigos/Mapa da linha EXEMPLO.canvas",
+        "apagadoEm": "2026-10-27T15:00:00-03:00",
+        "conteudo": "{\"nodes\":[],\"edges\":[]}\n"
+      }
+    ]
+  },
+  "esperado": {
+    "restauros": [
+      { "tipo": "volta", "caminho": "Ateliê de exemplo/Notas/Referência da semana.md", "pausada": false, "conteudoIgual": true },
+      { "tipo": "volta", "caminho": "Ateliê de exemplo/Rotinas/Resumo de sexta.md", "pausada": true, "conteudoIgual": true },
+      { "tipo": "pede-destino", "pasta": "Ateliê de exemplo/Mapas antigos" }
+    ]
+  },
+  "mac": "pendente: o Mac só tem lixeira para nota do Pessoal; rotina e canvas não"
+}

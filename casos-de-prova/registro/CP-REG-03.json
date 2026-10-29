@@ -1,0 +1,44 @@
+{
+  "id": "CP-REG-03",
+  "contrato": "registro",
+  "regra": "A reversão é uma entrada nova, com hora e autoria; Refazer devolve só a desfeita",
+  "relogio": "2026-10-28T10:40:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "arquivos": { "Pessoal/Notas/2026-10-28.md": "# Quarta, 28/10\n\n## O dia\n\n" },
+    "acoes": [
+      {
+        "id": "a1",
+        "hora": "2026-10-28T07:15:00-03:00",
+        "autor": "Briefing do dia",
+        "acao": "reescrever-bloco",
+        "titulo": "Briefing no bloco O dia",
+        "mudar": { "Pessoal/Notas/2026-10-28.md": "# Quarta, 28/10\n\n## O dia\n\nTrês cartões de Produto A para hoje.\n" }
+      },
+      {
+        "id": "a2",
+        "hora": "2026-10-28T10:30:00-03:00",
+        "autor": "Lia Pereira",
+        "acao": "reescrever-bloco",
+        "titulo": "Reescreveu o bloco O dia",
+        "mudar": { "Pessoal/Notas/2026-10-28.md": "# Quarta, 28/10\n\n## O dia\n\nDois cartões de Produto A; o terceiro fica para amanhã.\n" }
+      }
+    ],
+    "desfazer": { "id": "a2", "hora": "2026-10-28T10:40:00-03:00", "autor": "Lia Pereira" },
+    "refazer": { "hora": "2026-10-28T10:45:00-03:00", "autor": "Lia Pereira" }
+  },
+  "esperado": {
+    "reversao": {
+      "hora": "2026-10-28T10:40:00-03:00",
+      "autor": "Lia Pereira",
+      "titulo": "Desfeita: Reescreveu o bloco O dia",
+      "desfaz": "a2"
+    },
+    "entradasDepoisDeDesfazer": 3,
+    "arquivoDepoisDeDesfazer": "# Quarta, 28/10\n\n## O dia\n\nTrês cartões de Produto A para hoje.\n",
+    "refazer": { "titulo": "Refeita: Reescreveu o bloco O dia", "refaz": "a2" },
+    "arquivoDepoisDeRefazer": "# Quarta, 28/10\n\n## O dia\n\nDois cartões de Produto A; o terceiro fica para amanhã.\n",
+    "estados": { "a1": "ativa", "a2": "ativa" }
+  },
+  "mac": "pendente: o Mac não grava a reversão como entrada nova nem tem Refazer"
+}
