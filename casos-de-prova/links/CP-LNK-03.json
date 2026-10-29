@@ -1,0 +1,43 @@
+{
+  "id": "CP-LNK-03",
+  "contrato": "links",
+  "regra": "Desfazer volta só o que está como o app deixou e diz o que ficou",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "raiz": "/home/lia/Ateliê de exemplo",
+    "arquivos": {
+      "Notas/Referência da semana.md": "# Referência da semana\n\nO recorte da semana.\n\n## Recorte\n\nPeça de exemplo A.\n",
+      "Notas/Plano.md": "Ver [[Referência da semana]] antes.\n",
+      "Notas/Leituras.md": "Ler [[Referência da semana|a referência]].\n",
+      "Diário/2026-10-23.md": "# Sexta-feira, 23 de outubro\n\nRecorte em [[Referência da semana#Recorte]].\n",
+      "Notas/Código.md": "Exemplo:\n\n```\n[[Referência da semana]]\n```\n\nE em linha: `[[Referência da semana]]`.\n"
+    },
+    "passos": [
+      {
+        "renomear": "Notas/Referência da semana.md",
+        "nome": "Referência da semana 43"
+      },
+      {
+        "editar": "Notas/Leituras.md",
+        "texto": "Ler [[Referência da semana 43|a referência]] hoje.\n"
+      },
+      {
+        "desfazer": 0
+      }
+    ]
+  },
+  "esperado": {
+    "arquivos": {
+      "Notas/Referência da semana.md": "# Referência da semana\n\nO recorte da semana.\n\n## Recorte\n\nPeça de exemplo A.\n",
+      "Notas/Plano.md": "Ver [[Referência da semana]] antes.\n",
+      "Notas/Leituras.md": "Ler [[Referência da semana 43|a referência]] hoje.\n",
+      "Diário/2026-10-23.md": "# Sexta-feira, 23 de outubro\n\nRecorte em [[Referência da semana#Recorte]].\n",
+      "Notas/Código.md": "Exemplo:\n\n```\n[[Referência da semana]]\n```\n\nE em linha: `[[Referência da semana]]`.\n"
+    },
+    "ficaram": [
+      "Notas/Leituras.md"
+    ]
+  },
+  "mac": "pendente: o Mac desfaz igual, mas devolve só quantas ficaram (1), não quais"
+}

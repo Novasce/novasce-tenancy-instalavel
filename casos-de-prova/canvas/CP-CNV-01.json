@@ -1,0 +1,40 @@
+{
+  "id": "CP-CNV-01",
+  "contrato": "canvas",
+  "regra": "Ler o canvas nunca vira vazio por engano; chave desconhecida volta como veio",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "textos": {
+      "vazio": "",
+      "soEspacos": " \n\t",
+      "quebrado": "{\"nodes\": [",
+      "naoECanvas": "[]",
+      "noSemX": "{\"nodes\":[{\"id\":\"a\",\"type\":\"text\",\"y\":0,\"width\":1,\"height\":1}]}",
+      "chaveDesconhecida": "{\"nodes\":[{\"id\":\"a\",\"type\":\"text\",\"x\":0,\"y\":0,\"width\":250,\"height\":60,\"text\":\"Peça de exemplo A\",\"lia:marca\":{\"z\":1,\"b\":[true,null]}}],\"edges\":[],\"versao\":\"exemplo\"}"
+    }
+  },
+  "esperado": {
+    "textos": {
+      "vazio": {
+        "texto": "{\n\t\"nodes\":[],\n\t\"edges\":[]\n}\n"
+      },
+      "soEspacos": {
+        "texto": "{\n\t\"nodes\":[],\n\t\"edges\":[]\n}\n"
+      },
+      "quebrado": {
+        "erro": "o arquivo não é JSON"
+      },
+      "naoECanvas": {
+        "erro": "o arquivo não é um canvas"
+      },
+      "noSemX": {
+        "erro": "um nó sem \"x\""
+      },
+      "chaveDesconhecida": {
+        "texto": "{\n\t\"nodes\":[\n\t\t{\"id\":\"a\",\"type\":\"text\",\"x\":0,\"y\":0,\"width\":250,\"height\":60,\"text\":\"Peça de exemplo A\",\"lia:marca\":{\"b\":[true,null],\"z\":1}}\n\t],\n\t\"edges\":[],\n\t\"versao\":\"exemplo\"\n}\n"
+      }
+    }
+  },
+  "mac": "passa"
+}

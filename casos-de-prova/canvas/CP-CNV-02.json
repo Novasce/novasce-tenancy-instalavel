@@ -1,0 +1,14 @@
+{
+  "id": "CP-CNV-02",
+  "contrato": "canvas",
+  "regra": "Escrita canônica: os dois códigos gravam os mesmos bytes",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "texto": "{\"edges\":[{\"toNode\":\"b\",\"id\":\"e1\",\"fromNode\":\"a\",\"label\":\"pede\",\"color\":null}],\"nodes\":[{\"y\":0,\"x\":-20.0,\"id\":\"a\",\"type\":\"text\",\"text\":\"Peça de exemplo A\\nsegunda linha\",\"width\":250,\"height\":60.5},{\"id\":\"b\",\"type\":\"file\",\"file\":\"Notas\\/Referência da semana.md\",\"x\":300,\"y\":0,\"width\":400,\"height\":400,\"color\":\"4\"}],\"z-extra\":true}"
+  },
+  "esperado": {
+    "texto": "{\n\t\"nodes\":[\n\t\t{\"id\":\"a\",\"type\":\"text\",\"x\":-20,\"y\":0,\"width\":250,\"height\":60.5,\"text\":\"Peça de exemplo A\\nsegunda linha\"},\n\t\t{\"id\":\"b\",\"type\":\"file\",\"x\":300,\"y\":0,\"width\":400,\"height\":400,\"color\":\"4\",\"file\":\"Notas/Referência da semana.md\"}\n\t],\n\t\"edges\":[\n\t\t{\"id\":\"e1\",\"fromNode\":\"a\",\"toNode\":\"b\",\"color\":null,\"label\":\"pede\"}\n\t],\n\t\"z-extra\":true\n}\n"
+  },
+  "mac": "passa"
+}

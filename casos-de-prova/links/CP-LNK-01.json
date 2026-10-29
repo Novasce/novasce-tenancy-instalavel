@@ -1,0 +1,34 @@
+{
+  "id": "CP-LNK-01",
+  "contrato": "links",
+  "regra": "Renomear reescreve os links pelo nome, guardando apelido e âncora; código fica",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "raiz": "/home/lia/Ateliê de exemplo",
+    "arquivos": {
+      "Notas/Referência da semana.md": "# Referência da semana\n\nO recorte da semana.\n\n## Recorte\n\nPeça de exemplo A.\n",
+      "Notas/Plano.md": "Ver [[Referência da semana]] antes.\n",
+      "Notas/Leituras.md": "Ler [[Referência da semana|a referência]].\n",
+      "Diário/2026-10-23.md": "# Sexta-feira, 23 de outubro\n\nRecorte em [[Referência da semana#Recorte]].\n",
+      "Notas/Código.md": "Exemplo:\n\n```\n[[Referência da semana]]\n```\n\nE em linha: `[[Referência da semana]]`.\n"
+    },
+    "passos": [
+      {
+        "renomear": "Notas/Referência da semana.md",
+        "nome": "Referência da semana 43"
+      }
+    ]
+  },
+  "esperado": {
+    "arquivos": {
+      "Notas/Referência da semana 43.md": "# Referência da semana 43\n\nO recorte da semana.\n\n## Recorte\n\nPeça de exemplo A.\n",
+      "Notas/Plano.md": "Ver [[Referência da semana 43]] antes.\n",
+      "Notas/Leituras.md": "Ler [[Referência da semana 43|a referência]].\n",
+      "Diário/2026-10-23.md": "# Sexta-feira, 23 de outubro\n\nRecorte em [[Referência da semana 43#Recorte]].\n",
+      "Notas/Código.md": "Exemplo:\n\n```\n[[Referência da semana]]\n```\n\nE em linha: `[[Referência da semana]]`.\n"
+    },
+    "religadas": 3
+  },
+  "mac": "passa"
+}

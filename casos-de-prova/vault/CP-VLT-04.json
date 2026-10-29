@@ -1,0 +1,23 @@
+{
+  "id": "CP-VLT-04",
+  "contrato": "vault",
+  "regra": "O briefing preserva o fim de linha de cada nota; nota nova nasce com LF",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "briefing": "Bom dia.",
+    "notas": {
+      "crlf": "# Sexta-feira, 23 de outubro\r\n\r\nminha linha\r\n",
+      "lf": "# Sexta-feira, 23 de outubro\n\nminha linha\n",
+      "nova": null
+    }
+  },
+  "esperado": {
+    "notas": {
+      "crlf": "# Sexta-feira, 23 de outubro\r\n\r\n<!-- jarvis:briefing -->\r\nBom dia.\r\n<!-- /jarvis:briefing -->\r\n\r\nminha linha\r\n",
+      "lf": "# Sexta-feira, 23 de outubro\n\n<!-- jarvis:briefing -->\nBom dia.\n<!-- /jarvis:briefing -->\n\nminha linha\n",
+      "nova": "# Sexta-feira, 23 de outubro\n\n<!-- jarvis:briefing -->\nBom dia.\n<!-- /jarvis:briefing -->\n"
+    }
+  },
+  "mac": "pendente: o Mac parte a nota por \\n e mistura CRLF com LF (Não tem na 0.17.2)"
+}
