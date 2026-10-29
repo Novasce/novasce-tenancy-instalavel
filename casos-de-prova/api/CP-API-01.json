@@ -1,0 +1,54 @@
+{
+  "id": "CP-API-01",
+  "contrato": "api",
+  "regra": "Envelope {data, message} e datas ISO com e sem fração; erro com message texto ou lista junta por vírgula",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "sucesso": "{\"data\": {\"criadoEm\": \"2026-10-16T14:00:00.000Z\", \"prazo\": \"2026-10-17T09:30:00Z\", \"titulo\": \"Peça de exemplo A\"}, \"message\": \"ok\"}",
+    "camposDeData": [
+      "criadoEm",
+      "prazo"
+    ],
+    "dataFora": "16/10/2026",
+    "erros": [
+      {
+        "status": 400,
+        "corpo": "{\"message\": \"Título obrigatório\"}"
+      },
+      {
+        "status": 400,
+        "corpo": "{\"message\": [\"título vazio\", \"prazo inválido\"]}"
+      },
+      {
+        "status": 500,
+        "corpo": "falhou do lado de lá"
+      },
+      {
+        "status": 422,
+        "corpo": "{\"message\": {\"campo\": \"x\"}}"
+      }
+    ]
+  },
+  "esperado": {
+    "data": {
+      "criadoEm": "2026-10-16T14:00:00.000Z",
+      "prazo": "2026-10-17T09:30:00.000Z",
+      "titulo": "Peça de exemplo A"
+    },
+    "dataFora": "erro",
+    "mensagens": [
+      "Título obrigatório",
+      "título vazio, prazo inválido",
+      "falhou do lado de lá",
+      ""
+    ],
+    "textos": [
+      "Erro 400: Título obrigatório",
+      "Erro 400: título vazio, prazo inválido",
+      "Erro 500: falhou do lado de lá",
+      "Erro 422: "
+    ]
+  },
+  "mac": "passa"
+}

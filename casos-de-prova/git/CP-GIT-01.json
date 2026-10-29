@@ -1,0 +1,51 @@
+{
+  "id": "CP-GIT-01",
+  "contrato": "git",
+  "regra": "Pasta igual a um espaço registrado nunca ganha worktree: a segunda sessão abre ali sem pergunta",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "home": "/home/lia",
+    "espacos": [
+      "/home/lia/Brain/",
+      "~/Espaços/Ateliê de exemplo"
+    ],
+    "abertas": [
+      {
+        "pasta": "/home/lia/Brain",
+        "programa": "claude",
+        "desde": "2026-10-28T08:00:00-03:00",
+        "viva": true
+      },
+      {
+        "pasta": "~/Brain/repos/produto-a",
+        "programa": "codex",
+        "desde": "2026-10-28T08:30:00-03:00",
+        "viva": true
+      },
+      {
+        "pasta": "/home/lia/Espaços/Ateliê de exemplo",
+        "programa": "claude",
+        "desde": "2026-10-28T08:40:00-03:00",
+        "viva": true
+      }
+    ],
+    "pedidos": [
+      {
+        "pasta": "/home/lia/Brain",
+        "temGit": true
+      },
+      {
+        "pasta": "~/Espaços/Ateliê de exemplo/",
+        "temGit": true
+      }
+    ]
+  },
+  "esperado": {
+    "respostas": [
+      null,
+      null
+    ]
+  },
+  "mac": "passa"
+}

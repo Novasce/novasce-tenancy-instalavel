@@ -1,0 +1,68 @@
+{
+  "id": "CP-ESP-01",
+  "contrato": "espacos",
+  "regra": "Busca e sessão de um espaço não leem o outro",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "espacos": [
+      {
+        "id": "pessoal",
+        "tipo": "pessoal",
+        "pasta": "/home/lia/Novasce/Pessoal"
+      },
+      {
+        "id": "atelie",
+        "tipo": "trabalho",
+        "pasta": "/home/lia/Ateliê de exemplo"
+      }
+    ],
+    "notas": {
+      "/home/lia/Novasce/Pessoal/Diário/2026-10-23.md": "A referência do dia.\n",
+      "/home/lia/Ateliê de exemplo/Notas/Referência da semana.md": "A referência da semana.\n",
+      "/home/lia/Downloads/solta.md": "Outra referência.\n"
+    },
+    "busca": "referência"
+  },
+  "esperado": {
+    "busca": {
+      "pessoal": [
+        "/home/lia/Novasce/Pessoal/Diário/2026-10-23.md"
+      ],
+      "atelie": [
+        "/home/lia/Ateliê de exemplo/Notas/Referência da semana.md"
+      ]
+    },
+    "negadas": {
+      "pessoal": [
+        "/home/lia/Ateliê de exemplo"
+      ],
+      "atelie": [
+        "/home/lia/Novasce/Pessoal"
+      ]
+    },
+    "pode": [
+      {
+        "caminho": "/home/lia/Ateliê de exemplo/Notas/Referência da semana.md",
+        "irPara": "/home/lia/Novasce/Pessoal",
+        "pode": false
+      },
+      {
+        "caminho": "/home/lia/Novasce/Pessoal/Diário/2026-10-23.md",
+        "irPara": "/home/lia/Ateliê de exemplo/Notas",
+        "pode": false
+      },
+      {
+        "caminho": "/home/lia/Ateliê de exemplo/Notas/Referência da semana.md",
+        "irPara": "/home/lia/Ateliê de exemplo/Notas",
+        "pode": true
+      },
+      {
+        "caminho": "/home/lia/Downloads/solta.md",
+        "irPara": "/home/lia/Novasce/Pessoal",
+        "pode": true
+      }
+    ]
+  },
+  "mac": "pendente: negadas e pode batem com a Fronteira do Mac; a busca por conteúdo restrita ao espaço não existe no Mac (a dele é por nome, no índice de cada espaço)"
+}

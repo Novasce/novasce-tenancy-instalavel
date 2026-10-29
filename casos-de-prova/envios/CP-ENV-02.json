@@ -1,0 +1,52 @@
+{
+  "id": "CP-ENV-02",
+  "contrato": "envios",
+  "regra": "Espera resposta: sem a seção espera; seção vazia ou que diz nada não espera; o resto espera",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "variantes": [
+      {
+        "nome": "sem a seção",
+        "leia": "PRA QUEM\nLia Pereira\n"
+      },
+      {
+        "nome": "seção vazia",
+        "leia": "PRECISA VOLTAR\n\nPOR ONDE\nE-mail\n"
+      },
+      {
+        "nome": "só aviso",
+        "leia": "PRECISA VOLTAR\nNada, só aviso.\n"
+      },
+      {
+        "nome": "resposta",
+        "leia": "PRECISA VOLTAR\nResposta da Lia sobre o prazo.\n"
+      }
+    ]
+  },
+  "esperado": {
+    "variantes": [
+      {
+        "nome": "sem a seção",
+        "disseOQueVolta": false,
+        "esperaResposta": true
+      },
+      {
+        "nome": "seção vazia",
+        "disseOQueVolta": true,
+        "esperaResposta": false
+      },
+      {
+        "nome": "só aviso",
+        "disseOQueVolta": true,
+        "esperaResposta": false
+      },
+      {
+        "nome": "resposta",
+        "disseOQueVolta": true,
+        "esperaResposta": true
+      }
+    ]
+  },
+  "mac": "passa"
+}

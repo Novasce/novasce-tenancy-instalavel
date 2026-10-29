@@ -1,0 +1,14 @@
+> Limpe a pasta build
+
+╭──────────────────────────────────────────────────────────────╮
+│ Bash command                                                 │
+│                                                              │
+│   rm -rf build                                               │
+│   Apaga a pasta build                                        │
+│                                                              │
+│ Do you want to proceed?                                      │
+│ ❯ 1. Yes                                                     │
+│   2. Yes, and don't ask again for rm commands in             │
+│   /home/lia/Ateliê de exemplo                                │
+│   3. No, and tell Claude what to do differently (esc)        │
+╰──────────────────────────────────────────────────────────────╯

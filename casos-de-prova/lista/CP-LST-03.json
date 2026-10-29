@@ -1,0 +1,26 @@
+{
+  "id": "CP-LST-03",
+  "contrato": "lista",
+  "regra": "Por prazo: vencido, hoje, futuro e sem prazo; empate pelo título na ordem do português; a ordem volta igual ao reabrir",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "lista": "Meus cartões",
+    "acesso": ["Ateliê de exemplo"],
+    "itens": [
+      { "id": "s1", "titulo": "Ideia sem prazo", "espaco": "Ateliê de exemplo" },
+      { "id": "h3", "titulo": "árvore", "espaco": "Ateliê de exemplo", "prazo": "2026-10-28" },
+      { "id": "a1", "titulo": "Proposta de amanhã", "espaco": "Ateliê de exemplo", "prazo": "2026-10-29" },
+      { "id": "h2", "titulo": "Arte", "espaco": "Ateliê de exemplo", "prazo": "2026-10-28" },
+      { "id": "v1", "titulo": "Relatório vencido", "espaco": "Ateliê de exemplo", "prazo": "2026-10-27" },
+      { "id": "h1", "titulo": "Ária", "espaco": "Ateliê de exemplo", "prazo": "2026-10-28" }
+    ],
+    "ordem": "prazo"
+  },
+  "esperado": {
+    "ordem": ["v1", "h1", "h2", "h3", "a1", "s1"],
+    "grupos": ["Vencido", "Hoje", "Hoje", "Hoje", "Futuro", "Sem prazo"],
+    "aoReabrir": { "ordem": "prazo", "ids": ["v1", "h1", "h2", "h3", "a1", "s1"] }
+  },
+  "mac": "pendente: o Mac não tem o componente de lista"
+}

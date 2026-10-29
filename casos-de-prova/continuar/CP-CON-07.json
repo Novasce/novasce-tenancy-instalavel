@@ -1,0 +1,50 @@
+{
+  "id": "CP-CON-07",
+  "contrato": "continuar",
+  "regra": "Copiar não move; desfazer volta ao caminho exato; nome tomado no destino ganha ' 2'",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "brain": "/home/lia/Brain",
+    "arquivos": {
+      "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1/prompt.txt": "Siga o passo 1.\n",
+      "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 2/prompt.txt": "Siga o passo 2.\n",
+      "/home/lia/Brain/continuar/continuados/2026-10-28 Produto A - passo 2/prompt.txt": "Versão antiga.\n"
+    },
+    "passos": [
+      {
+        "acao": "copiar",
+        "pasta": "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1"
+      },
+      {
+        "acao": "abrir",
+        "pasta": "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1"
+      },
+      {
+        "acao": "desfazer"
+      },
+      {
+        "acao": "abrir",
+        "pasta": "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 2"
+      }
+    ]
+  },
+  "esperado": {
+    "passos": [
+      {
+        "copiado": "Siga o passo 1.\n",
+        "pasta": "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1"
+      },
+      {
+        "pasta": "/home/lia/Brain/continuar/continuados/2026-10-28 Produto A - passo 1"
+      },
+      {
+        "pasta": "/home/lia/Brain/continuar/a-continuar/2026-10-28 Produto A - passo 1"
+      },
+      {
+        "pasta": "/home/lia/Brain/continuar/continuados/2026-10-28 Produto A - passo 2 2"
+      }
+    ]
+  },
+  "mac": "passa"
+}

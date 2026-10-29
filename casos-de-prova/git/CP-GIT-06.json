@@ -1,0 +1,69 @@
+{
+  "id": "CP-GIT-06",
+  "contrato": "git",
+  "regra": "Mesclar só com a pasta principal na principal e limpa; o merge nunca é por avanço rápido e nunca faz push",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "branch": "sessao-2-2026-10-28",
+    "retratos": [
+      {
+        "principal": "main",
+        "headDaPastaPrincipal": "outra",
+        "mergeEmCurso": false,
+        "rastreadosMudados": 0
+      },
+      {
+        "principal": "main",
+        "headDaPastaPrincipal": "main",
+        "mergeEmCurso": true,
+        "rastreadosMudados": 0
+      },
+      {
+        "principal": "main",
+        "headDaPastaPrincipal": "main",
+        "mergeEmCurso": false,
+        "rastreadosMudados": 1
+      },
+      {
+        "principal": "main",
+        "headDaPastaPrincipal": "main",
+        "mergeEmCurso": false,
+        "rastreadosMudados": 0
+      },
+      {
+        "principal": null,
+        "headDaPastaPrincipal": "main",
+        "mergeEmCurso": false,
+        "rastreadosMudados": 0
+      }
+    ]
+  },
+  "esperado": {
+    "decisoes": [
+      {
+        "tipo": "recusa",
+        "motivo": "outra-branch",
+        "branch": "outra"
+      },
+      {
+        "tipo": "recusa",
+        "motivo": "pasta-principal-ocupada"
+      },
+      {
+        "tipo": "recusa",
+        "motivo": "pasta-principal-ocupada"
+      },
+      {
+        "tipo": "mesclar",
+        "noFf": true,
+        "push": false
+      },
+      {
+        "tipo": "recusa",
+        "motivo": "sem-principal"
+      }
+    ]
+  },
+  "mac": "passa"
+}

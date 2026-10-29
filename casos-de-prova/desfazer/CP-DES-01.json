@@ -1,0 +1,34 @@
+{
+  "id": "CP-DES-01",
+  "contrato": "desfazer",
+  "regra": "Ação reversível não pede confirmação; o Desfazer fica 10 s no rodapé e depois segue pelo Registro",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "arquivos": {
+      "Ateliê de exemplo/Notas/Leituras.md": "# Leituras\n\nVer [[Plano]].\n",
+      "Ateliê de exemplo/Notas/Plano.md": "# Plano\n",
+      "Ateliê de exemplo/Notas/Peça de exemplo A.md": "# Peça de exemplo A\n"
+    },
+    "acao": {
+      "id": "r1",
+      "hora": "2026-10-28T09:00:00-03:00",
+      "autor": "Lia Pereira",
+      "acao": "arquivar",
+      "titulo": "Arquivou 3 notas",
+      "mover": [
+        ["Ateliê de exemplo/Notas/Leituras.md", "Ateliê de exemplo/Arquivo/Leituras.md"],
+        ["Ateliê de exemplo/Notas/Plano.md", "Ateliê de exemplo/Arquivo/Plano.md"],
+        ["Ateliê de exemplo/Notas/Peça de exemplo A.md", "Ateliê de exemplo/Arquivo/Peça de exemplo A.md"]
+      ]
+    },
+    "instantes": ["2026-10-28T09:00:09-03:00", "2026-10-28T09:00:11-03:00"]
+  },
+  "esperado": {
+    "pergunta": false,
+    "noRodape": [true, false],
+    "noRegistro": [true, true],
+    "depoisDeDesfazer": "igual à entrada"
+  },
+  "mac": "pendente: o Mac não tem o rodapé de Desfazer nem o tempo de 10 s"
+}

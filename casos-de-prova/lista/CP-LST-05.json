@@ -1,0 +1,24 @@
+{
+  "id": "CP-LST-05",
+  "contrato": "lista",
+  "regra": "A janela visível sai da altura da linha, da região e da rolagem, com o cabeçalho do grupo preso",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "alturaLinha": 44,
+    "alturaRegiao": 352,
+    "grupos": [
+      { "nome": "Hoje", "quantos": 4 },
+      { "nome": "Esta semana", "quantos": 6 },
+      { "nome": "Mais tarde", "quantos": 290 }
+    ],
+    "rolagens": [0, 440]
+  },
+  "esperado": {
+    "janelas": [
+      { "inicio": 0, "fim": 7, "grupoPreso": "Hoje", "rotulo": "300 itens · 8 à vista" },
+      { "inicio": 10, "fim": 17, "grupoPreso": "Mais tarde", "rotulo": "300 itens · 8 à vista" }
+    ]
+  },
+  "mac": "pendente: o Mac não tem o componente de lista"
+}

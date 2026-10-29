@@ -1,0 +1,47 @@
+{
+  "id": "CP-REG-04",
+  "contrato": "registro",
+  "regra": "Exportar o Registro para o Pessoal leva o nome da chave, nunca o valor, e nunca o texto da conversa",
+  "relogio": "2026-10-28T18:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "arquivos": {
+      "Ateliê de exemplo/.chaves/produto-a.env": "EMAIL_PRODUTO_A=valor-antigo-de-exemplo\n",
+      "Ateliê de exemplo/Notas/Leituras.md": "# Leituras\n",
+      "Ateliê de exemplo/Notas/Plano.md": "# Plano\n",
+      "Ateliê de exemplo/Notas/Peça de exemplo A.md": "# Peça de exemplo A\n"
+    },
+    "acoes": [
+      {
+        "id": "a1",
+        "hora": "2026-10-28T09:00:00-03:00",
+        "autor": "Lia Pereira",
+        "acao": "trocar-chave",
+        "titulo": "Trocou a chave",
+        "chave": "E-mail do Produto A",
+        "mudar": { "Ateliê de exemplo/.chaves/produto-a.env": "EMAIL_PRODUTO_A=valor-novo-de-exemplo\n" }
+      },
+      {
+        "id": "a2",
+        "hora": "2026-10-28T10:00:00-03:00",
+        "autor": "Lia Pereira",
+        "acao": "pedido-a-ia",
+        "titulo": "Pediu à IA o resumo da semana",
+        "conversa": "Resuma a semana da linha EXEMPLO em cinco linhas, sem nomes."
+      },
+      { "id": "a3", "hora": "2026-10-28T11:00:00-03:00", "autor": "Lia Pereira", "acao": "arquivar", "titulo": "Arquivou Leituras", "mover": [["Ateliê de exemplo/Notas/Leituras.md", "Ateliê de exemplo/Arquivo/Leituras.md"]] },
+      { "id": "a4", "hora": "2026-10-28T11:01:00-03:00", "autor": "Lia Pereira", "acao": "arquivar", "titulo": "Arquivou Plano", "mover": [["Ateliê de exemplo/Notas/Plano.md", "Ateliê de exemplo/Arquivo/Plano.md"]] },
+      { "id": "a5", "hora": "2026-10-28T11:02:00-03:00", "autor": "Lia Pereira", "acao": "arquivar", "titulo": "Arquivou Peça de exemplo A", "mover": [["Ateliê de exemplo/Notas/Peça de exemplo A.md", "Ateliê de exemplo/Arquivo/Peça de exemplo A.md"]] }
+    ],
+    "formatos": ["md", "csv"],
+    "de": "2026-10-28",
+    "ate": "2026-10-28"
+  },
+  "esperado": {
+    "caminhos": ["Pessoal/Registro/Registro 2026-10-28 a 2026-10-28.md", "Pessoal/Registro/Registro 2026-10-28 a 2026-10-28.csv"],
+    "linhas": 5,
+    "tem": ["E-mail do Produto A", "Pediu à IA o resumo da semana", "Arquivou Leituras", "Lia Pereira", "09:00"],
+    "naoTem": ["valor-antigo-de-exemplo", "valor-novo-de-exemplo", "EMAIL_PRODUTO_A", "Resuma a semana"]
+  },
+  "mac": "pendente: o Mac não exporta o Registro"
+}

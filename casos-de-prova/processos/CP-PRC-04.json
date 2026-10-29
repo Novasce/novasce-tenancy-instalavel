@@ -1,0 +1,70 @@
+{
+  "id": "CP-PRC-04",
+  "contrato": "processos",
+  "regra": "O app e os pais dele nunca são alvo, nem o grupo do app; quem divide o grupo com o app recebe o sinal pelo pid",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "app": {
+      "pid": 50,
+      "pgid": 50
+    },
+    "tabela": [
+      {
+        "pid": 40,
+        "ppid": 1,
+        "pgid": 40,
+        "sid": 40,
+        "inicio": "2026-10-28T07:00:00-03:00"
+      },
+      {
+        "pid": 50,
+        "ppid": 40,
+        "pgid": 50,
+        "sid": 40,
+        "inicio": "2026-10-28T07:01:00-03:00"
+      },
+      {
+        "pid": 100,
+        "ppid": 50,
+        "pgid": 50,
+        "sid": 100,
+        "inicio": "2026-10-28T08:00:00-03:00"
+      },
+      {
+        "pid": 101,
+        "ppid": 100,
+        "pgid": 101,
+        "sid": 100,
+        "inicio": "2026-10-28T08:00:01-03:00"
+      }
+    ],
+    "pedidos": [
+      {
+        "raiz": 100,
+        "inicio": "2026-10-28T08:00:00-03:00"
+      }
+    ]
+  },
+  "esperado": {
+    "protegidos": [
+      40,
+      50
+    ],
+    "alvos": [
+      [
+        100,
+        101
+      ]
+    ],
+    "plano": {
+      "grupos": [
+        101
+      ],
+      "avulsos": [
+        100
+      ]
+    }
+  },
+  "mac": "passa"
+}

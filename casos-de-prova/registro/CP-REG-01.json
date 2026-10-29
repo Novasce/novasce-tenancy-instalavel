@@ -1,0 +1,33 @@
+{
+  "id": "CP-REG-01",
+  "contrato": "registro",
+  "regra": "No mesmo arquivo só a ação mais nova desfaz; a de baixo libera quando a de cima é desfeita",
+  "relogio": "2026-10-28T10:40:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "arquivos": { "Pessoal/Notas/2026-10-28.md": "# Quarta, 28/10\n\n## O dia\n\n" },
+    "acoes": [
+      {
+        "id": "a1",
+        "hora": "2026-10-28T07:15:00-03:00",
+        "autor": "Briefing do dia",
+        "acao": "reescrever-bloco",
+        "titulo": "Briefing no bloco O dia",
+        "mudar": { "Pessoal/Notas/2026-10-28.md": "# Quarta, 28/10\n\n## O dia\n\nTrês cartões de Produto A para hoje.\n" }
+      },
+      {
+        "id": "a2",
+        "hora": "2026-10-28T10:30:00-03:00",
+        "autor": "Lia Pereira",
+        "acao": "reescrever-bloco",
+        "titulo": "Reescreveu o bloco O dia",
+        "mudar": { "Pessoal/Notas/2026-10-28.md": "# Quarta, 28/10\n\n## O dia\n\nDois cartões de Produto A; o terceiro fica para amanhã.\n" }
+      }
+    ]
+  },
+  "esperado": {
+    "antes": { "a1": { "pode": false, "aviso": "depois da de cima", "porCausaDe": "a2" }, "a2": { "pode": true } },
+    "depoisDeDesfazerA2": { "a1": { "pode": true } }
+  },
+  "mac": "pendente: o Mac desfaz uma ação de cada vez, sem a ordem do Registro"
+}

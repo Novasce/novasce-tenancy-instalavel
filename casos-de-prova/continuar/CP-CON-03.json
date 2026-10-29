@@ -1,0 +1,21 @@
+{
+  "id": "CP-CON-03",
+  "contrato": "continuar",
+  "regra": "Onde parou vem de ONDE PAROU; as seções de espera se juntam na ordem do arquivo",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "leia": "ASSUNTO\nPeça de exemplo A\n\nESPERA DA LIA\n- Aprovar o texto\n\nONDE PAROU\nTexto escrito, imagem pendente.\n\nO QUE ESPERA (de você)\n- Escolher a foto\n- Confirmar a data\n"
+  },
+  "esperado": {
+    "ondeParou": [
+      "Texto escrito, imagem pendente."
+    ],
+    "oQueEspera": [
+      "Aprovar o texto",
+      "Escolher a foto",
+      "Confirmar a data"
+    ]
+  },
+  "mac": "passa"
+}

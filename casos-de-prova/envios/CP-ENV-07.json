@@ -1,0 +1,34 @@
+{
+  "id": "CP-ENV-07",
+  "contrato": "envios",
+  "regra": "Cobrar depois de três dias úteis",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "pasta": "envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta",
+    "arquivos": {
+      "enviado-em.txt": "2026-10-23\n",
+      "mensagem.txt": "Oi, Lia!\n"
+    },
+    "pessoa": "Lia",
+    "prazo": 3,
+    "outrosDias": [
+      {
+        "relogio": "2026-10-27T09:00:00-03:00",
+        "diasUteis": 2,
+        "cobrar": false
+      },
+      {
+        "relogio": "2026-10-23T18:00:00-03:00",
+        "diasUteis": 0,
+        "cobrar": false
+      }
+    ]
+  },
+  "esperado": {
+    "diasUteis": 3,
+    "cobrar": true,
+    "lembrete": "Oi, Lia! Voltando à minha mensagem de sexta, 23/10. Conseguiu ver? Fico no aguardo."
+  },
+  "mac": "passa"
+}

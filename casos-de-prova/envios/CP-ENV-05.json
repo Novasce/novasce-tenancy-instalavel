@@ -1,0 +1,82 @@
+{
+  "id": "CP-ENV-05",
+  "contrato": "envios",
+  "regra": "Dia do envio pelo app: só em Aguardando, sem data e não depois de hoje; desfazer apaga só esse arquivo",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "variantes": [
+      {
+        "nome": "sem data",
+        "pasta": "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta",
+        "dia": "2026-10-23",
+        "arquivos": {
+          "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta/LEIA.txt": "PRECISA VOLTAR\nResposta.\n"
+        },
+        "desfazer": true
+      },
+      {
+        "nome": "com data",
+        "pasta": "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta",
+        "dia": "2026-10-23",
+        "arquivos": {
+          "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta/LEIA.txt": "x\n",
+          "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta/enviado-em.txt": "2026-10-22\n"
+        }
+      },
+      {
+        "nome": "data inválida",
+        "pasta": "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta",
+        "dia": "2026-10-23",
+        "arquivos": {
+          "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta/enviado-em.txt": "ontem\n"
+        }
+      },
+      {
+        "nome": "amanhã",
+        "pasta": "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta",
+        "dia": "2026-10-29",
+        "arquivos": {
+          "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta/LEIA.txt": "x\n"
+        }
+      },
+      {
+        "nome": "fora de Aguardando",
+        "pasta": "/home/lia/Brain/envios/a-enviar/2026-10-27 Lia Pereira - proposta",
+        "dia": "2026-10-23",
+        "arquivos": {
+          "/home/lia/Brain/envios/a-enviar/2026-10-27 Lia Pereira - proposta/LEIA.txt": "x\n"
+        }
+      }
+    ]
+  },
+  "esperado": {
+    "variantes": [
+      {
+        "nome": "sem data",
+        "gravou": "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta/enviado-em.txt",
+        "conteudo": "2026-10-23\n",
+        "depoisDeDesfazer": [
+          "/home/lia/Brain/envios/aguardando-resposta/2026-10-23 Lia Pereira - proposta/LEIA.txt"
+        ]
+      },
+      {
+        "nome": "com data",
+        "recusa": "o enviado-em.txt já existe: a data dele fica"
+      },
+      {
+        "nome": "data inválida",
+        "recusa": "o enviado-em.txt existe sem uma data AAAA-MM-DD: corrija o arquivo na pasta"
+      },
+      {
+        "nome": "amanhã",
+        "recusa": "o dia do envio não pode ser depois de hoje"
+      },
+      {
+        "nome": "fora de Aguardando",
+        "recusa": "só a pasta em Aguardando resposta recebe o dia do envio"
+      }
+    ]
+  },
+  "mac": "passa"
+}

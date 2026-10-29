@@ -1,0 +1,35 @@
+{
+  "id": "CP-VLT-03",
+  "contrato": "vault",
+  "regra": "Desfazer o briefing só tira o bloco que está como o app deixou",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "marca": "briefing",
+    "conteudoGravado": "Bom dia.",
+    "notas": {
+      "intacta": "# Sexta-feira, 23 de outubro\n\n<!-- jarvis:briefing -->\nBom dia.\n<!-- /jarvis:briefing -->\n\nminha linha\n",
+      "mudada": "# Sexta-feira, 23 de outubro\n\n<!-- jarvis:briefing -->\nBom dia.\nA Lia escreveu aqui.\n<!-- /jarvis:briefing -->\n\nminha linha\n",
+      "semBloco": "# Sexta-feira, 23 de outubro\n\nminha linha\n"
+    }
+  },
+  "esperado": {
+    "notas": {
+      "intacta": {
+        "desfez": true,
+        "texto": "# Sexta-feira, 23 de outubro\n\nminha linha\n"
+      },
+      "mudada": {
+        "desfez": false,
+        "aviso": "você escreveu dentro do bloco depois; tire à mão se quiser",
+        "texto": "# Sexta-feira, 23 de outubro\n\n<!-- jarvis:briefing -->\nBom dia.\nA Lia escreveu aqui.\n<!-- /jarvis:briefing -->\n\nminha linha\n"
+      },
+      "semBloco": {
+        "desfez": false,
+        "aviso": "o bloco já saiu da nota",
+        "texto": "# Sexta-feira, 23 de outubro\n\nminha linha\n"
+      }
+    }
+  },
+  "mac": "passa"
+}

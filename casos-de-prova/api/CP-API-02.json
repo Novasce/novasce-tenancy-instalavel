@@ -1,0 +1,81 @@
+{
+  "id": "CP-API-02",
+  "contrato": "api",
+  "regra": "401 em rota autenticada vence a sessão: limpa sessão e dados de trabalho, não toca no Pessoal nem nos rascunhos",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "base": "https://api.exemplo.invalid",
+    "estado": {
+      "sessao": {
+        "payload": {
+          "exp": 1793192400,
+          "jti": "sessao-de-exemplo"
+        }
+      },
+      "eu": {
+        "id": "00000000-0000-4000-8000-000000000001",
+        "nome": "Lia Pereira"
+      },
+      "tarefas": [
+        {
+          "id": "00000000-0000-4000-8000-0000000000a1",
+          "titulo": "Peça de exemplo A"
+        }
+      ],
+      "linhas": [
+        {
+          "slug": "EXEMPLO",
+          "nome": "Linha de exemplo"
+        }
+      ],
+      "leituras": {
+        "cartoes": 1
+      },
+      "pessoal": {
+        "notas": [
+          "Pessoal/Ideias.md"
+        ]
+      },
+      "rascunhos": {
+        "comentario": "Texto que a Lia ainda não enviou"
+      }
+    },
+    "pedido": {
+      "metodo": "GET",
+      "rota": "/tasks",
+      "linha": "EXEMPLO"
+    },
+    "resposta": {
+      "status": 401,
+      "corpo": "{\"message\": \"Unauthorized\"}"
+    },
+    "login": {
+      "resposta": {
+        "status": 401,
+        "corpo": "{\"message\": \"Unauthorized\"}"
+      }
+    }
+  },
+  "esperado": {
+    "erro": "sessao-vencida",
+    "estado": {
+      "sessao": null,
+      "eu": null,
+      "tarefas": [],
+      "linhas": [],
+      "leituras": {},
+      "pessoal": {
+        "notas": [
+          "Pessoal/Ideias.md"
+        ]
+      },
+      "rascunhos": {
+        "comentario": "Texto que a Lia ainda não enviou"
+      },
+      "sessaoVenceu": true
+    },
+    "login": "credenciais"
+  },
+  "mac": "passa"
+}

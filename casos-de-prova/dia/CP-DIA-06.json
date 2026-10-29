@@ -1,0 +1,41 @@
+{
+  "id": "CP-DIA-06",
+  "contrato": "dia",
+  "regra": "Dia de vendas: as ligações do painel entram no fim do pedido, na ordem; resultado no topo",
+  "relogio": "2026-10-26T07:15:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "pessoa": {
+      "usuario": "u-1",
+      "papel": "VENDEDOR",
+      "meuDia": "vendas"
+    },
+    "founder": "u-founder-exemplo",
+    "pessoal": {},
+    "ligacoes": [
+      {
+        "cliente": "Ateliê de exemplo",
+        "dias": 14,
+        "etapa": "BRIEFING"
+      },
+      {
+        "cliente": "Loja de exemplo B",
+        "dias": 1,
+        "etapa": "PROPOSTA_ENVIADA"
+      }
+    ]
+  },
+  "esperado": {
+    "dia": "vendas",
+    "arquivos": {
+      "rotinas/o-dia.md": "---\nnome: O dia\nquando: dias úteis 07:15\nia: claude\nhabilidade: briefing-de-vendas\navisa: não\nonde: topo\npermite: [Read, mcp__tenancy__search_customers, mcp__tenancy__get_customer]\nligada: sim\nrascunho: não\n---\n\nfaça o briefing de vendas do dia em até 8 linhas, para o topo da minha nota de hoje: as ligações de hoje, em ordem, com o porquê e o próximo passo de cada uma, e o que andou sem mim. As ligações vêm no fim deste pedido, do seu painel no Tenancy. Não grave nada: a resposta vai para a nota.\n",
+      ".agents/skills/briefing-do-dia/SKILL.md": "---\nname: briefing-do-dia\ndescription: O briefing da manhã, em até 8 linhas, para o topo da nota do dia. Lê os seus cartões no Tenancy pelo MCP e não grava nada.\n---\n# Briefing do dia\n\n1. Liste os seus cartões no Tenancy (list_tasks) em Fazendo e em Review. Os que vencem hoje ou já venceram vêm primeiro.\n2. Para o que estiver parado há mais tempo, leia o cartão (get_task) e diga o próximo passo numa linha.\n3. Escreva em até 8 linhas: a uma coisa que fecha hoje, o que está parado e o que andou desde ontem.\n4. Se uma ferramenta recusar, diga numa linha o que faltou (por exemplo, a chave do Tenancy) e siga com o resto.\n5. Não grave nada no Tenancy: a resposta vai para a nota do dia.\n",
+      ".ia/semeada-briefing-do-dia": "",
+      ".agents/skills/briefing-de-vendas/SKILL.md": "---\nname: briefing-de-vendas\ndescription: O briefing da manhã de quem vende, em até 8 linhas: os clientes para ligar, o porquê e o próximo passo de cada um. Parte das ligações do painel, que vêm no pedido, e não grava nada.\n---\n# Briefing de vendas\n\n1. Comece pelas ligações que vêm no fim do pedido: elas saem do seu painel no Tenancy, das negociações abertas há mais tempo.\n2. Para cada uma, tente a ficha do cliente (get_customer, ou search_customers pelo nome): a proposta atual e a última conversa registrada. O papel de vendedor nem sempre abre a ficha.\n3. Escreva em até 8 linhas: as ligações de hoje (quem, por quê e o próximo passo) e o que andou desde ontem nas suas notas.\n4. Se uma ferramenta recusar, diga numa linha o que faltou (por exemplo, a ficha do cliente ou a chave do Tenancy) e siga com o que veio no pedido.\n5. Não grave nada no Tenancy: a resposta vai para a nota do dia.\n",
+      ".ia/semeada-briefing-de-vendas": ""
+    },
+    "onde": "topo",
+    "pedido": "Use a habilidade briefing-de-vendas (.agents/skills/briefing-de-vendas/SKILL.md). faça o briefing de vendas do dia em até 8 linhas, para o topo da minha nota de hoje: as ligações de hoje, em ordem, com o porquê e o próximo passo de cada uma, e o que andou sem mim. As ligações vêm no fim deste pedido, do seu painel no Tenancy. Não grave nada: a resposta vai para a nota. As ligações de hoje, do seu painel no Tenancy: Ateliê de exemplo (negociação aberta há 14 dias, briefing); Loja de exemplo B (negociação aberta há 1 dia, proposta enviada)."
+  },
+  "mac": "pendente: ficha Meu dia (o Mac escolhe o dia pelo papel)"
+}

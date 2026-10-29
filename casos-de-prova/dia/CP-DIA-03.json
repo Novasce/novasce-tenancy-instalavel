@@ -1,0 +1,47 @@
+{
+  "id": "CP-DIA-03",
+  "contrato": "dia",
+  "regra": "Sem ficha, o dia sai do papel; o founder só pelo id fixo",
+  "relogio": "2026-10-26T07:15:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "founder": "u-founder-exemplo",
+    "pessoas": [
+      {
+        "usuario": "u-1",
+        "papel": "VENDEDOR"
+      },
+      {
+        "usuario": "u-2",
+        "papel": "MARKETING"
+      },
+      {
+        "usuario": "u-3",
+        "papel": "ADMIN"
+      },
+      {
+        "usuario": "u-founder-exemplo",
+        "papel": "ADMIN"
+      },
+      {
+        "usuario": "u-4",
+        "papel": "DEV"
+      },
+      {
+        "usuario": "u-5",
+        "papel": "SOCIO"
+      }
+    ]
+  },
+  "esperado": {
+    "dias": [
+      "vendas",
+      "marketing",
+      "time",
+      "founder",
+      "time",
+      "time"
+    ]
+  },
+  "mac": "pendente: dias de marketing e design e ADMIN que não é o founder (o Mac não tem)"
+}

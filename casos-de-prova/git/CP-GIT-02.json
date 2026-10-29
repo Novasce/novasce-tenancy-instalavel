@@ -1,0 +1,59 @@
+{
+  "id": "CP-GIT-02",
+  "contrato": "git",
+  "regra": "Repo de código dentro do brain pergunta: a igualdade com o espaço é exata, não por prefixo",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "home": "/home/lia",
+    "espacos": [
+      "/home/lia/Brain/",
+      "~/Espaços/Ateliê de exemplo"
+    ],
+    "abertas": [
+      {
+        "pasta": "/home/lia/Brain",
+        "programa": "claude",
+        "desde": "2026-10-28T08:00:00-03:00",
+        "viva": true
+      },
+      {
+        "pasta": "~/Brain/repos/produto-a",
+        "programa": "codex",
+        "desde": "2026-10-28T08:30:00-03:00",
+        "viva": true
+      },
+      {
+        "pasta": "/home/lia/Espaços/Ateliê de exemplo",
+        "programa": "claude",
+        "desde": "2026-10-28T08:40:00-03:00",
+        "viva": true
+      }
+    ],
+    "pedidos": [
+      {
+        "pasta": "/home/lia/Brain/repos/produto-a/",
+        "temGit": true
+      },
+      {
+        "pasta": "/home/lia/Brain/repos/produto-b",
+        "temGit": true
+      },
+      {
+        "pasta": "/home/lia/Brain/repos/produto-a",
+        "temGit": false
+      }
+    ]
+  },
+  "esperado": {
+    "respostas": [
+      {
+        "programa": "codex",
+        "desde": "2026-10-28T08:30:00-03:00"
+      },
+      null,
+      null
+    ]
+  },
+  "mac": "passa"
+}

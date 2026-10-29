@@ -1,0 +1,81 @@
+{
+  "id": "CP-LOT-02",
+  "contrato": "lote",
+  "regra": "Em Review só com a confirmação daquele cartão; 403 num não para os outros; nenhum vira FEITO",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "cartoes": [
+      {
+        "id": "cartao-a",
+        "titulo": "Peça de exemplo A",
+        "status": "FAZENDO",
+        "comentario": "Pronto A",
+        "prova": {
+          "nome": "revisao-a.md"
+        }
+      },
+      {
+        "id": "cartao-b",
+        "titulo": "Peça de exemplo B",
+        "status": "FAZENDO",
+        "comentario": "Pronto B",
+        "prova": {
+          "nome": "revisao-b.md"
+        }
+      },
+      {
+        "id": "cartao-c",
+        "titulo": "Peça de exemplo C",
+        "status": "FAZENDO",
+        "comentario": "Pronto C",
+        "prova": {
+          "nome": "revisao-c.md"
+        }
+      }
+    ],
+    "respostas": {
+      "cartao-a": {
+        "status": 200,
+        "corpo": "{\"data\": {\"status\": \"REVIEW\"}}"
+      },
+      "cartao-b": {
+        "status": 201,
+        "corpo": "{\"data\": {\"status\": \"REVIEW\"}}"
+      },
+      "cartao-c": {
+        "status": 403,
+        "corpo": "{\"message\": \"Forbidden\"}"
+      }
+    }
+  },
+  "esperado": {
+    "antesDaResposta": {
+      "cartao-a": "FAZENDO",
+      "cartao-b": "FAZENDO",
+      "cartao-c": "FAZENDO"
+    },
+    "chamadas": [
+      "cartao-a",
+      "cartao-b",
+      "cartao-c"
+    ],
+    "resultado": {
+      "cartao-a": {
+        "status": "REVIEW",
+        "aviso": null
+      },
+      "cartao-b": {
+        "status": "REVIEW",
+        "aviso": null
+      },
+      "cartao-c": {
+        "status": "FAZENDO",
+        "aviso": "nao-esta-no-seu-acesso",
+        "prova": "revisao-c.md",
+        "comentario": "Pronto C"
+      }
+    }
+  },
+  "mac": "pendente: sem lote"
+}

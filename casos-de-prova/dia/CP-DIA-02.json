@@ -1,0 +1,32 @@
+{
+  "id": "CP-DIA-02",
+  "contrato": "dia",
+  "regra": "Ficha Meu dia = design leva o dia de design, mesmo com papel MARKETING",
+  "relogio": "2026-10-26T07:15:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "pessoa": {
+      "usuario": "u-lia",
+      "papel": "MARKETING",
+      "meuDia": "design"
+    },
+    "founder": "u-founder-exemplo",
+    "pessoal": {}
+  },
+  "esperado": {
+    "dia": "design",
+    "arquivos": {
+      "rotinas/o-dia.md": "---\nnome: O dia\nquando: dias úteis 07:15\nia: claude\nhabilidade: briefing-de-design\navisa: não\nonde: topo\npermite: [Read, mcp__tenancy__list_tasks, mcp__tenancy__get_task, mcp__tenancy__list_brand_references, mcp__tenancy__brand_review, mcp__tenancy__get_brand]\nligada: sim\nrascunho: não\n---\n\nfaça o briefing de design do dia em até 8 linhas, para o topo da minha nota de hoje: a arte que entrego hoje e a que vence nos próximos três dias, o que espera aprovação, a direção criativa parada e o que andou sem mim. Não grave nada: a resposta vai para a nota.\n",
+      ".agents/skills/briefing-do-dia/SKILL.md": "---\nname: briefing-do-dia\ndescription: O briefing da manhã, em até 8 linhas, para o topo da nota do dia. Lê os seus cartões no Tenancy pelo MCP e não grava nada.\n---\n# Briefing do dia\n\n1. Liste os seus cartões no Tenancy (list_tasks) em Fazendo e em Review. Os que vencem hoje ou já venceram vêm primeiro.\n2. Para o que estiver parado há mais tempo, leia o cartão (get_task) e diga o próximo passo numa linha.\n3. Escreva em até 8 linhas: a uma coisa que fecha hoje, o que está parado e o que andou desde ontem.\n4. Se uma ferramenta recusar, diga numa linha o que faltou (por exemplo, a chave do Tenancy) e siga com o resto.\n5. Não grave nada no Tenancy: a resposta vai para a nota do dia.\n",
+      ".ia/semeada-briefing-do-dia": "",
+      ".agents/skills/briefing-de-design/SKILL.md": "---\nname: briefing-de-design\ndescription: O briefing da manhã de quem cuida da marca e do design, em até 8 linhas, para o topo da nota do dia: a arte que entrega hoje, o que espera o founder, a direção criativa e as telas com guia. Lê o Tenancy pelo MCP e não grava nada.\n---\n# Briefing de design\n\n1. Liste os seus cartões (list_tasks) em Fazendo e em Review, e as peças de conteúdo (kind CONTEUDO) dos próximos três dias. Arte vem antes de legenda: peça com arte \"a criar\" e vencimento perto é a primeira coisa do dia.\n2. O que espera o founder: cartões seus em REVIEW e há quantos dias. Peça aprovada (FEITO) com arte ainda por agendar, avise quem publica.\n3. A direção criativa, pela aba Marca (list_brand_references, produto NOVASCE): referências na fila sem decisão e as em prancha paradas há mais de uma semana, até três, com o título. Na primeira segunda do mês, puxe o rascunho da review (brand_review) e diga os números do período numa linha.\n4. Tela e guia: cartão de desenvolvimento ou de revisão de UX do SOPEC que toque uma tela com guia pede o guia conferido no mesmo ciclo (list_tasks com etiqueta design ou ux). Diga qual, numa linha.\n5. Escreva em até 8 linhas, nesta ordem: a arte de hoje, o que espera aprovação, a direção criativa, as telas com guia e o que andou desde ontem.\n6. Se uma ferramenta recusar, diga numa linha o que faltou e siga com o resto. Não grave nada no Tenancy: a resposta vai para a nota do dia.\n",
+      ".ia/semeada-briefing-de-design": ""
+    },
+    "nasceram": [
+      "briefing-do-dia",
+      "briefing-de-design"
+    ],
+    "gravouODia": true
+  },
+  "mac": "pendente: dias de marketing e design e ADMIN que não é o founder (o Mac não tem)"
+}

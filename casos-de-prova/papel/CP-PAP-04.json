@@ -1,0 +1,61 @@
+{
+  "id": "CP-PAP-04",
+  "contrato": "papel",
+  "regra": "Cartão restrito por visibleToUserIds",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "cartoes": [
+      {
+        "nome": "um id",
+        "cartao": {
+          "id": "a1",
+          "visibleToUserIds": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        }
+      },
+      {
+        "nome": "vazio",
+        "cartao": {
+          "id": "a2",
+          "visibleToUserIds": []
+        }
+      },
+      {
+        "nome": "nulo",
+        "cartao": {
+          "id": "a3",
+          "visibleToUserIds": null
+        }
+      },
+      {
+        "nome": "ausente",
+        "cartao": {
+          "id": "a4"
+        }
+      }
+    ]
+  },
+  "esperado": {
+    "cartoes": [
+      {
+        "nome": "um id",
+        "restrito": true
+      },
+      {
+        "nome": "vazio",
+        "restrito": false
+      },
+      {
+        "nome": "nulo",
+        "restrito": false
+      },
+      {
+        "nome": "ausente",
+        "restrito": false
+      }
+    ]
+  },
+  "mac": "passa"
+}

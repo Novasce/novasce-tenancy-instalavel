@@ -1,0 +1,25 @@
+{
+  "id": "CP-DES-03",
+  "contrato": "desfazer",
+  "regra": "A lixeira guarda por 30 dias pelo fuso da casa; a regra só diz o que venceu, quem apaga é a varredura",
+  "relogio": "2026-10-28T09:59:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "itens": [
+      {
+        "id": "n1",
+        "tipo": "nota",
+        "espaco": "Pessoal",
+        "origem": "Pessoal/Notas/Leituras.md",
+        "apagadoEm": "2026-09-28T10:00:00-03:00"
+      }
+    ],
+    "instantes": ["2026-10-28T09:59:00-03:00", "2026-10-28T10:00:00-03:00"]
+  },
+  "esperado": {
+    "venceEm": "2026-10-28T13:00:00.000Z",
+    "vencidos": [[], ["n1"]],
+    "rotulos": ["sai amanhã", "a exclusão já pode começar"]
+  },
+  "mac": "pendente: o Mac diz \"pode sair de vez\" no vencido e conta 30 vezes 24 h, sem o fuso"
+}

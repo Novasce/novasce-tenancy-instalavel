@@ -1,0 +1,27 @@
+{
+  "id": "CP-DIA-05",
+  "contrato": "dia",
+  "regra": "Leitura da rotina: sem ia, sem avisa e ligada com valor estranho",
+  "relogio": "2026-10-26T07:15:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "id": "fechar-o-dia",
+    "markdown": "---\nnome: Fechar o dia\nquando: dias úteis 19:00\nligada: talvez\n---\nfeche o meu dia em três linhas.\n"
+  },
+  "esperado": {
+    "rotina": {
+      "id": "fechar-o-dia",
+      "nome": "Fechar o dia",
+      "quando": "dias úteis 19:00",
+      "pedido": "feche o meu dia em três linhas.",
+      "ia": "claude",
+      "habilidade": null,
+      "avisa": true,
+      "onde": "fim",
+      "permite": [],
+      "ligada": false,
+      "rascunho": false
+    }
+  },
+  "mac": "passa"
+}

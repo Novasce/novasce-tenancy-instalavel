@@ -1,0 +1,23 @@
+{
+  "id": "CP-VLT-05",
+  "contrato": "vault",
+  "regra": "Nome com espa\u00e7o e acento: acha, grava e compara pela forma NFC",
+  "relogio": "2026-10-23T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "arquivos": {
+      "Ce\u0301rebro de exemplo/A\u0301rea/nota.md": "antes\n"
+    },
+    "pedido": "C\u00e9rebro de exemplo/\u00c1rea/nota.md",
+    "gravar": "depois\n"
+  },
+  "esperado": {
+    "achou": true,
+    "texto": "antes\n",
+    "iguais": true,
+    "depoisDeGravar": {
+      "Ce\u0301rebro de exemplo/A\u0301rea/nota.md": "depois\n"
+    }
+  },
+  "mac": "pendente: o Mac guarda o caminho em NFC s\u00f3 no \u00edndice; abrir e gravar NFD e NFC depende do APFS, e num disco que n\u00e3o normaliza (ext4) ele n\u00e3o acha"
+}

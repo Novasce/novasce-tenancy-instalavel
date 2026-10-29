@@ -1,0 +1,105 @@
+{
+  "id": "CP-API-05",
+  "contrato": "api",
+  "regra": "Só a rota por linha leva o cabeçalho X-Linha (slug ou todas); a base da API vem da configuração",
+  "relogio": "2026-10-28T09:00:00-03:00",
+  "fuso": "America/Maceio",
+  "entrada": {
+    "base": "  https://api.exemplo.invalid//  ",
+    "token": "token-de-exemplo",
+    "pedidos": [
+      {
+        "metodo": "GET",
+        "rota": "/tasks",
+        "linha": "EXEMPLO"
+      },
+      {
+        "metodo": "GET",
+        "rota": "/tasks",
+        "linha": "todas"
+      },
+      {
+        "metodo": "GET",
+        "rota": "/tasks",
+        "linha": null
+      },
+      {
+        "metodo": "POST",
+        "rota": "/tasks/00000000-0000-4000-8000-0000000000a1/comments",
+        "linha": "EXEMPLO",
+        "corpo": {
+          "texto": "ok"
+        }
+      },
+      {
+        "metodo": "GET",
+        "rota": "/products",
+        "linha": "EXEMPLO"
+      },
+      {
+        "metodo": "GET",
+        "rota": "/auth/me",
+        "linha": "EXEMPLO"
+      },
+      {
+        "metodo": "GET",
+        "rota": "/lines/minhas",
+        "linha": "EXEMPLO"
+      },
+      {
+        "metodo": "POST",
+        "rota": "/tasks/00000000-0000-4000-8000-0000000000a1/review",
+        "linha": "EXEMPLO",
+        "corpo": {
+          "texto": "ok"
+        }
+      }
+    ]
+  },
+  "esperado": {
+    "pedidos": [
+      {
+        "url": "https://api.exemplo.invalid/tasks",
+        "xLinha": "EXEMPLO",
+        "contentType": false
+      },
+      {
+        "url": "https://api.exemplo.invalid/tasks",
+        "xLinha": "todas",
+        "contentType": false
+      },
+      {
+        "url": "https://api.exemplo.invalid/tasks",
+        "xLinha": null,
+        "contentType": false
+      },
+      {
+        "url": "https://api.exemplo.invalid/tasks/00000000-0000-4000-8000-0000000000a1/comments",
+        "xLinha": "EXEMPLO",
+        "contentType": true
+      },
+      {
+        "url": "https://api.exemplo.invalid/products",
+        "xLinha": "EXEMPLO",
+        "contentType": false
+      },
+      {
+        "url": "https://api.exemplo.invalid/auth/me",
+        "xLinha": null,
+        "contentType": false
+      },
+      {
+        "url": "https://api.exemplo.invalid/lines/minhas",
+        "xLinha": null,
+        "contentType": false
+      },
+      {
+        "url": "https://api.exemplo.invalid/tasks/00000000-0000-4000-8000-0000000000a1/review",
+        "xLinha": null,
+        "contentType": true
+      }
+    ],
+    "autorizacao": "Bearer token-de-exemplo"
+  },
+  "mac": "passa"
+}
